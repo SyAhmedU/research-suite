@@ -118,6 +118,10 @@ a { color: inherit; text-decoration: none; }
   background: color-mix(in srgb, var(--ink) 38%, transparent); backdrop-filter: blur(6px);
   animation: fadein .2s ease;
 }
+/* The `hidden` attribute must beat the class's display:grid — without this,
+   setting modal.hidden = true had no visual effect (close handlers ran but
+   the popup stayed open). Specificity: [hidden]+class > class alone. */
+.modal-overlay[hidden] { display: none; }
 @keyframes fadein { from { opacity: 0; } }
 .modal {
   position: relative; width: 100%; max-width: 400px; background: var(--paper-2);
@@ -607,6 +611,8 @@ $('authBtn').addEventListener('click', () => {
 });
 $('authClose').addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+// Belt-and-braces: Escape always closes, no matter what.
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
 
 function setStatus(el, msg, kind) {
   el.hidden = !msg; el.textContent = msg || '';
