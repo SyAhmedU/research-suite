@@ -139,6 +139,11 @@ a { color: inherit; text-decoration: none; }
 .modal-label { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: 7px; }
 .modal-emailrow { display: flex; gap: 8px; }
 .modal-setup h3 { margin-bottom: 4px; }
+.conn-state { margin-top: 14px; font-size: .78rem; font-weight: 600; color: var(--ink-faint); }
+.conn-state.ok { color: #1f9d6b; }
+html[data-theme="dark"] .conn-state.ok { color: #4ade9a; }
+.conn-state.warn { color: var(--coral); }
+.conn-state.err { color: var(--magenta); }
 
 /* Dashboard */
 .dash-new { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
@@ -551,6 +556,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
         <button class="btn btn-ghost" id="emailBtn">Send link</button>
       </div>
       <div id="authStatus" class="dash-status" hidden></div>
+      <div id="connState" class="conn-state" hidden></div>
     </div>
     <div id="authSetup" class="modal-setup" hidden>
       <h3>Almost there — one setup step</h3>
@@ -574,10 +580,25 @@ const TOOLS = [
 ];
 
 const modal = $('authModal');
+async function checkConn() {
+  const el = $('connState');
+  if (!el || !Auth.isConfigured()) { if (el) el.hidden = true; return; }
+  el.hidden = false; el.textContent = '● checking connection…'; el.className = 'conn-state';
+  const h = await Auth.health();
+  const map = {
+    ok:       ['ok',   '● Connected to your Supabase — sign-in is live.'],
+    'no-table':['warn', '● ' + (h.msg || 'Table missing.')],
+    error:    ['err',  '● ' + (h.msg || 'Connection error.')],
+    unconfigured: ['', ''],
+  };
+  const [cls, txt] = map[h.state] || ['', ''];
+  el.textContent = txt; el.className = 'conn-state' + (cls ? ' ' + cls : ''); el.hidden = !txt;
+}
 function openModal() {
   modal.hidden = false;
   $('authForm').hidden = Auth.isConfigured() ? false : true;
   $('authSetup').hidden = Auth.isConfigured() ? true : false;
+  if (Auth.isConfigured()) checkConn();
 }
 function closeModal() { modal.hidden = true; }
 $('authBtn').addEventListener('click', () => {
@@ -673,6 +694,10 @@ function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;
 if (Auth.isConfigured()) {
   Auth.onAuthChange(renderAuth);
   Auth.currentUser().then(renderAuth);
+  // Surface setup problems early — visible in the console right after you paste keys.
+  Auth.health().then(h => { if (h.state !== 'ok') console.warn('[suite-auth] ' + h.state + ': ' + (h.msg || '')); });
+} else {
+  console.info('[suite-auth] preview mode — add your Supabase keys to suite-auth.js (see SETUP.md) to enable accounts.');
 }
 </script>
 

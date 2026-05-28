@@ -85,6 +85,29 @@ export async function signOut() {
   if (c) await c.auth.signOut();
 }
 
+// ── Connection self-test ────────────────────────────────────────────
+// Lets the hub tell you, the moment you paste keys, whether everything is
+// actually wired — turning the SETUP.md steps into a verifiable checklist
+// instead of a guess. A lightweight `projects` select exercises the URL, the
+// anon key, the table, and RLS in one call (RLS returns empty-but-no-error
+// when signed out, which is exactly "connected & healthy").
+export async function health() {
+  if (!isConfigured()) return { state: 'unconfigured' };
+  const c = client();
+  try {
+    const { error } = await c.from('projects').select('id').limit(1);
+    if (error) {
+      if (error.code === '42P01' || /relation .*does not exist/i.test(error.message || '')) {
+        return { state: 'no-table', msg: 'Keys work, but the projects table is missing — run the SQL in SETUP.md (step 3).' };
+      }
+      return { state: 'error', msg: error.message || 'Query failed — check your table & RLS policy.' };
+    }
+    return { state: 'ok' };
+  } catch (e) {
+    return { state: 'error', msg: 'Could not reach Supabase — double-check the project URL. (' + (e?.message || e) + ')' };
+  }
+}
+
 // ── Projects (per-user, RLS-protected) ──────────────────────────────
 // A "project" is a named research workspace. `data` (jsonb) is where each
 // suite tool will later stash its per-project state during rollout; for now
