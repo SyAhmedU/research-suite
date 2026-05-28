@@ -340,6 +340,40 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 .foot-links a:hover { color: var(--magenta); }
 
 /* ── Responsive ────────────────────────────────────────────── */
+/* Quick Start panel */
+.qs-card {
+  padding: 22px 24px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,150,86,.07), rgba(241,69,117,.05), rgba(146,112,244,.09));
+  border: 1px solid color-mix(in srgb, var(--magenta) 22%, var(--line));
+  box-shadow: var(--shadow-sm);
+}
+.qs-input {
+  width: 100%; box-sizing: border-box; padding: 14px 16px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--paper-2); color: var(--ink);
+  font-family: inherit; font-size: 1.05rem; line-height: 1.55;
+  outline: none; resize: vertical; min-height: 88px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.qs-input:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 16%, transparent); }
+.qs-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 12px; }
+.qs-hint { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--ink-faint); }
+.qs-routes { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-soft); display: grid; gap: 10px; }
+.qs-routes[hidden] { display: none; }
+.qs-route {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+  padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper-2);
+  text-decoration: none; color: inherit; transition: .2s;
+}
+.qs-route:hover { border-color: var(--magenta); transform: translateX(3px); box-shadow: var(--shadow-sm); }
+.qs-route-icon { font-size: 1.4rem; }
+.qs-route-body { min-width: 0; }
+.qs-route-tool { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.08rem; color: var(--ink); }
+.qs-route-why { color: var(--ink-soft); font-size: .85rem; margin-top: 2px; line-height: 1.45; }
+.qs-route-arrow { font-family: 'IBM Plex Mono', monospace; color: var(--magenta); font-size: .8rem; font-weight: 700; }
+.qs-err { padding: 10px 14px; border-radius: 8px; background: color-mix(in srgb, var(--magenta) 8%, transparent); border: 1px solid color-mix(in srgb, var(--magenta) 25%, var(--line)); color: var(--magenta); font-size: .88rem; margin-top: 12px; }
+.qs-loading { color: var(--ink-soft); font-size: .9rem; margin-top: 12px; }
+
 @media (min-width: 720px) {
   .proof-grid { grid-template-columns: repeat(3, 1fr); }
   .tools-grid { grid-template-columns: 1fr 1fr; }
@@ -408,6 +442,25 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     </div>
     <div id="projStatus" class="dash-status" hidden></div>
     <div id="projList" class="proj-list"></div>
+  </div>
+</section>
+
+<!-- Quick Start (Generate entry — orchestrates into the right tool) -->
+<section class="section" id="quickstart">
+  <div class="wrap">
+    <div class="section-head" style="max-width:64ch">
+      <div class="kicker">Quick start</div>
+      <h2>Tell me what you're <em>researching</em>.</h2>
+      <p class="sub">One line, plain English. I'll route you to the right tool to start — with your topic carried in, ready to explore.</p>
+    </div>
+    <div class="qs-card">
+      <textarea id="qs-input" class="qs-input" rows="3" placeholder="e.g. how AI is changing the meaning of work for early-career knowledge workers in India"></textarea>
+      <div class="qs-row">
+        <span class="qs-hint">⌘/Ctrl+Enter to launch</span>
+        <button class="btn btn-fill" id="qs-go">✨ Start researching →</button>
+      </div>
+      <div class="qs-routes" id="qs-routes" hidden></div>
+    </div>
   </div>
 </section>
 
@@ -755,6 +808,129 @@ if (Auth.isConfigured()) {
 } else {
   console.info('[suite-auth] preview mode — add your Supabase keys to suite-auth.js (see SETUP.md) to enable accounts.');
 }
+</script>
+
+<script>
+// ── Quick Start: route a free-text research interest into the right tool ─
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const RF_URL = 'https://researchflow-syahmedus-projects.vercel.app/api/generate';
+
+  // Tool catalogue used in the prompt + for rendering routes.
+  const TOOL_INFO = {
+    wm: { tool: 'Wordmap',      icon: '📈', href: 'https://syahmedu.github.io/wordmap/' },
+    pc: { tool: 'PaperCards',   icon: '📑', href: 'https://papercards.vercel.app/' },
+    rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/' },
+    ts: { tool: 'TheoryScope',  icon: '🏛️', href: 'https://theoryscope.vercel.app/' },
+    ss: { tool: 'ScaleScope',   icon: '📏', href: 'https://scalescope.vercel.app/' },
+    cd: { tool: 'Cadence',      icon: '🧪', href: 'https://syahmedu.github.io/cadence/' },
+    to: { tool: 'ToolsScope',   icon: '🔬', href: 'https://toolsscope.vercel.app/' },
+    jt: { tool: 'JournalTime',  icon: '✍️', href: 'https://syahmedu.github.io/journaltime/' },
+  };
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function fallbackRoutes(topic) {
+    // Deterministic routes for when the AI is unreachable — better than
+    // nothing. Sends the user to the discovery tier with the topic seeded.
+    return [
+      { tool: 'wm', why: "Get a 50-yr trend read on your topic — what's rising, what's saturated, where the white space is.", deeplink: null },
+      { tool: 'pc', why: "Map the citation network around the topic and pull foundational papers as cards.", deeplink: 'https://papercards.vercel.app/#seed=' + encodeURIComponent(topic) },
+      { tool: 'rf', why: 'Frame the study end-to-end — question, theory, instruments, design, analysis.', deeplink: null },
+    ];
+  }
+
+  function renderRoutes(routes, topic) {
+    const wrap = $('qs-routes');
+    if (!routes || !routes.length) { wrap.hidden = true; return; }
+    let html = '';
+    routes.slice(0, 4).forEach((r, i) => {
+      const meta = TOOL_INFO[r.tool] || TOOL_INFO.rf;
+      const href = r.deeplink || meta.href;
+      const stepNo = i + 1;
+      html += `<a class="qs-route" href="${href}" target="_blank" rel="noopener">`
+        + `<span class="qs-route-icon">${meta.icon}</span>`
+        + `<span class="qs-route-body">`
+        +   `<div class="qs-route-tool"><span style="opacity:.55;font-family:'IBM Plex Mono',monospace;font-size:.78rem;margin-right:6px;">Step ${stepNo}</span>${meta.tool}</div>`
+        +   `<div class="qs-route-why">${esc(r.why || '')}</div>`
+        + `</span>`
+        + `<span class="qs-route-arrow">Open ↗</span>`
+        + `</a>`;
+    });
+    html += `<p class="qs-hint" style="margin:6px 2px 0;">Topic in hand: <em>${esc(topic).slice(0,160)}</em></p>`;
+    wrap.innerHTML = html;
+    wrap.hidden = false;
+  }
+
+  async function generateRoutes() {
+    const topic = ($('qs-input').value || '').trim();
+    const wrap = $('qs-routes');
+    if (!topic) { $('qs-input').focus(); return; }
+    const btn = $('qs-go');
+    const original = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Routing…';
+    wrap.innerHTML = '<div class="qs-loading">Reading your topic and picking the best entry points…</div>';
+    wrap.hidden = false;
+    try {
+      const prompt =
+`A researcher describes what they're working on. Route them into the most useful entry points of the Research Suite — a connected toolkit of 8 tools.
+
+Researcher's topic:
+"""${topic}"""
+
+Available tools (use these short keys EXACTLY):
+- "wm" Wordmap — 50-yr term trends, white-space discovery, when they want to see "what's hot / what's been done".
+- "pc" PaperCards — DOI / topic → seed papers + citation network. Best when they want to read the literature.
+- "rf" ResearchFlow — 10-stage wizard from idea to design. Best when they have a topic but need a sharp question, theory, hypotheses, design, analysis plan.
+- "ts" TheoryScope — 449-theory library, AI matchmaker. Best when they need to ground in theory.
+- "ss" ScaleScope — 174 validated scales. Best when they need measurement instruments.
+- "cd" Cadence — survey collection. Best when they have a study and need to gather data.
+- "to" ToolsScope — stats + analysis. Best when they have data.
+- "jt" JournalTime — write + place papers. Best when they have results.
+
+Return JSON:
+{
+  "routes": [
+    { "tool": "wm|pc|rf|ts|ss|cd|to|jt", "why": "one sentence on WHY this tool, in this order, for this researcher" }
+  ]
+}
+Pick 2-4 tools, in the order the researcher should engage them. Start where they ARE in the research process, not always at step 1.`;
+      const r = await fetch(RF_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, schema_hint: 'Throughline Quick Start router', temperature: 0.45 }),
+      });
+      if (!r.ok) {
+        let detail = '';
+        try { detail = (await r.json()).detail || ''; } catch (_) {}
+        if (r.status === 503 || /GROQ_API_KEY/i.test(detail)) {
+          // AI offline — show the deterministic fallback, still useful.
+          renderRoutes(fallbackRoutes(topic), topic);
+          return;
+        }
+        throw new Error(detail || `HTTP ${r.status}`);
+      }
+      const { result } = await r.json();
+      const routes = Array.isArray(result?.routes) ? result.routes.filter(x => x && TOOL_INFO[x.tool]) : [];
+      // Auto-seed PaperCards when it's in the routes — gives an instant
+      // jump from this hub to a populated Explore view.
+      routes.forEach(rt => {
+        if (rt.tool === 'pc') rt.deeplink = 'https://papercards.vercel.app/#seed=' + encodeURIComponent(topic);
+      });
+      if (!routes.length) { renderRoutes(fallbackRoutes(topic), topic); return; }
+      renderRoutes(routes, topic);
+    } catch (err) {
+      wrap.innerHTML = `<div class="qs-err">${esc(err.message || String(err))}</div>`;
+    } finally {
+      btn.disabled = false; btn.textContent = original;
+    }
+  }
+
+  $('qs-go').addEventListener('click', generateRoutes);
+  $('qs-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); generateRoutes(); }
+  });
+})();
 </script>
 
 <script>
