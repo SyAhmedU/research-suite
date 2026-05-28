@@ -74,6 +74,92 @@ a { color: inherit; text-decoration: none; }
 .wrap { max-width: 1140px; margin: 0 auto; padding: 0 26px; position: relative; z-index: 2; }
 .mono { font-family: 'IBM Plex Mono', monospace; }
 
+/* ── Liquid drift — slow ambient blobs behind everything ─────────── */
+.liquid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.liquid-blob {
+  position: absolute; width: 60vmax; height: 60vmax;
+  border-radius: 50%; filter: blur(110px); opacity: .18;
+  will-change: transform;
+}
+.liquid-blob-1 { background: var(--coral);   top: -18%; left: -18%;  animation: drift1 32s ease-in-out infinite; }
+.liquid-blob-2 { background: var(--magenta); top:  22%; right: -22%; animation: drift2 38s ease-in-out infinite; }
+.liquid-blob-3 { background: var(--violet);  bottom: -22%; left: 22%; animation: drift3 44s ease-in-out infinite; }
+html[data-theme="dark"] .liquid-blob { opacity: .28; filter: blur(140px); }
+@keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(15vw,10vh) scale(1.15)} 66%{transform:translate(-8vw,18vh) scale(.9)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-18vw,-8vh) scale(.85)} 70%{transform:translate(10vw,12vh) scale(1.1)} }
+@keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 35%{transform:translate(12vw,-14vh) scale(1.2)} 65%{transform:translate(-15vw,5vh) scale(.95)} }
+
+/* ── Spring interactions: tactile clicks, fluid hover lifts ──────── */
+.btn, .qs-route, .station-card, .tool, .proj-card, .ex-route {
+  transition: transform .55s cubic-bezier(.34, 1.5, .6, 1),
+              box-shadow .35s cubic-bezier(.22, 1, .36, 1),
+              border-color .25s ease-out,
+              filter .35s ease-out;
+}
+.btn:active, .qs-route:active, .tool:active, .proj-card:active, .station-card:active {
+  transform: translateY(2px) scale(.985); transition-duration: .14s;
+}
+.btn-fill:active { transform: translateY(1px) scale(.97); transition-duration: .14s; }
+
+/* ── Gradient words breathe (slow horizontal shimmer) ────────────── */
+.hero h1 em, .close h2 em, .section h2 em {
+  background-size: 220% 220%; background-position: 0% 50%;
+  animation: gradShimmer 16s ease-in-out infinite;
+}
+@keyframes gradShimmer {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+/* ── Timeline station cards: gentle glow breathing ──────────────── */
+.station-card { animation: cardPulse 9s ease-in-out infinite; }
+.station:nth-child(even) .station-card { animation-delay: -4.5s; }
+@keyframes cardPulse {
+  0%,100% { box-shadow: var(--shadow-sm); }
+  50%     { box-shadow: 0 14px 32px -18px rgba(241, 69, 117, .28), 0 0 0 1px var(--line); }
+}
+
+/* Quick-Start card has its own soft breathing ring */
+.qs-card { animation: qsBreathe 8s ease-in-out infinite; }
+@keyframes qsBreathe {
+  0%,100% { box-shadow: var(--shadow-sm); }
+  50%     { box-shadow: 0 18px 40px -22px rgba(146, 112, 244, .32), 0 0 0 1px color-mix(in srgb, var(--magenta) 22%, var(--line)); }
+}
+
+/* ── Hero glow follows cursor with a long, lazy lag ──────────────── */
+.hero-glow {
+  transform: translateX(calc(-50% + (var(--mx, .5) - .5) * 240px))
+             translateY(calc((var(--my, .5) - .5) * 180px));
+  transition: transform 1.2s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+/* Close-section glow does the same, gentler */
+.close-glow {
+  transform: translate(calc((var(--mx, .5) - .5) * 140px), calc((var(--my, .5) - .5) * 100px));
+  transition: transform 1.4s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+
+/* ── Hover lifts feel slightly weightless ───────────────────────── */
+.qs-route:hover { transform: translateX(5px) translateY(-1px); }
+.station-card:hover { transform: translateX(6px) translateY(-2px); }
+.tool:hover { transform: translateY(-3px) scale(1.005); }
+
+/* ── Inputs breathe focus rings ──────────────────────────────────── */
+.qs-input:focus, .dash-input:focus, .modal-emailrow input:focus {
+  transition: box-shadow .35s cubic-bezier(.22, 1, .36, 1), border-color .25s ease;
+}
+
+/* ── Smooth thread fill (the line down the timeline) ─────────────── */
+.thread-fill { transition: height .45s cubic-bezier(.22, 1, .36, 1); }
+
+/* ── Accessibility: respect reduced motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .liquid-blob, .station-card, .qs-card, .hero h1 em, .close h2 em, .section h2 em { animation: none !important; }
+  .hero-glow, .close-glow { transition: none !important; transform: translateX(-50%) !important; }
+  .btn, .qs-route, .station-card, .tool, .proj-card { transition: none !important; }
+}
+
 /* ── Brand bar ─────────────────────────────────────────────── */
 .bar {
   position: sticky; top: 0; z-index: 100;
@@ -393,6 +479,13 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 </style>
 </head>
 <body>
+
+<!-- Liquid drift — ambient motion in the background, always on -->
+<div class="liquid-bg" aria-hidden="true">
+  <div class="liquid-blob liquid-blob-1"></div>
+  <div class="liquid-blob liquid-blob-2"></div>
+  <div class="liquid-blob liquid-blob-3"></div>
+</div>
 
 <!-- Brand bar -->
 <div class="bar">
@@ -808,6 +901,29 @@ if (Auth.isConfigured()) {
 } else {
   console.info('[suite-auth] preview mode — add your Supabase keys to suite-auth.js (see SETUP.md) to enable accounts.');
 }
+</script>
+
+<script>
+// ── Wobble: cursor-following CSS vars driving the ambient glows ──
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let mx = .5, my = .5, cx = .5, cy = .5, raf = null;
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX / window.innerWidth;
+    my = e.clientY / window.innerHeight;
+    if (!raf) raf = requestAnimationFrame(tick);
+  }, { passive: true });
+  function tick() {
+    cx += (mx - cx) * .065;
+    cy += (my - cy) * .065;
+    const root = document.documentElement;
+    root.style.setProperty('--mx', cx.toFixed(3));
+    root.style.setProperty('--my', cy.toFixed(3));
+    if (Math.abs(mx - cx) > .001 || Math.abs(my - cy) > .001) {
+      raf = requestAnimationFrame(tick);
+    } else { raf = null; }
+  }
+})();
 </script>
 
 <script>
