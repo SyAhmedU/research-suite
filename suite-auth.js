@@ -1,0 +1,126 @@
+// ════════════════════════════════════════════════════════════════
+//  suite-auth.js — the Research Suite's shared identity + cloud layer.
+//
+//  ONE source of truth for accounts across the suite. Built on Supabase
+//  (hosted Postgres + Auth). Safe to ship in the browser: the anon key is
+//  *meant* to be public — every row is protected by row-level security, so
+//  a signed-in user can only ever read/write their own projects.
+//
+//  ▶ To go live, paste your project's URL + anon key into SUITE_CONFIG below
+//    (see SETUP.md for the ~10-minute one-time setup). Until then the app
+//    runs in "preview" mode: the account UI shows the setup hint instead of
+//    breaking.
+//
+//  Origin note for later rollout: Supabase keeps the session in localStorage,
+//  which is per-origin. All the github.io apps (hub, wordmap, cadence,
+//  journaltime) share the `syahmedu.github.io` origin, so one sign-in covers
+//  them. The *.vercel.app tools are separate origins and will each need their
+//  own sign-in (or token hand-off, like the existing #pack= handoffs).
+// ════════════════════════════════════════════════════════════════
+
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+// ── FILL THESE IN (Project Settings → API in your Supabase dashboard) ──
+export const SUITE_CONFIG = {
+  url: '',       // e.g. 'https://abcdefgh.supabase.co'
+  anonKey: '',   // the public "anon" / publishable key (NOT the service_role key)
+};
+
+let _client = null;
+
+export function isConfigured() {
+  return Boolean(SUITE_CONFIG.url && SUITE_CONFIG.anonKey);
+}
+
+export function client() {
+  if (!isConfigured()) return null;
+  if (!_client) {
+    _client = createClient(SUITE_CONFIG.url, SUITE_CONFIG.anonKey, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    });
+  }
+  return _client;
+}
+
+// ── Auth ──────────────────────────────────────────────────────────
+export async function currentUser() {
+  const c = client();
+  if (!c) return null;
+  const { data } = await c.auth.getUser();
+  return data?.user ?? null;
+}
+
+export function onAuthChange(cb) {
+  const c = client();
+  if (!c) return () => {};
+  const { data } = c.auth.onAuthStateChange((_event, session) => cb(session?.user ?? null));
+  return () => data?.subscription?.unsubscribe?.();
+}
+
+export async function signInWithGoogle() {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  // Return to wherever we are now so the dashboard opens on redirect back.
+  const { error } = await c.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: location.origin + location.pathname },
+  });
+  if (error) throw error;
+}
+
+// Passwordless email: Supabase sends a magic link; clicking it returns here
+// with a session in the URL, which detectSessionInUrl picks up automatically.
+export async function signInWithEmail(email) {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  const { error } = await c.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: location.origin + location.pathname },
+  });
+  if (error) throw error;
+}
+
+export async function signOut() {
+  const c = client();
+  if (c) await c.auth.signOut();
+}
+
+// ── Projects (per-user, RLS-protected) ──────────────────────────────
+// A "project" is a named research workspace. `data` (jsonb) is where each
+// suite tool will later stash its per-project state during rollout; for now
+// the hub just creates/lists/renames/deletes them.
+export async function listProjects() {
+  const c = client();
+  if (!c) return [];
+  const { data, error } = await c.from('projects').select('*').order('updated_at', { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+export async function createProject(name) {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  const user = await currentUser();
+  if (!user) throw new Error('sign in first');
+  const { data, error } = await c.from('projects')
+    .insert({ name: name.trim() || 'Untitled project', user_id: user.id })
+    .select().single();
+  if (error) throw error;
+  return data;
+}
+
+export async function renameProject(id, name) {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  const { error } = await c.from('projects')
+    .update({ name: name.trim() || 'Untitled project', updated_at: new Date().toISOString() })
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export async function deleteProject(id) {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  const { error } = await c.from('projects').delete().eq('id', id);
+  if (error) throw error;
+}

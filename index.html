@@ -102,6 +102,68 @@ a { color: inherit; text-decoration: none; }
   display: grid; place-items: center; transition: .2s; font-family: inherit;
 }
 .theme-btn:hover { color: var(--ink); transform: rotate(15deg); }
+.btn-auth {
+  font-family: inherit; font-weight: 700; font-size: .82rem; cursor: pointer;
+  padding: 8px 16px; border-radius: 999px; border: 1px solid transparent;
+  background: var(--grad); color: #fff; box-shadow: 0 6px 16px -8px rgba(241,69,117,.6);
+  transition: .2s; white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis;
+}
+.btn-auth:hover { transform: translateY(-1px); box-shadow: 0 10px 22px -10px rgba(241,69,117,.7); }
+.btn-auth.in { background: var(--paper-2); color: var(--ink-soft); border-color: var(--line); box-shadow: none; }
+.btn-auth.in:hover { color: var(--ink); }
+
+/* Sign-in modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px;
+  background: color-mix(in srgb, var(--ink) 38%, transparent); backdrop-filter: blur(6px);
+  animation: fadein .2s ease;
+}
+@keyframes fadein { from { opacity: 0; } }
+.modal {
+  position: relative; width: 100%; max-width: 400px; background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 20px; padding: 30px 28px; box-shadow: var(--shadow);
+}
+.modal-x { position: absolute; top: 14px; right: 16px; background: none; border: 0; font-size: 1.4rem; color: var(--ink-faint); cursor: pointer; line-height: 1; }
+.modal-x:hover { color: var(--ink); }
+.modal h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -.015em; }
+.modal-sub { color: var(--ink-soft); font-size: .88rem; margin: 8px 0 20px; line-height: 1.5; }
+.modal-sub code { font-family: 'IBM Plex Mono', monospace; font-size: .82em; background: var(--paper-3); padding: 1px 5px; border-radius: 4px; }
+.btn-google {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px; border-radius: 11px; border: 1px solid var(--line); background: var(--paper);
+  font-family: inherit; font-weight: 700; font-size: .9rem; color: var(--ink); cursor: pointer; transition: .15s;
+}
+.btn-google:hover { border-color: var(--magenta); transform: translateY(-1px); }
+.modal-or { display: flex; align-items: center; gap: 12px; margin: 18px 0; color: var(--ink-faint); font-size: .76rem; }
+.modal-or::before, .modal-or::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.modal-label { display: block; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); margin-bottom: 7px; }
+.modal-emailrow { display: flex; gap: 8px; }
+.modal-setup h3 { margin-bottom: 4px; }
+
+/* Dashboard */
+.dash-new { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.dash-input {
+  flex: 1; min-width: 200px; padding: 12px 15px; border-radius: 11px; border: 1px solid var(--line);
+  background: var(--paper-2); color: var(--ink); font-family: inherit; font-size: .92rem; outline: none; transition: .15s;
+}
+.dash-input:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 16%, transparent); }
+.dash-status { font-size: .85rem; color: var(--ink-soft); padding: 8px 0; }
+.dash-status.err { color: var(--magenta); }
+.dash-status.ok { color: #1f9d6b; }
+html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
+.empty-note { color: var(--ink-faint); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: 14px; }
+.proj-list { display: grid; gap: 12px; grid-template-columns: 1fr; }
+.proj-card { padding: 18px 20px; border-radius: 15px; border: 1px solid var(--line); background: var(--paper-2); box-shadow: var(--shadow-sm); }
+.proj-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.proj-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.18rem; letter-spacing: -.01em; }
+.proj-date { font-size: .74rem; color: var(--ink-faint); flex: none; }
+.proj-tools { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 12px 0; }
+.proj-tools a { font-size: .8rem; font-weight: 600; color: var(--ink-soft); }
+.proj-tools a:hover { color: var(--magenta); }
+.proj-actions { display: flex; gap: 14px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
+.proj-link { background: none; border: 0; cursor: pointer; font-family: inherit; font-size: .8rem; font-weight: 600; color: var(--ink-soft); }
+.proj-link:hover { color: var(--ink); }
+.proj-link.danger:hover { color: var(--magenta); }
 
 /* ── Hero ──────────────────────────────────────────────────── */
 .hero { padding: 92px 0 70px; position: relative; }
@@ -270,6 +332,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   .tools-grid { grid-template-columns: 1fr 1fr; }
   .aud-grid { grid-template-columns: repeat(3, 1fr); }
   .trust { grid-template-columns: 1fr 1fr; }
+  .proj-list { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 560px) {
   .bar-link.hide-sm { display: none; }
@@ -293,7 +356,8 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   <div class="bar-right">
     <a class="bar-link hide-sm" href="#thread">The workflow</a>
     <a class="bar-link hide-sm" href="#tools">Tools</a>
-    <a class="bar-link" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects ↗</a>
+    <a class="bar-link hide-sm" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects ↗</a>
+    <button class="btn-auth" id="authBtn">Sign in</button>
     <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark">🌙</button>
   </div>
 </div>
@@ -316,6 +380,23 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     </div>
   </div>
 </header>
+
+<!-- Your workspace (signed-in only) -->
+<section class="section" id="dash" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Your workspace</div>
+      <h2>Your research <em>projects</em>.</h2>
+      <p class="sub">Each project is a named home for one study. Open any suite tool from here — soon, your work in each will sync back into the project so you can pick up the thread on any device.</p>
+    </div>
+    <div class="dash-new">
+      <input id="projName" class="dash-input" placeholder="Name a new project — e.g. Burnout & engagement in nurses" maxlength="120">
+      <button id="projAdd" class="btn btn-fill">Create project</button>
+    </div>
+    <div id="projStatus" class="dash-status" hidden></div>
+    <div id="projList" class="proj-list"></div>
+  </div>
+</section>
 
 <!-- Why this exists -->
 <section class="section" id="why">
@@ -451,6 +532,149 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     </div>
   </div>
 </footer>
+
+<!-- Sign-in modal -->
+<div class="modal-overlay" id="authModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="modal-x" id="authClose" aria-label="Close">×</button>
+    <div id="authForm">
+      <h3 id="authTitle">Sign in to your suite</h3>
+      <p class="modal-sub">One account across the workflow. Your projects and data stay yours — and follow you across devices.</p>
+      <button class="btn btn-google" id="googleBtn">
+        <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.2-7.9l-6.5 5C9.6 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.3-.1-2.3-.4-3.5z"/></svg>
+        Continue with Google
+      </button>
+      <div class="modal-or"><span>or</span></div>
+      <label class="modal-label" for="emailIn">Email a magic link</label>
+      <div class="modal-emailrow">
+        <input id="emailIn" class="dash-input" type="email" placeholder="you@university.edu" autocomplete="email">
+        <button class="btn btn-ghost" id="emailBtn">Send link</button>
+      </div>
+      <div id="authStatus" class="dash-status" hidden></div>
+    </div>
+    <div id="authSetup" class="modal-setup" hidden>
+      <h3>Almost there — one setup step</h3>
+      <p class="modal-sub">Accounts need a free Supabase project (yours, ~10 min). Create it, then paste the project URL + anon key into <code>suite-auth.js</code> → <code>SUITE_CONFIG</code>. Full steps are in <strong>SETUP.md</strong>.</p>
+      <p class="modal-sub">Until then, everything else on the page works as a preview.</p>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import * as Auth from './suite-auth.js';
+
+const $ = (id) => document.getElementById(id);
+const TOOLS = [
+  ['ResearchFlow', 'https://researchflow-syahmedus-projects.vercel.app'],
+  ['PaperCards', 'https://papercards.vercel.app'],
+  ['ScaleScope', 'https://scalescope.vercel.app'],
+  ['Cadence', 'https://syahmedu.github.io/cadence/'],
+  ['ToolsScope', 'https://toolsscope.vercel.app'],
+  ['JournalTime', 'https://syahmedu.github.io/journaltime/'],
+];
+
+const modal = $('authModal');
+function openModal() {
+  modal.hidden = false;
+  $('authForm').hidden = Auth.isConfigured() ? false : true;
+  $('authSetup').hidden = Auth.isConfigured() ? true : false;
+}
+function closeModal() { modal.hidden = true; }
+$('authBtn').addEventListener('click', () => {
+  // When signed in, the button acts as "sign out"; otherwise open the modal.
+  if (currentUserEmail) { Auth.signOut(); } else { openModal(); }
+});
+$('authClose').addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+function setStatus(el, msg, kind) {
+  el.hidden = !msg; el.textContent = msg || '';
+  el.className = 'dash-status' + (kind ? ' ' + kind : '');
+}
+
+$('googleBtn').addEventListener('click', async () => {
+  try { await Auth.signInWithGoogle(); }
+  catch (e) { setStatus($('authStatus'), 'Could not start Google sign-in: ' + e.message, 'err'); }
+});
+$('emailBtn').addEventListener('click', async () => {
+  const email = $('emailIn').value.trim();
+  if (!email) { setStatus($('authStatus'), 'Enter your email first.', 'err'); return; }
+  try {
+    await Auth.signInWithEmail(email);
+    setStatus($('authStatus'), 'Check your inbox — a sign-in link is on its way.', 'ok');
+  } catch (e) { setStatus($('authStatus'), 'Could not send the link: ' + e.message, 'err'); }
+});
+
+// ── React to auth state ───────────────────────────────────────────
+let currentUserEmail = null;
+function renderAuth(user) {
+  currentUserEmail = user?.email || null;
+  const btn = $('authBtn');
+  if (user) {
+    btn.textContent = (user.email ? user.email.split('@')[0] : 'Account') + ' · Sign out';
+    btn.classList.add('in');
+    $('dash').hidden = false;
+    closeModal();
+    loadProjects();
+  } else {
+    btn.textContent = 'Sign in';
+    btn.classList.remove('in');
+    $('dash').hidden = true;
+  }
+}
+
+async function loadProjects() {
+  const list = $('projList');
+  list.innerHTML = '<div class="dash-status">Loading your projects…</div>';
+  try {
+    const projects = await Auth.listProjects();
+    if (!projects.length) { list.innerHTML = '<div class="empty-note">No projects yet — name one above to begin.</div>'; return; }
+    list.innerHTML = '';
+    for (const p of projects) {
+      const card = document.createElement('div');
+      card.className = 'proj-card';
+      const created = new Date(p.created_at).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+      card.innerHTML = `
+        <div class="proj-top">
+          <span class="proj-name">${escapeHtml(p.name)}</span>
+          <span class="proj-date mono">${created}</span>
+        </div>
+        <div class="proj-tools">${TOOLS.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>
+        <div class="proj-actions">
+          <button class="proj-link" data-act="rename">Rename</button>
+          <button class="proj-link danger" data-act="delete">Delete</button>
+        </div>`;
+      card.querySelector('[data-act="rename"]').addEventListener('click', async () => {
+        const name = prompt('Rename project:', p.name);
+        if (name && name.trim()) { await Auth.renameProject(p.id, name); loadProjects(); }
+      });
+      card.querySelector('[data-act="delete"]').addEventListener('click', async () => {
+        if (confirm(`Delete “${p.name}”? This can't be undone.`)) { await Auth.deleteProject(p.id); loadProjects(); }
+      });
+      list.appendChild(card);
+    }
+  } catch (e) {
+    list.innerHTML = '';
+    setStatus($('projStatus'), 'Could not load projects: ' + e.message, 'err');
+  }
+}
+
+$('projAdd').addEventListener('click', async () => {
+  const name = $('projName').value.trim();
+  if (!name) { setStatus($('projStatus'), 'Give the project a name first.', 'err'); return; }
+  try { await Auth.createProject(name); $('projName').value = ''; setStatus($('projStatus'), '', ''); loadProjects(); }
+  catch (e) { setStatus($('projStatus'), 'Could not create project: ' + e.message, 'err'); }
+});
+$('projName').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('projAdd').click(); });
+
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+
+// Init: if configured, subscribe to auth; otherwise the modal explains setup.
+if (Auth.isConfigured()) {
+  Auth.onAuthChange(renderAuth);
+  Auth.currentUser().then(renderAuth);
+}
+</script>
 
 <script>
 // ── Data: the eight stations, in workflow order ──────────────────
