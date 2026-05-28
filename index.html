@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Throughline — the research workflow, end to end</title>
+<meta name="description" content="From a hunch to a published paper, one continuous workflow. Eight connected tools that carry your idea forward — discover, frame, measure, collect, analyse, and write, without re-typing a thing.">
+<meta name="theme-color" content="#FBF7EF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Throughline — the research workflow, end to end">
+<meta property="og:description" content="From a hunch to a published paper, one continuous workflow. Eight connected research tools that pass your work forward.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════════
+   THROUGHLINE — research-suite hub. Single file, no build.
+   Brand name lives in one place: change the .wordmark text + <title>.
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  --paper:   #FBF7EF;
+  --paper-2: #FFFFFF;
+  --paper-3: #F3ECDF;
+  --ink:     #211B2E;
+  --ink-soft:#574E64;
+  --ink-faint:#8C8498;
+  --line:    rgba(33,27,46,.12);
+  --line-soft:rgba(33,27,46,.07);
+  --coral:   #FF9656;
+  --magenta: #F14575;
+  --violet:  #9270F4;
+  --grad:    linear-gradient(135deg, #FF9656 0%, #F14575 52%, #9270F4 100%);
+  --grad-soft: linear-gradient(135deg, rgba(255,150,86,.14), rgba(241,69,117,.12), rgba(146,112,244,.14));
+  --shadow:  0 24px 60px -28px rgba(33,27,46,.35);
+  --shadow-sm: 0 8px 24px -14px rgba(33,27,46,.3);
+}
+html[data-theme="dark"] {
+  --paper:   #14111C;
+  --paper-2: #1C1827;
+  --paper-3: #241F31;
+  --ink:     #F4EFF8;
+  --ink-soft:#B8AEC6;
+  --ink-faint:#7C7389;
+  --line:    rgba(255,255,255,.13);
+  --line-soft:rgba(255,255,255,.07);
+  --grad-soft: linear-gradient(135deg, rgba(255,150,86,.16), rgba(241,69,117,.13), rgba(146,112,244,.18));
+  --shadow:  0 24px 60px -24px rgba(0,0,0,.7);
+  --shadow-sm: 0 8px 24px -14px rgba(0,0,0,.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background .4s ease, color .4s ease;
+  -webkit-font-smoothing: antialiased;
+}
+/* Paper grain overlay */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .035; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .05; }
+
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--magenta); color: #fff; }
+
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 26px; position: relative; z-index: 2; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── Brand bar ─────────────────────────────────────────────── */
+.bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: 14px;
+  height: 60px; padding: 0 26px;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--line-soft);
+}
+.bar-logo { display: flex; align-items: center; gap: 10px; }
+.s-mark {
+  width: 30px; height: 30px; border-radius: 9px; background: var(--grad);
+  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .82rem;
+  box-shadow: 0 4px 14px -4px rgba(241,69,117,.55); animation: glow 5s ease-in-out infinite;
+}
+@keyframes glow { 0%,100%{box-shadow:0 4px 14px -4px rgba(241,69,117,.45)} 50%{box-shadow:0 7px 24px -4px rgba(146,112,244,.6)} }
+.bar-name { font-weight: 800; letter-spacing: -.02em; font-size: .96rem; }
+.bar-name span { color: var(--ink-faint); font-weight: 600; }
+.bar-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.bar-link { font-size: .82rem; font-weight: 600; color: var(--ink-soft); padding: 7px 13px; border-radius: 999px; transition: .15s; }
+.bar-link:hover { color: var(--ink); background: var(--line-soft); }
+.theme-btn {
+  width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--paper-2); color: var(--ink-soft); cursor: pointer; font-size: 1rem;
+  display: grid; place-items: center; transition: .2s; font-family: inherit;
+}
+.theme-btn:hover { color: var(--ink); transform: rotate(15deg); }
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero { padding: 92px 0 70px; position: relative; }
+.hero-glow {
+  position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 520px; max-width: 120vw;
+  background: var(--grad-soft); filter: blur(80px); border-radius: 50%;
+  z-index: 0; pointer-events: none; opacity: .9;
+}
+.hero .wrap { position: relative; z-index: 2; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'IBM Plex Mono', monospace; font-size: .72rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+  padding: 6px 13px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--paper-2); margin-bottom: 30px;
+}
+.eyebrow b { width: 7px; height: 7px; border-radius: 50%; background: var(--grad); }
+.hero h1 {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: clamp(2.7rem, 6.4vw, 5rem); line-height: 1.02;
+  letter-spacing: -.025em; max-width: 16ch;
+}
+.hero h1 em {
+  font-style: italic; font-weight: 500;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .lede {
+  font-size: clamp(1.05rem, 1.7vw, 1.32rem); color: var(--ink-soft);
+  max-width: 56ch; margin-top: 26px; line-height: 1.55;
+}
+.cta-row { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 38px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-weight: 700; font-size: .94rem; padding: 14px 24px; border-radius: 13px;
+  border: 1px solid transparent; cursor: pointer; transition: .2s; font-family: inherit;
+}
+.btn-fill { background: var(--grad); color: #fff; box-shadow: 0 12px 30px -12px rgba(241,69,117,.6); }
+.btn-fill:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(241,69,117,.7); }
+.btn-ghost { background: var(--paper-2); border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--magenta); color: var(--magenta); transform: translateY(-2px); }
+.hero-foot {
+  margin-top: 44px; display: flex; flex-wrap: wrap; gap: 8px 22px;
+  font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-faint);
+}
+.hero-foot span { display: inline-flex; align-items: center; gap: 7px; }
+.hero-foot span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--violet); }
+
+/* Load-in animation */
+.rise { opacity: 0; transform: translateY(22px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+.d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
+
+/* ── Section frames ────────────────────────────────────────── */
+.section { padding: 76px 0; position: relative; }
+.section-head { max-width: 60ch; margin-bottom: 50px; }
+.kicker {
+  font-family: 'IBM Plex Mono', monospace; font-size: .73rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--magenta); font-weight: 600; margin-bottom: 14px;
+}
+.section h2 {
+  font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -.02em;
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.08;
+}
+.section h2 em { font-style: italic; color: var(--magenta); }
+.section .sub { color: var(--ink-soft); font-size: 1.06rem; margin-top: 16px; max-width: 58ch; }
+
+/* ── The thread (workflow timeline) ────────────────────────── */
+.thread { position: relative; max-width: 880px; margin: 0 auto; padding: 8px 0; }
+.thread-line, .thread-fill {
+  position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; border-radius: 2px;
+}
+.thread-line { background: var(--line); }
+.thread-fill { background: var(--grad); height: var(--fill, 0%); bottom: auto; transition: height .15s linear; box-shadow: 0 0 14px -2px rgba(241,69,117,.5); }
+
+.station {
+  position: relative; padding: 0 0 46px 76px;
+  opacity: 0; transform: translateY(26px); transition: opacity .7s, transform .7s;
+}
+.station.in { opacity: 1; transform: none; }
+.station:last-child { padding-bottom: 6px; }
+.node {
+  position: absolute; left: 16px; top: 2px; width: 26px; height: 26px; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--accent, var(--magenta));
+  display: grid; place-items: center; z-index: 3;
+}
+.node::after { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--accent, var(--magenta)); }
+.phase-tag {
+  font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent, var(--magenta)); font-weight: 600;
+}
+.station-card {
+  display: block; margin-top: 6px; padding: 22px 24px; border-radius: 16px;
+  background: var(--paper-2); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+  transition: .22s;
+}
+.station-card:hover { transform: translateX(6px); border-color: var(--accent, var(--magenta)); box-shadow: var(--shadow); }
+.station-top { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.station-num { font-family: 'IBM Plex Mono', monospace; font-size: .82rem; color: var(--ink-faint); }
+.station-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.42rem; letter-spacing: -.015em; }
+.station-verb { margin-left: auto; font-size: .82rem; font-weight: 700; color: var(--accent, var(--magenta)); }
+.station-desc { color: var(--ink-soft); font-size: .95rem; margin-top: 9px; }
+.station-carry {
+  margin-top: 14px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--ink-soft);
+  padding: 5px 11px; border-radius: 8px; background: var(--paper-3);
+}
+.station-carry b { color: var(--ink); font-weight: 600; }
+.station-carry .arr { color: var(--accent, var(--magenta)); }
+.station-open { float: right; font-size: .8rem; font-weight: 700; color: var(--ink-faint); transition: .2s; }
+.station-card:hover .station-open { color: var(--accent, var(--magenta)); }
+
+/* ── Integration proof ─────────────────────────────────────── */
+.proof { background: var(--paper-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+.proof-grid { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 14px; }
+.proof-card { padding: 24px; border-radius: 16px; border: 1px solid var(--line); background: var(--paper); }
+.proof-card .pc-icon { font-size: 1.4rem; }
+.proof-card h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.2rem; margin: 12px 0 7px; }
+.proof-card p { color: var(--ink-soft); font-size: .92rem; }
+.proof-flow { font-family: 'IBM Plex Mono', monospace; font-size: .76rem; color: var(--magenta); margin-top: 12px; word-break: break-word; }
+
+/* ── Tools grid ────────────────────────────────────────────── */
+.tools-grid { display: grid; gap: 14px; grid-template-columns: 1fr; margin-top: 12px; }
+.tool {
+  display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px;
+  border-radius: 14px; border: 1px solid var(--line); background: var(--paper-2); transition: .2s;
+}
+.tool:hover { transform: translateY(-3px); border-color: var(--accent, var(--magenta)); box-shadow: var(--shadow-sm); }
+.tool-dot { flex: none; width: 11px; height: 11px; border-radius: 50%; background: var(--accent, var(--magenta)); margin-top: 7px; }
+.tool-body { flex: 1; min-width: 0; }
+.tool-name { font-weight: 800; letter-spacing: -.01em; }
+.tool-name .arr { color: var(--ink-faint); font-weight: 600; transition: .2s; }
+.tool:hover .tool-name .arr { color: var(--accent, var(--magenta)); }
+.tool-tag { color: var(--ink-soft); font-size: .86rem; margin-top: 2px; }
+
+/* ── Audience ──────────────────────────────────────────────── */
+.aud-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 12px; }
+.aud { padding: 26px; border-radius: 18px; background: var(--grad-soft); border: 1px solid var(--line); }
+.aud h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 8px; }
+.aud p { color: var(--ink-soft); font-size: .93rem; }
+
+/* ── Trust strip ───────────────────────────────────────────── */
+.trust { display: grid; gap: 16px 30px; grid-template-columns: 1fr; margin-top: 14px; }
+.trust-item { padding-left: 18px; border-left: 2px solid var(--magenta); }
+.trust-item h4 { font-weight: 700; font-size: .98rem; }
+.trust-item p { color: var(--ink-soft); font-size: .89rem; margin-top: 3px; }
+
+/* ── Closing CTA ───────────────────────────────────────────── */
+.close { text-align: center; padding: 96px 0; position: relative; }
+.close-glow { position: absolute; inset: 0; background: var(--grad-soft); filter: blur(70px); opacity: .8; z-index: 0; }
+.close .wrap { position: relative; z-index: 2; }
+.close h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(2rem,4.5vw,3.2rem); line-height: 1.07; letter-spacing: -.02em; max-width: 18ch; margin: 0 auto; }
+.close h2 em { font-style: italic; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.close p { color: var(--ink-soft); margin: 18px auto 32px; max-width: 48ch; }
+
+footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
+.foot-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; }
+.foot-row .mono { font-size: .76rem; color: var(--ink-faint); }
+.foot-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: .84rem; }
+.foot-links a { color: var(--ink-soft); }
+.foot-links a:hover { color: var(--magenta); }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (min-width: 720px) {
+  .proof-grid { grid-template-columns: repeat(3, 1fr); }
+  .tools-grid { grid-template-columns: 1fr 1fr; }
+  .aud-grid { grid-template-columns: repeat(3, 1fr); }
+  .trust { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .bar-link.hide-sm { display: none; }
+  .hero { padding: 64px 0 50px; }
+  .station-verb { margin-left: 0; flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise, .station { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Brand bar -->
+<div class="bar">
+  <a class="bar-logo" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">
+    <span class="s-mark">S</span>
+    <span class="bar-name wordmark">Throughline <span>· by Syed</span></span>
+  </a>
+  <div class="bar-right">
+    <a class="bar-link hide-sm" href="#thread">The workflow</a>
+    <a class="bar-link hide-sm" href="#tools">Tools</a>
+    <a class="bar-link" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects ↗</a>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark">🌙</button>
+  </div>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="eyebrow rise d1"><b></b> One workflow · eight connected tools</div>
+    <h1 class="rise d2">From a hunch to a <em>published paper</em>, without losing the thread.</h1>
+    <p class="lede rise d3">Most research tools are islands — a citation explorer here, a survey builder there, a stats package somewhere else. <strong>Throughline</strong> is the whole journey as one continuous workflow: each step hands its work to the next, so your question, your theory, your scale, and your data travel with you instead of being re-typed.</p>
+    <div class="cta-row rise d4">
+      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener">Start with an idea →</a>
+      <a class="btn btn-ghost" href="#thread">Follow the thread ↓</a>
+    </div>
+    <div class="hero-foot rise d5">
+      <span>No account, runs in your browser</span>
+      <span>Methodology baked in</span>
+      <span>Your data stays local</span>
+    </div>
+  </div>
+</header>
+
+<!-- The thread -->
+<section class="section" id="thread">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The throughline</div>
+      <h2>Eight steps. <em>One thread.</em></h2>
+      <p class="sub">Follow a project from first curiosity to submission. Watch what each step carries forward — that hand-off is the whole point.</p>
+    </div>
+    <div class="thread" id="threadEl">
+      <div class="thread-line"></div>
+      <div class="thread-fill" id="threadFill"></div>
+      <!-- stations injected -->
+    </div>
+  </div>
+</section>
+
+<!-- Integration proof -->
+<section class="section proof">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Not vaporware</div>
+      <h2>The hand-offs are <em>real</em>.</h2>
+      <p class="sub">These aren't loose links between separate apps. The work is encoded and carried forward — pre-filling the next tool so you never start from a blank page.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="pc-icon">🔍</div>
+        <h3>Discover → Read</h3>
+        <p>A rising term in Wordmap opens straight into PaperCards' citation network, seeded and mapped.</p>
+        <div class="proof-flow">wordmap → #seed=&lt;term&gt; → papercards</div>
+      </div>
+      <div class="proof-card">
+        <div class="pc-icon">📦</div>
+        <h3>Read → Frame</h3>
+        <p>Papers you've compared — their recurring constructs and the gap between them — carry into ResearchFlow's idea stage.</p>
+        <div class="proof-flow">papercards → #discovery → researchflow</div>
+      </div>
+      <div class="proof-card">
+        <div class="pc-icon">🧬</div>
+        <h3>Design → Collect → Write</h3>
+        <p>A ResearchPack threads your question, scales, and design through Cadence, ToolsScope, and JournalTime.</p>
+        <div class="proof-flow">researchflow → #pack → cadence → toolsscope → journaltime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools grid -->
+<section class="section" id="tools">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The toolkit</div>
+      <h2>Each piece, strong on its own.</h2>
+      <p class="sub">Use the whole pipeline, or drop into any single tool. Each one stands up against its category — together they become a workflow.</p>
+    </div>
+    <div class="tools-grid" id="toolsGrid"></div>
+  </div>
+</section>
+
+<!-- Audience -->
+<section class="section proof">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Who it's for</div>
+      <h2>Built for people <em>doing</em> the research.</h2>
+    </div>
+    <div class="aud-grid">
+      <div class="aud">
+        <h3>Graduate researchers</h3>
+        <p>Doing your first real study and drowning in disconnected tools? This is the scaffold from idea to manuscript — with the method decisions explained as you go.</p>
+      </div>
+      <div class="aud">
+        <h3>Social-science labs</h3>
+        <p>Psychology, management, organisational behaviour. Validated scales, the right theory, and analysis that reports itself in APA — the conventions your field expects, built in.</p>
+      </div>
+      <div class="aud">
+        <h3>Methods instructors</h3>
+        <p>A living map of the research process for your students to walk through, where every step shows its reasoning instead of hiding it behind a button.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Why trust the output</div>
+      <h2>Rigour, not just <em>vibes</em>.</h2>
+    </div>
+    <div class="trust">
+      <div class="trust-item"><h4>Real statistics</h4><p>A hand-written stats engine — t-tests through mediation — verified against textbook values, with effect-size benchmarks and APA write-ups.</p></div>
+      <div class="trust-item"><h4>Validated measures</h4><p>Scales carry their reliability, dimensions, and original citations. No improvising the questionnaire.</p></div>
+      <div class="trust-item"><h4>Theory with receipts</h4><p>~400 theories grounded in key studies and applications, mapped by influence and shared constructs.</p></div>
+      <div class="trust-item"><h4>Private by default</h4><p>Everything runs client-side in your browser. Your data and your participants' responses stay on your machine.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing -->
+<section class="close">
+  <div class="close-glow"></div>
+  <div class="wrap">
+    <h2>Pick up the <em>thread</em>.</h2>
+    <p>Start anywhere in the workflow. The next step will be waiting with your work already in hand.</p>
+    <div class="cta-row" style="justify-content:center">
+      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener">Begin a project →</a>
+      <a class="btn btn-ghost" href="https://syahmedu.github.io/wordmap/" target="_blank" rel="noopener">Or explore a trend</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">THROUGHLINE — the research workflow, end to end</span>
+    <div class="foot-links">
+      <a href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects</a>
+      <a href="#thread">The workflow</a>
+      <a href="#tools">Tools</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Data: the eight stations, in workflow order ──────────────────
+const ACCENT = { coral: 'var(--coral)', magenta: 'var(--magenta)', violet: 'var(--violet)' };
+const STAGES = [
+  { phase:'Discover', n:'01', name:'Wordmap',      verb:'Spot the trend',  accent:'coral',
+    desc:'Watch concepts rise and fall across 50+ years of literature, and find the white space before you commit to it.',
+    carry:'a live topic', url:'https://syahmedu.github.io/wordmap/' },
+  { phase:'Discover', n:'02', name:'PaperCards',   verb:'Read the field',  accent:'coral',
+    desc:'Any paper as a glanceable card — its constructs, effects, and method. Trace the citation network to find what to read next.',
+    carry:'a set of papers', url:'https://papercards.vercel.app' },
+  { phase:'Develop',  n:'03', name:'ResearchFlow', verb:'Frame the study', accent:'magenta',
+    desc:'A ten-stage wizard that turns a raw idea into a sharp question, a stated gap, and a defensible design.',
+    carry:'your question + gap', url:'https://researchflow-syahmedus-projects.vercel.app' },
+  { phase:'Develop',  n:'04', name:'TheoryScope',  verb:'Ground it',       accent:'magenta',
+    desc:'~400 social-science theories, mapped by influence and construct. Pick the lens your study looks through.',
+    carry:'a framework', url:'https://theoryscope.vercel.app' },
+  { phase:'Develop',  n:'05', name:'ScaleScope',   verb:'Operationalise',  accent:'magenta',
+    desc:'Validated measurement scales with reliability, dimensions, and citations — turn abstract constructs into real items.',
+    carry:'your instruments', url:'https://scalescope.vercel.app' },
+  { phase:'Collect',  n:'06', name:'Cadence',      verb:'Gather data',     accent:'violet',
+    desc:'Immersive, one-question-at-a-time surveys with wave tracking and a built-in analytics dashboard.',
+    carry:'clean responses', url:'https://syahmedu.github.io/cadence/' },
+  { phase:'Collect',  n:'07', name:'ToolsScope',   verb:'Analyse',         accent:'violet',
+    desc:'A real stats engine — descriptives to mediation — that writes its own APA results and draws the figures, in the browser.',
+    carry:'results + figures', url:'https://toolsscope.vercel.app' },
+  { phase:'Publish',  n:'08', name:'JournalTime',  verb:'Write & place',   accent:'violet',
+    desc:'Draft the article, find the right home from 2,000+ journals, and aim your submission with turnaround data.',
+    carry:'a manuscript', url:'https://syahmedu.github.io/journaltime/' },
+];
+
+// ── Render the thread ─────────────────────────────────────────────
+const threadEl = document.getElementById('threadEl');
+STAGES.forEach((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'station';
+  el.style.setProperty('--accent', ACCENT[s.accent]);
+  const carry = i < STAGES.length - 1
+    ? `<span class="station-carry">carries <b>${s.carry}</b> <span class="arr">→</span></span>`
+    : `<span class="station-carry">delivers <b>${s.carry}</b> ✓</span>`;
+  el.innerHTML = `
+    <span class="node"></span>
+    <div class="phase-tag">${s.phase}</div>
+    <a class="station-card" href="${s.url}" target="_blank" rel="noopener">
+      <div class="station-top">
+        <span class="station-num">${s.n}</span>
+        <span class="station-name">${s.name}</span>
+        <span class="station-verb">${s.verb}</span>
+      </div>
+      <div class="station-desc">${s.desc}</div>
+      ${carry}
+      <span class="station-open">Open ↗</span>
+    </a>`;
+  threadEl.appendChild(el);
+});
+
+// ── Render tools grid ─────────────────────────────────────────────
+const grid = document.getElementById('toolsGrid');
+STAGES.forEach(s => {
+  const a = document.createElement('a');
+  a.className = 'tool'; a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
+  a.style.setProperty('--accent', ACCENT[s.accent]);
+  a.innerHTML = `
+    <span class="tool-dot"></span>
+    <span class="tool-body">
+      <span class="tool-name">${s.name} <span class="arr">↗</span></span>
+      <div class="tool-tag">${s.verb} — ${s.carry}</div>
+    </span>`;
+  grid.appendChild(a);
+});
+
+// ── Scroll reveal for stations ────────────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.2 });
+document.querySelectorAll('.station').forEach(s => io.observe(s));
+
+// ── Thread fill follows scroll through the thread section ─────────
+const fill = document.getElementById('threadFill');
+let ticking = false;
+function updateFill() {
+  const r = threadEl.getBoundingClientRect();
+  const vh = window.innerHeight;
+  const total = r.height + vh * 0.4;
+  const progressed = Math.min(total, Math.max(0, vh * 0.7 - r.top));
+  fill.style.setProperty('--fill', Math.max(0, Math.min(100, (progressed / r.height) * 100)) + '%');
+  ticking = false;
+}
+window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateFill); ticking = true; } }, { passive: true });
+window.addEventListener('resize', updateFill);
+updateFill();
+
+// ── Theme toggle (shares 'syed-theme' with the rest of the suite) ─
+const root = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+function applyTheme(t) {
+  root.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('syed-theme', t); } catch {}
+}
+(function initTheme(){
+  let t = 'light';
+  try { const s = localStorage.getItem('syed-theme'); if (s === 'dark' || s === 'light') t = s; else if (matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark'; } catch {}
+  applyTheme(t);
+})();
+themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
