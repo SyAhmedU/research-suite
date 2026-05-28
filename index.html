@@ -162,7 +162,11 @@ html[data-theme="dark"] .conn-state.ok { color: #4ade9a; }
 html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 .empty-note { color: var(--ink-faint); padding: 20px; text-align: center; border: 1px dashed var(--line); border-radius: 14px; }
 .proj-list { display: grid; gap: 12px; grid-template-columns: 1fr; }
-.proj-card { padding: 18px 20px; border-radius: 15px; border: 1px solid var(--line); background: var(--paper-2); box-shadow: var(--shadow-sm); }
+.proj-card { padding: 18px 20px; border-radius: 15px; border: 1px solid var(--line); background: var(--paper-2); box-shadow: var(--shadow-sm); transition: .2s; }
+.proj-card.active { border-color: transparent; box-shadow: 0 0 0 2px var(--magenta), 0 12px 30px -14px rgba(241,69,117,.4); background: color-mix(in srgb, var(--magenta) 4%, var(--paper-2)); }
+.proj-active-badge { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; font-weight: 700; letter-spacing: .04em; color: #fff; background: var(--grad); padding: 3px 10px; border-radius: 999px; }
+.proj-activate { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; color: var(--magenta); border: 1px solid var(--magenta); padding: 3px 10px; border-radius: 999px; cursor: pointer; background: transparent; transition: .15s; }
+.proj-activate:hover { background: var(--magenta); color: #fff; }
 .proj-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .proj-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.18rem; letter-spacing: -.01em; }
 .proj-date { font-size: .74rem; color: var(--ink-faint); flex: none; }
@@ -647,7 +651,26 @@ function renderAuth(user) {
     btn.textContent = 'Sign in';
     btn.classList.remove('in');
     $('dash').hidden = true;
+    clearActive();  // drop any stale active-project pointer on sign-out
   }
+}
+
+// ── Active project: the workspace context every suite tool will read ──
+// Stored in localStorage so it's shared across the syahmedu.github.io origin
+// — the moment the hub marks a project active, the github.io tools can
+// surface it without any cross-app sync.
+const ACTIVE_ID_KEY = 'active_project_id';
+const ACTIVE_NAME_KEY = 'active_project_name';
+function getActive() {
+  try { return { id: localStorage.getItem(ACTIVE_ID_KEY), name: localStorage.getItem(ACTIVE_NAME_KEY) }; }
+  catch { return { id: null, name: null }; }
+}
+function setActive(p) {
+  try { localStorage.setItem(ACTIVE_ID_KEY, p.id); localStorage.setItem(ACTIVE_NAME_KEY, p.name); } catch {}
+  loadProjects();
+}
+function clearActive() {
+  try { localStorage.removeItem(ACTIVE_ID_KEY); localStorage.removeItem(ACTIVE_NAME_KEY); } catch {}
 }
 
 async function loadProjects() {
@@ -656,14 +679,22 @@ async function loadProjects() {
   try {
     const projects = await Auth.listProjects();
     if (!projects.length) { list.innerHTML = '<div class="empty-note">No projects yet — name one above to begin.</div>'; return; }
+    const active = getActive();
+    // If the active id no longer points at one of your projects, drop it so
+    // we don't keep referencing a deleted project.
+    if (active.id && !projects.find(p => p.id === active.id)) clearActive();
     list.innerHTML = '';
     for (const p of projects) {
+      const isActive = p.id === active.id;
       const card = document.createElement('div');
-      card.className = 'proj-card';
+      card.className = 'proj-card' + (isActive ? ' active' : '');
       const created = new Date(p.created_at).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
       card.innerHTML = `
         <div class="proj-top">
           <span class="proj-name">${escapeHtml(p.name)}</span>
+          ${isActive
+            ? '<span class="proj-active-badge" title="The suite tools will load this project as the active workspace">● Active</span>'
+            : '<button class="proj-link proj-activate" title="Make this the active workspace across the suite">Make active</button>'}
           <span class="proj-date mono">${created}</span>
         </div>
         <div class="proj-tools">${TOOLS.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n} ↗</a>`).join('')}</div>
@@ -671,12 +702,23 @@ async function loadProjects() {
           <button class="proj-link" data-act="rename">Rename</button>
           <button class="proj-link danger" data-act="delete">Delete</button>
         </div>`;
+      const activateBtn = card.querySelector('.proj-activate');
+      if (activateBtn) activateBtn.addEventListener('click', () => setActive(p));
       card.querySelector('[data-act="rename"]').addEventListener('click', async () => {
         const name = prompt('Rename project:', p.name);
-        if (name && name.trim()) { await Auth.renameProject(p.id, name); loadProjects(); }
+        if (name && name.trim()) {
+          await Auth.renameProject(p.id, name);
+          // Keep the active name in sync if this is the active project.
+          if (active.id === p.id) try { localStorage.setItem(ACTIVE_NAME_KEY, name); } catch {}
+          loadProjects();
+        }
       });
       card.querySelector('[data-act="delete"]').addEventListener('click', async () => {
-        if (confirm(`Delete “${p.name}”? This can't be undone.`)) { await Auth.deleteProject(p.id); loadProjects(); }
+        if (confirm(`Delete “${p.name}”? This can't be undone.`)) {
+          await Auth.deleteProject(p.id);
+          if (active.id === p.id) clearActive();
+          loadProjects();
+        }
       });
       list.appendChild(card);
     }
