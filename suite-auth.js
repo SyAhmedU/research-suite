@@ -22,8 +22,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 // ── FILL THESE IN (Project Settings → API in your Supabase dashboard) ──
 export const SUITE_CONFIG = {
-  url: '',       // e.g. 'https://abcdefgh.supabase.co'
-  anonKey: '',   // the public "anon" / publishable key (NOT the service_role key)
+  url: 'https://hpupaqzebvrjhrpywtzl.supabase.co',
+  anonKey: 'sb_publishable_HwG-E4cFEuoeV_XlVxSrdA_E8x7UweQ',  // public publishable key — safe to ship; RLS protects data
 };
 
 let _client = null;
