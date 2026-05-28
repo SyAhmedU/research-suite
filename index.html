@@ -1046,6 +1046,7 @@ if (Auth.isConfigured()) {
   // Generate input — that's what makes "open tool" actually mean "open
   // tool with my topic already in hand".
   const TOOL_INFO = {
+    ib: { tool: 'IdeaBox',      icon: '💡', href: 'https://ideabox-six.vercel.app',                         param: 'idea'  },
     wm: { tool: 'Wordmap',      icon: '📈', href: 'https://syahmedu.github.io/wordmap/',                    param: 'brief' },
     pc: { tool: 'PaperCards',   icon: '📑', href: 'https://papercards.vercel.app/',                         param: 'seed'  },
     rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/',    param: 'idea'  },
@@ -1116,6 +1117,7 @@ Researcher's topic:
 """${topic}"""
 
 Available tools (use these short keys EXACTLY):
+- "ib" IdeaBox — mobile-first idea catcher (voice + text + tags). When the researcher has a fresh hunch worth saving before doing anything else.
 - "wm" Wordmap — 50-yr term trends, white-space discovery, when they want to see "what's hot / what's been done".
 - "pc" PaperCards — DOI / topic → seed papers + citation network. Best when they want to read the literature.
 - "rf" ResearchFlow — 10-stage wizard from idea to design. Best when they have a topic but need a sharp question, theory, hypotheses, design, analysis plan.
@@ -1128,7 +1130,7 @@ Available tools (use these short keys EXACTLY):
 Return JSON:
 {
   "routes": [
-    { "tool": "wm|pc|rf|ts|ss|cd|to|jt", "why": "one sentence on WHY this tool, in this order, for this researcher" }
+    { "tool": "ib|wm|pc|rf|ts|ss|cd|to|jt", "why": "one sentence on WHY this tool, in this order, for this researcher" }
   ]
 }
 Pick 2-4 tools, in the order the researcher should engage them. Start where they ARE in the research process, not always at step 1.`;
@@ -1169,6 +1171,9 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
 // ── Data: the eight stations, in workflow order ──────────────────
 const ACCENT = { coral: 'var(--coral)', magenta: 'var(--magenta)', violet: 'var(--violet)' };
 const STAGES = [
+  { phase:'Capture',  n:'00', name:'IdeaBox',      verb:'Catch the hunch', accent:'coral',
+    desc:"Where every research idea starts — the mobile-first scratchpad for half-formed thoughts. Voice or text, auto-categorised, tagged, pinned. A 6 a.m. hunch worth keeping shouldn't die in the Notes app.",
+    carry:'a raw idea', url:'https://ideabox-six.vercel.app' },
   { phase:'Discover', n:'01', name:'Wordmap',      verb:'Spot the trend',  accent:'coral',
     desc:'Watch concepts rise and fall across 50+ years of literature, and find the white space before you commit to it.',
     carry:'a live topic', url:'https://syahmedu.github.io/wordmap/' },
