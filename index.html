@@ -816,17 +816,25 @@ if (Auth.isConfigured()) {
   const $ = (id) => document.getElementById(id);
   const RF_URL = 'https://researchflow-syahmedus-projects.vercel.app/api/generate';
 
-  // Tool catalogue used in the prompt + for rendering routes.
+  // Tool catalogue used in the prompt + for rendering routes. `param` is
+  // the query-string key each tool's receiver reads to pre-fill its
+  // Generate input — that's what makes "open tool" actually mean "open
+  // tool with my topic already in hand".
   const TOOL_INFO = {
-    wm: { tool: 'Wordmap',      icon: '📈', href: 'https://syahmedu.github.io/wordmap/' },
-    pc: { tool: 'PaperCards',   icon: '📑', href: 'https://papercards.vercel.app/' },
-    rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/' },
-    ts: { tool: 'TheoryScope',  icon: '🏛️', href: 'https://theoryscope.vercel.app/' },
-    ss: { tool: 'ScaleScope',   icon: '📏', href: 'https://scalescope.vercel.app/' },
-    cd: { tool: 'Cadence',      icon: '🧪', href: 'https://syahmedu.github.io/cadence/' },
-    to: { tool: 'ToolsScope',   icon: '🔬', href: 'https://toolsscope.vercel.app/' },
-    jt: { tool: 'JournalTime',  icon: '✍️', href: 'https://syahmedu.github.io/journaltime/' },
+    wm: { tool: 'Wordmap',      icon: '📈', href: 'https://syahmedu.github.io/wordmap/',                    param: 'brief' },
+    pc: { tool: 'PaperCards',   icon: '📑', href: 'https://papercards.vercel.app/',                         param: 'seed'  },
+    rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/',    param: 'idea'  },
+    ts: { tool: 'TheoryScope',  icon: '🏛️', href: 'https://theoryscope.vercel.app/',                        param: 'q'     },
+    ss: { tool: 'ScaleScope',   icon: '📏', href: 'https://scalescope.vercel.app/',                         param: 'q'     },
+    cd: { tool: 'Cadence',      icon: '🧪', href: 'https://syahmedu.github.io/cadence/',                    param: 'gen'   },
+    to: { tool: 'ToolsScope',   icon: '🔬', href: 'https://toolsscope.vercel.app/',                         param: 'plan'  },
+    jt: { tool: 'JournalTime',  icon: '✍️', href: 'https://syahmedu.github.io/journaltime/',                param: 'topic' },
   };
+  function buildDeepLink(toolKey, topic) {
+    const meta = TOOL_INFO[toolKey];
+    if (!meta) return null;
+    return meta.href + '?' + meta.param + '=' + encodeURIComponent(topic);
+  }
 
   function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -834,9 +842,9 @@ if (Auth.isConfigured()) {
     // Deterministic routes for when the AI is unreachable — better than
     // nothing. Sends the user to the discovery tier with the topic seeded.
     return [
-      { tool: 'wm', why: "Get a 50-yr trend read on your topic — what's rising, what's saturated, where the white space is.", deeplink: null },
-      { tool: 'pc', why: "Map the citation network around the topic and pull foundational papers as cards.", deeplink: 'https://papercards.vercel.app/#seed=' + encodeURIComponent(topic) },
-      { tool: 'rf', why: 'Frame the study end-to-end — question, theory, instruments, design, analysis.', deeplink: null },
+      { tool: 'wm', why: "Get a 50-yr trend read on your topic — what's rising, what's saturated, where the white space is." },
+      { tool: 'pc', why: 'Map the citation network around the topic and pull foundational papers as cards.' },
+      { tool: 'rf', why: 'Frame the study end-to-end — question, theory, instruments, design, analysis.' },
     ];
   }
 
@@ -846,7 +854,10 @@ if (Auth.isConfigured()) {
     let html = '';
     routes.slice(0, 4).forEach((r, i) => {
       const meta = TOOL_INFO[r.tool] || TOOL_INFO.rf;
-      const href = r.deeplink || meta.href;
+      // Always build a deep-link so the destination tool can read the topic
+      // and auto-fill its Generate input. Falls back to homepage only if
+      // the topic is somehow empty.
+      const href = (r.deeplink || (topic ? buildDeepLink(r.tool, topic) : null) || meta.href);
       const stepNo = i + 1;
       html += `<a class="qs-route" href="${href}" target="_blank" rel="noopener">`
         + `<span class="qs-route-icon">${meta.icon}</span>`
@@ -912,11 +923,6 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
       }
       const { result } = await r.json();
       const routes = Array.isArray(result?.routes) ? result.routes.filter(x => x && TOOL_INFO[x.tool]) : [];
-      // Auto-seed PaperCards when it's in the routes — gives an instant
-      // jump from this hub to a populated Explore view.
-      routes.forEach(rt => {
-        if (rt.tool === 'pc') rt.deeplink = 'https://papercards.vercel.app/#seed=' + encodeURIComponent(topic);
-      });
       if (!routes.length) { renderRoutes(fallbackRoutes(topic), topic); return; }
       renderRoutes(routes, topic);
     } catch (err) {
