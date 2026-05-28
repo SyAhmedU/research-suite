@@ -108,6 +108,19 @@ export async function health() {
   }
 }
 
+// Which login methods are actually turned on in the dashboard. Public
+// endpoint (anon key only) — lets the UI hide buttons for providers that
+// aren't enabled yet, instead of bouncing the user to a "provider not
+// enabled" error page.
+export async function enabledProviders() {
+  if (!isConfigured()) return {};
+  try {
+    const r = await fetch(SUITE_CONFIG.url + '/auth/v1/settings', { headers: { apikey: SUITE_CONFIG.anonKey } });
+    if (!r.ok) return {};
+    return (await r.json()).external || {};
+  } catch { return {}; }
+}
+
 // ── Projects (per-user, RLS-protected) ──────────────────────────────
 // A "project" is a named research workspace. `data` (jsonb) is where each
 // suite tool will later stash its per-project state during rollout; for now
