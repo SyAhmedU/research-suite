@@ -84,7 +84,11 @@ Supabase keeps the session in `localStorage`, which is **per-origin**:
 
 **JournalTime is wired and is the canonical example** — see the `<script type="module">` block at the end of `journaltime/index.html`. It's the vanilla, same-origin pattern: imports `suite-auth.js` by absolute URL, inherits the hub session (no auth UI), syncs one slice (`jt` → the Article Developer draft), cloud-wins-if-newer on load, pushes on `visibilitychange`/`pagehide` + a best-effort wrap of the existing writer. Clone its shape for the other github.io tools (wordmap, cadence) — change `TOOL_KEY` and the localStorage key(s) you read/write.
 
-Remaining same-origin (free session): **wordmap** (`wm`), **cadence** (`cd` — but gate behind Phase 1, it holds participant data). Cross-origin (own sign-in needed): the five `*.vercel.app` React tools.
+**ResearchFlow is the cross-origin reference** — see `researchflow/src/lib/suiteSync.ts` + `AccountButton` in `App.tsx`. It dynamically imports suite-auth via `import(/* @vite-ignore */ 'https://syahmedu.github.io/research-suite/suite-auth.js')` — **zero new npm dependency, no bundler/type friction** (Vite preserves the URL as a runtime import; GitHub Pages serves it with `Access-Control-Allow-Origin: *`, verified). Because the hub session isn't shared cross-origin, it ships its own `AccountButton` (Google + email magic link). Clone this for the other React tools (theoryscope/toolsscope/papercards) — change `TOOL_KEY` and wrap their autosave site.
+
+> **One-time per new origin:** add the tool's URL to the Supabase dashboard → Authentication → URL Configuration → **Redirect URLs**, or sign-in can't return. (SETUP.md step 4.)
+
+Remaining: **wordmap** (`wm`) has no per-project state — skip. **cadence** (`cd`) is same-origin but **gate behind Phase 1** (participant data). React tools left: theoryscope, toolsscope, papercards (clone ResearchFlow).
 
 ## Definition of done (per tool)
 - [ ] Signed-out / preview behaviour is byte-for-byte unchanged.
