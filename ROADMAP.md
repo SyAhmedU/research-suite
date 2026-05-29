@@ -42,8 +42,8 @@ The suite already works end to end. The gap to "sellable" is not features — it
 
 - **Per-study data ownership**: a study's responses belong to the study owner's account, RLS-enforced, never co-mingled.
 - ✅ **Privacy posture, written and visible** — `privacy.html` (linked from the hub footer): local-first default, opt-in cloud + RLS, per-tool storage table, transparent AI handling, the participant-data gate stated plainly, user controls, and an IRB summary. Done 2026-05-30. *Remaining in this bullet: name the Supabase region + a concrete retention window once set.*
-- **Consent + anonymisation primitives** in Cadence: a consent gate, participant-code-only identification (already the model), an export-and-purge path.
-- **IRB-friendly framing**: a one-page "how Throughline handles participant data" doc an ethics board can read. This is a *sales asset* in the education wedge, not just compliance.
+- **Consent + anonymisation primitives** in Cadence: ✅ **consent gate** — required, voluntary/anonymous/withdrawable notice before every survey (default text, overridable per study via `consentText`), `consentedAt` timestamped on each response (done 2026-05-30); participant-code-only identification (already the model). *Remaining: an explicit export-and-purge (delete-my-data) path.*
+- ✅ **IRB-friendly framing**: the "For ethics boards & IRBs" section in `privacy.html` is the point-by-point page an ethics board can rely on. Done 2026-05-30.
 - Data export in standard formats at every stage (already strong: Cadence JSON, ToolsScope .docx/CSV) — never trap the user's data.
 
 **Exit criterion:** an instructor can point their ethics board at a page and get a study approved.
