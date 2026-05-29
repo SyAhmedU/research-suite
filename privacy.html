@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Data &amp; Privacy — Throughline</title>
+  <meta name="description" content="How Throughline (the Research Suite) handles your data: local-first by default, optional per-user cloud sync, transparent AI processing, and a research-data governance posture for ethics boards." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Syed Asrar" />
+  <link rel="canonical" href="https://syahmedu.github.io/research-suite/privacy.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Data & Privacy — Throughline" />
+  <meta property="og:description" content="Local-first by default, opt-in cloud sync, transparent AI processing, and a research-data governance posture." />
+  <meta property="og:url" content="https://syahmedu.github.io/research-suite/privacy.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FF9656'/><stop offset='.55' stop-color='%23F14575'/><stop offset='1' stop-color='%239270F4'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='23' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='19' fill='white'>S</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>(function(){try{var t=localStorage.getItem('syed-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <style>
+  :root {
+    --paper:#FBF7EF; --paper-2:#FFFFFF; --paper-3:#F3ECDF;
+    --ink:#211B2E; --ink-soft:#574E64; --ink-faint:#8C8498;
+    --line:rgba(33,27,46,.12); --line-soft:rgba(33,27,46,.07);
+    --magenta:#F14575; --violet:#9270F4;
+    --grad:linear-gradient(135deg,#FF9656 0%,#F14575 52%,#9270F4 100%);
+    --shadow-sm:0 8px 24px -14px rgba(33,27,46,.3);
+  }
+  html[data-theme="dark"] {
+    --paper:#14111C; --paper-2:#1C1827; --paper-3:#241F31;
+    --ink:#F4EFF8; --ink-soft:#B8AEC6; --ink-faint:#7C7389;
+    --line:rgba(255,255,255,.13); --line-soft:rgba(255,255,255,.07);
+    --shadow-sm:0 8px 24px -14px rgba(0,0,0,.6);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body {
+    font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.65;
+    -webkit-font-smoothing:antialiased; transition:background .4s,color .4s;
+  }
+  .wrap { width:100%; max-width:760px; margin:0 auto; padding:0 22px; }
+  a { color:var(--magenta); }
+  .skip-link { position:absolute; left:8px; top:-48px; z-index:50; background:var(--ink); color:var(--paper); padding:9px 16px; border-radius:8px; font-weight:600; font-size:.82rem; text-decoration:none; transition:top .18s ease; }
+  .skip-link:focus { top:8px; outline:2px solid var(--violet); outline-offset:2px; }
+  :focus-visible { outline:2px solid var(--violet); outline-offset:2px; border-radius:4px; }
+
+  header.bar {
+    position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:12px;
+    padding:12px 22px; background:color-mix(in srgb,var(--paper) 82%,transparent);
+    backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .bar a.home { display:flex; align-items:center; gap:9px; text-decoration:none; color:var(--ink); }
+  .mark { width:28px; height:28px; border-radius:8px; background:var(--grad); display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:.8rem; flex:none; }
+  .bar .name { font-weight:800; letter-spacing:-.02em; }
+  .bar .crumb { color:var(--ink-faint); font-size:.85rem; }
+  .bar .spacer { margin-left:auto; }
+  .theme-btn { border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft); width:34px; height:34px; border-radius:999px; cursor:pointer; font-size:1rem; font-family:inherit; }
+
+  main { padding:48px 0 80px; }
+  .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:.73rem; letter-spacing:.14em; text-transform:uppercase; color:var(--magenta); font-weight:600; }
+  h1 { font-family:'Fraunces',serif; font-weight:600; font-size:2.4rem; letter-spacing:-.02em; line-height:1.1; margin:10px 0 12px; }
+  .lede { font-size:1.08rem; color:var(--ink-soft); max-width:62ch; }
+  .updated { font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--ink-faint); margin-top:14px; }
+  h2 { font-family:'Fraunces',serif; font-weight:600; font-size:1.5rem; letter-spacing:-.015em; margin:42px 0 12px; padding-top:14px; border-top:1px solid var(--line-soft); }
+  h3 { font-size:1.05rem; font-weight:700; margin:22px 0 6px; }
+  p { margin:10px 0; color:var(--ink-soft); }
+  p strong, li strong { color:var(--ink); }
+  ul { margin:10px 0 10px 4px; padding-left:20px; }
+  li { margin:6px 0; color:var(--ink-soft); }
+  .principle-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin:18px 0; }
+  .card { background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:var(--shadow-sm); }
+  .card h3 { margin:0 0 6px; }
+  .card p { margin:0; font-size:.92rem; }
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:.92rem; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th { font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); }
+  td:first-child { font-weight:700; color:var(--ink); white-space:nowrap; }
+  .callout { background:var(--paper-3); border:1px solid var(--line); border-left:3px solid var(--magenta); border-radius:10px; padding:14px 16px; margin:18px 0; font-size:.95rem; }
+  .irb { background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:22px; margin:18px 0; box-shadow:var(--shadow-sm); }
+  .irb ol { margin:10px 0 0 18px; }
+  .irb li { margin:8px 0; }
+  footer { border-top:1px solid var(--line-soft); padding:30px 0; margin-top:30px; }
+  .foot-row { display:flex; align-items:center; gap:18px; flex-wrap:wrap; justify-content:space-between; }
+  .foot-row .mono { font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--ink-faint); }
+  .foot-links { display:flex; gap:16px; flex-wrap:wrap; }
+  .foot-links a { font-size:.82rem; font-weight:600; color:var(--ink-soft); text-decoration:none; }
+  .foot-links a:hover { color:var(--magenta); }
+  @media (max-width:560px){ h1{font-size:1.9rem;} .bar .crumb{display:none;} }
+  @media (prefers-reduced-motion:reduce){ *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; scroll-behavior:auto!important; } }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="bar">
+  <a class="home" href="./index.html"><span class="mark">S</span><span class="name">Throughline</span></a>
+  <span class="crumb">· Data &amp; Privacy</span>
+  <span class="spacer"></span>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark theme" title="Toggle theme">◐</button>
+</header>
+
+<main id="main-content" tabindex="-1">
+  <div class="wrap">
+    <p class="eyebrow">Trust before scale</p>
+    <h1>Your data, and what we do with it</h1>
+    <p class="lede">Throughline is a suite of research tools. This page explains, plainly, where your work is stored, what leaves your device, and the controls you have. The short version: <strong>it's local-first and yours by default</strong> — the cloud is something you opt into, not out of.</p>
+    <p class="updated">Last updated: 30 May 2026</p>
+
+    <h2>The four principles</h2>
+    <div class="principle-grid">
+      <div class="card"><h3>Local-first</h3><p>By default, your work lives only in your browser on your device. You can use every tool without an account.</p></div>
+      <div class="card"><h3>Opt-in cloud</h3><p>Cloud sync only happens after you sign in. It's off until you choose it, and it never removes the local copy.</p></div>
+      <div class="card"><h3>Your data is isolated</h3><p>When synced, row-level security means you can only ever read or write your own projects — never anyone else's.</p></div>
+      <div class="card"><h3>No dark corners</h3><p>You can export or delete your data at any time. We don't sell it, and we don't run ads.</p></div>
+    </div>
+
+    <h2>Where your data lives</h2>
+    <h3>1 · On your device (the default)</h3>
+    <p>Every tool works with no account. It stores your work in your browser's <strong>localStorage</strong>, keyed to that tool. Clearing your browser data, or using a different browser or device, means that local work won't follow you — that's the trade-off the cloud option below addresses.</p>
+
+    <h3>2 · In the cloud (only if you sign in)</h3>
+    <p>If you create an account on the hub, you can sync work to a hosted database (Supabase). Sign-in is via Google or a one-time email link. What's stored:</p>
+    <ul>
+      <li><strong>Projects</strong> — a named workspace per research project, owned by your account.</li>
+      <li><strong>Per-tool state</strong> — each tool saves its slice of the active project (your draft, your plan, your library, and so on).</li>
+      <li><strong>A preference</strong> — which project is "active", so it follows you across devices.</li>
+    </ul>
+    <p>Access is enforced by <strong>per-user row-level security</strong> at the database: a signed-in account can only ever touch its own rows. The public key shipped in the app is designed to be public precisely because that rule, not the key, is what protects your data.</p>
+
+    <h2>What each tool stores</h2>
+    <table>
+      <thead><tr><th>Tool</th><th>What it keeps</th></tr></thead>
+      <tbody>
+        <tr><td>IdeaBox</td><td>Your captured ideas and tags.</td></tr>
+        <tr><td>Wordmap</td><td>Only your theme preference — no personal data.</td></tr>
+        <tr><td>PaperCards</td><td>Your saved paper library and comparisons.</td></tr>
+        <tr><td>ResearchFlow</td><td>Your research plan (question, theory, design, etc.).</td></tr>
+        <tr><td>TheoryScope</td><td>Recent queries and saved comparisons.</td></tr>
+        <tr><td>ScaleScope</td><td>Browsing only; computations run locally in your browser.</td></tr>
+        <tr><td>Cadence</td><td>Study definitions and collected responses (see below).</td></tr>
+        <tr><td>ToolsScope</td><td>Datasets you load and the analyses you run — computed entirely in your browser.</td></tr>
+        <tr><td>JournalTime</td><td>Your article drafts and journal shortlist.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>AI features</h2>
+    <p>Several tools offer an AI "Generate" step. When you use one, the text you submit — a topic, an abstract, a draft — is sent to a third-party AI provider (such as Groq or Google) to produce the response. A few things to know:</p>
+    <ul>
+      <li>Throughline's own backend is <strong>stateless</strong> for these calls: it relays your request to generate a reply and does not keep your prompts.</li>
+      <li>Once text reaches an AI provider, that provider's terms govern how it's handled — which is outside Throughline's control.</li>
+      <li>Practical rule: <strong>don't paste anything into an AI feature that you wouldn't be comfortable sharing with a third-party service.</strong> AI features are optional; the rest of each tool works without them.</li>
+    </ul>
+
+    <h2>Research participant data</h2>
+    <p>Cadence collects survey responses. Today, those responses are stored <strong>in the browser</strong>, keyed to the study, and you can pull them out at any time with <strong>"Download my data."</strong></p>
+    <div class="callout">
+      <strong>Cloud collection of participant data is deliberately not enabled yet.</strong> Holding other people's data at scale carries real obligations — consent, ownership, retention, deletion, and ethics-board review. We're building that governance layer before turning on cloud-backed participant collection, rather than after. Until then, participant data stays on the researcher's device.
+    </div>
+
+    <h2>Your controls</h2>
+    <ul>
+      <li><strong>Export</strong> — tools offer downloads (e.g. Cadence "Download my data", ToolsScope CSV/Word, others as JSON). Your data is never trapped.</li>
+      <li><strong>Delete</strong> — clear a tool's local data via your browser; delete a cloud project from the hub dashboard (it's removed from the database).</li>
+      <li><strong>Sign out</strong> — ends the session and clears the active-project pointer on that device.</li>
+      <li><strong>Stay anonymous</strong> — simply don't sign in. Everything still works, locally.</li>
+    </ul>
+
+    <h2>For ethics boards &amp; IRBs</h2>
+    <p>If you're reviewing a study run with these tools, here is the data posture in brief:</p>
+    <div class="irb">
+      <ol>
+        <li><strong>Local-first by default.</strong> Without an account, all data — including any participant responses in Cadence — stays in the researcher's own browser.</li>
+        <li><strong>Cloud sync is opt-in</strong> and currently scoped to the researcher's own working artifacts (plans, drafts, libraries), not pooled participant data.</li>
+        <li><strong>Per-user isolation.</strong> Synced data is protected by database row-level security; accounts cannot access each other's data.</li>
+        <li><strong>Export and deletion</strong> are available at every stage, supporting data-subject requests and retention limits.</li>
+        <li><strong>No secondary use.</strong> Data is not sold, and there is no advertising.</li>
+        <li><strong>AI is explicit and optional.</strong> Text is sent to a third-party provider only when a user invokes an AI feature; researchers are advised not to submit identifiable participant data to it.</li>
+      </ol>
+      <p style="margin-top:14px;">Questions or a data request? Contact <a href="mailto:syedfaceprep@gmail.com">syedfaceprep@gmail.com</a>.</p>
+    </div>
+
+    <div class="callout">
+      This document describes the suite as it works today and will evolve as the governance layer above lands. It's a plain-language summary, not a contract.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">THROUGHLINE — the research workflow, end to end</span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="./index.html">Home</a>
+      <a href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('syed-theme', next); } catch(e) {}
+  });
+})();
+</script>
+</body>
+</html>
