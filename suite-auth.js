@@ -160,3 +160,102 @@ export async function deleteProject(id) {
   const { error } = await c.from('projects').delete().eq('id', id);
   if (error) throw error;
 }
+
+// ── Active project (cloud-backed, localStorage-mirrored) ─────────────
+// "Which project am I working on right now" is a per-user preference, so it
+// lives in Supabase **user metadata** — no extra table, RLS-free (it's the
+// user's own record), and it follows the user across devices *and* origins
+// once signed in. We also mirror it to localStorage so:
+//   • the same-origin github.io tools can paint the active-project pill
+//     instantly, before any network call, and
+//   • anonymous / preview mode (no keys, not signed in) still works offline.
+// This replaces the hub's old localStorage-only mechanism without breaking it.
+const ACTIVE_ID_KEY = 'active_project_id';
+const ACTIVE_NAME_KEY = 'active_project_name';
+
+export function getActiveLocal() {
+  try { return { id: localStorage.getItem(ACTIVE_ID_KEY), name: localStorage.getItem(ACTIVE_NAME_KEY) }; }
+  catch { return { id: null, name: null }; }
+}
+
+function mirrorActive(p) {
+  try {
+    if (p && p.id) {
+      localStorage.setItem(ACTIVE_ID_KEY, p.id);
+      localStorage.setItem(ACTIVE_NAME_KEY, p.name || '');
+    } else {
+      localStorage.removeItem(ACTIVE_ID_KEY);
+      localStorage.removeItem(ACTIVE_NAME_KEY);
+    }
+  } catch {}
+}
+
+// Resolve the active project, preferring the cloud value (so a switch on
+// another device wins) and falling back to the local mirror. Cheap to call:
+// signed-out / unconfigured returns the mirror without a network round-trip.
+export async function getActiveProject() {
+  const local = getActiveLocal();
+  const c = client();
+  if (!c) return local;
+  const user = await currentUser();
+  const cloudId = user?.user_metadata?.active_project_id || null;
+  if (!cloudId) return local;
+  // Pull the current name so a rename elsewhere is reflected here.
+  try {
+    const { data } = await c.from('projects').select('id,name').eq('id', cloudId).single();
+    if (data) { const p = { id: data.id, name: data.name }; mirrorActive(p); return p; }
+  } catch {}
+  // Project may have been deleted on another device — clear the stale pointer.
+  if (local.id === cloudId) return local;
+  return { id: cloudId, name: null };
+}
+
+// Set (or clear, with null) the active project. Mirrors locally immediately,
+// then persists to user metadata so it travels with the account.
+export async function setActiveProject(p) {
+  mirrorActive(p);
+  const c = client();
+  if (!c) return;
+  try { await c.auth.updateUser({ data: { active_project_id: p?.id || null } }); } catch {}
+}
+
+export async function clearActiveProject() {
+  return setActiveProject(null);
+}
+
+// ── Per-project tool state (the `data` jsonb column) ─────────────────
+// Each suite tool stashes its slice of a project under its own key, e.g.
+//   data = { toolsscope: {...}, cadence: {...}, researchflow: {...} }
+// so tools never clobber one another. These are the primitives a tool calls
+// to sync its per-project state to the cloud during rollout.
+export async function getProjectData(id) {
+  const c = client();
+  if (!c || !id) return {};
+  const { data, error } = await c.from('projects').select('data').eq('id', id).single();
+  if (error) throw error;
+  return data?.data ?? {};
+}
+
+// Read one tool's slice. Returns null when absent so callers can fall back to
+// their existing localStorage value (the offline/anonymous tier).
+export async function getToolData(id, toolKey) {
+  if (!id || !toolKey) return null;
+  const all = await getProjectData(id);
+  return all?.[toolKey] ?? null;
+}
+
+// Merge-write one tool's slice. Read-merge-write (not blind overwrite) so two
+// tools saving close together don't wipe each other's slice. Bumps updated_at
+// so the hub's project list re-sorts to most-recently-touched.
+export async function setToolData(id, toolKey, value) {
+  const c = client();
+  if (!c) throw new Error('not configured');
+  if (!id || !toolKey) throw new Error('project id and tool key required');
+  const all = await getProjectData(id);
+  const next = { ...all, [toolKey]: value };
+  const { error } = await c.from('projects')
+    .update({ data: next, updated_at: new Date().toISOString() })
+    .eq('id', id);
+  if (error) throw error;
+  return next;
+}

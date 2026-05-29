@@ -2,13 +2,62 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Throughline — the research workflow, end to end</title>
 <meta name="description" content="From a hunch to a published paper, one continuous workflow. Eight connected tools that carry your idea forward — discover, frame, measure, collect, analyse, and write, without re-typing a thing.">
 <meta name="theme-color" content="#FBF7EF">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Throughline — the research workflow, end to end">
 <meta property="og:description" content="From a hunch to a published paper, one continuous workflow. Eight connected research tools that pass your work forward.">
+<meta property="og:url" content="https://syahmedu.github.io/research-suite/">
+<meta property="og:image" content="https://syahmedu.github.io/research-suite/og.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Throughline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Throughline — the research workflow, end to end">
+<meta name="twitter:description" content="From a hunch to a published paper, one continuous workflow. Eight connected tools that pass your work forward.">
+<meta name="twitter:image" content="https://syahmedu.github.io/research-suite/og.svg">
+<meta name="twitter:image:alt" content="Throughline — eight connected research tools as one continuous workflow.">
+<link rel="canonical" href="https://syahmedu.github.io/research-suite/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Syed Ahmed">
+<meta name="keywords" content="research workflow, social science research tools, literature review, survey tool, statistics, measurement scales, theory, academic writing, free research software">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://syahmedu.github.io/research-suite/#website",
+      "url": "https://syahmedu.github.io/research-suite/",
+      "name": "Throughline",
+      "description": "From a hunch to a published paper, one continuous research workflow. Eight connected tools that carry your work forward.",
+      "inLanguage": "en",
+      "author": { "@id": "https://syahmedu.github.io/research-suite/#author" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://syahmedu.github.io/research-suite/#author",
+      "name": "Syed Ahmed",
+      "url": "https://syahmedu.github.io/nexus/"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Throughline Research Suite",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web browser",
+      "description": "An end-to-end research workflow: capture an idea, spot trends, read the literature, frame a question, pick theories, choose validated scales, collect data, run the statistics, and write the paper — each step hands its work to the next.",
+      "url": "https://syahmedu.github.io/research-suite/",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "author": { "@id": "https://syahmedu.github.io/research-suite/#author" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='url(%23g)'/><text x='50%25' y='57%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='900' font-size='17' fill='white'>T</text><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23FF9656'/><stop offset='52%25' stop-color='%23F14575'/><stop offset='100%25' stop-color='%239270F4'/></linearGradient></defs></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -71,6 +120,22 @@ html[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .05; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--magenta); color: #fff; }
 
+/* Skip link — first stop for keyboard/screen-reader users */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: 9999;
+  transform: translateY(-160%); transition: transform .2s ease;
+  background: var(--ink); color: var(--paper);
+  padding: 10px 16px; border-radius: 10px; font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+.skip-link:focus-visible { transform: translateY(0); outline: 3px solid var(--violet); outline-offset: 2px; }
+main:focus { outline: none; }
+/* Visible, consistent keyboard focus everywhere */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
+input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid var(--violet); outline-offset: 2px; border-radius: 4px;
+}
+
 .wrap { max-width: 1140px; margin: 0 auto; padding: 0 26px; position: relative; z-index: 2; }
 .mono { font-family: 'IBM Plex Mono', monospace; }
 
@@ -85,6 +150,18 @@ a { color: inherit; text-decoration: none; }
 .liquid-blob-2 { background: var(--magenta); top:  22%; right: -22%; animation: drift2 38s ease-in-out infinite; }
 .liquid-blob-3 { background: var(--violet);  bottom: -22%; left: 22%; animation: drift3 44s ease-in-out infinite; }
 html[data-theme="dark"] .liquid-blob { opacity: .28; filter: blur(140px); }
+/* Living WebGL aurora (identity/syed-aurora.js) — when it mounts, retire the
+   static blobs to it. Plus mobile-native essentials for the flagship. */
+canvas.sx-aurora { transition: opacity 1.4s ease; }
+body.aurora-on .liquid-blob { opacity: 0 !important; transition: opacity 1.4s ease; }
+html, body { overflow-x: clip; }
+* { -webkit-tap-highlight-color: transparent; }
+.bar { padding-top: env(safe-area-inset-top, 0px); }
+@media (hover: none) { .cursor-glow { display: none; } }
+@media (max-width: 560px) {
+  .btn { min-height: 46px; }
+  footer { padding-bottom: calc(34px + env(safe-area-inset-bottom, 0px)); }
+}
 @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(15vw,10vh) scale(1.15)} 66%{transform:translate(-8vw,18vh) scale(.9)} }
 @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-18vw,-8vh) scale(.85)} 70%{transform:translate(10vw,12vh) scale(1.1)} }
 @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 35%{transform:translate(12vw,-14vh) scale(1.2)} 65%{transform:translate(-15vw,5vh) scale(.95)} }
@@ -342,10 +419,10 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 .proj-link.danger:hover { color: var(--magenta); }
 
 /* ── Hero ──────────────────────────────────────────────────── */
-.hero { padding: 92px 0 70px; position: relative; }
+.hero { padding: 92px 0 70px; position: relative; overflow: hidden; }
 .hero-glow {
   position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-  width: 900px; height: 520px; max-width: 120vw;
+  width: 900px; height: 520px; max-width: 100%;
   background: var(--grad-soft); filter: blur(80px); border-radius: 50%;
   z-index: 0; pointer-events: none; opacity: .9;
 }
@@ -553,9 +630,157 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   .rise, .station { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   UP-A-NOTCH ADDITIONS — thread playback, live counts, route
+   highlight, resume pill. Appended; nothing above was changed.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Thread: the "watch one idea travel" control ─────────────────── */
+.thread-play {
+  display: inline-flex; align-items: center; gap: 9px; margin-top: 22px;
+  font-family: inherit; font-weight: 700; font-size: .9rem; cursor: pointer;
+  padding: 11px 20px; border-radius: 999px; color: var(--ink);
+  background: var(--paper-2); border: 1px solid color-mix(in srgb, var(--magenta) 30%, var(--line));
+  box-shadow: var(--shadow-sm); transition: .2s;
+}
+.thread-play:hover { transform: translateY(-2px); border-color: var(--magenta); color: var(--magenta); }
+.thread-play:disabled { opacity: .6; cursor: default; transform: none; }
+.thread-play .pp { color: var(--magenta); font-size: 1.05em; line-height: 1; }
+
+/* The comet that rides the fill line during playback */
+.thread-comet {
+  position: absolute; left: 28px; top: 0; width: 14px; height: 14px;
+  margin-left: -7px; margin-top: -7px; border-radius: 50%;
+  background: var(--grad); z-index: 5; opacity: 0; pointer-events: none;
+  box-shadow: 0 0 18px 4px rgba(241,69,117,.7), 0 0 36px 10px rgba(146,112,244,.35);
+  transition: top .8s cubic-bezier(.5,.05,.2,1), opacity .35s ease;
+}
+
+/* A station catching the idea as the comet passes */
+.station.firing .node {
+  border-color: var(--accent, var(--magenta));
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent, var(--magenta)) 16%, transparent),
+              0 0 20px 2px color-mix(in srgb, var(--accent, var(--magenta)) 55%, transparent);
+}
+.station.firing .node::after { transform: scale(1.35); }
+.node::after { transition: transform .4s cubic-bezier(.18,1.4,.25,1); }
+.station.firing .station-card {
+  border-color: var(--accent, var(--magenta));
+  box-shadow: 0 18px 40px -20px color-mix(in srgb, var(--accent, var(--magenta)) 60%, transparent),
+              0 0 0 1px color-mix(in srgb, var(--accent, var(--magenta)) 35%, var(--line));
+  background: color-mix(in srgb, var(--accent, var(--magenta)) 4%, var(--paper-2));
+}
+.station.firing .station-carry {
+  background: color-mix(in srgb, var(--accent, var(--magenta)) 14%, var(--paper-3));
+  transform: scale(1.04); transition: transform .4s cubic-bezier(.18,1.4,.25,1), background .3s;
+}
+.station-carry { transition: transform .4s, background .3s; }
+
+/* ── Quick-Start → thread route highlight ────────────────────────── */
+.station.dimmed { opacity: .4; filter: grayscale(.5); transition: opacity .5s, filter .5s; }
+.station.recommended .node {
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, var(--magenta)) 18%, transparent);
+}
+.station.recommended .station-card { border-color: var(--accent, var(--magenta)); }
+.rec-step {
+  display: inline-grid; place-items: center; flex: none;
+  width: 24px; height: 24px; border-radius: 50%; margin-right: 4px;
+  background: var(--grad); color: #fff; font-weight: 800; font-size: .8rem;
+  font-family: 'IBM Plex Mono', monospace;
+  box-shadow: 0 4px 12px -4px rgba(241,69,117,.6);
+  animation: anim-fade-up .5s cubic-bezier(.18,1.4,.25,1) both;
+}
+.qs-trace {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 6px;
+  font-family: 'IBM Plex Mono', monospace; font-size: .76rem; font-weight: 600;
+  color: var(--magenta); background: none; border: 0; cursor: pointer; padding: 4px 2px;
+}
+.qs-trace:hover { text-decoration: underline; }
+
+/* ── Live-count band (under the "hand-offs are real" proof) ──────── */
+.livestat {
+  display: flex; flex-wrap: wrap; gap: 14px 0; margin-top: 28px;
+  border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  background: var(--paper); box-shadow: var(--shadow-sm);
+}
+.livestat-item {
+  flex: 1 1 140px; padding: 20px 22px; text-align: center;
+  border-right: 1px solid var(--line-soft);
+}
+.livestat-item:last-child { border-right: 0; }
+.livestat-n {
+  font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: -.02em;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.livestat-l {
+  font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-faint); margin-top: 8px;
+}
+.livestat-item.is-live .livestat-l::after {
+  content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #1f9d6b; margin-left: 7px; vertical-align: middle;
+  box-shadow: 0 0 8px #1f9d6b; animation: livedot 2.2s ease-in-out infinite;
+}
+@keyframes livedot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.7)} }
+@media (max-width: 560px) { .livestat-item { flex-basis: 50%; border-bottom: 1px solid var(--line-soft); } }
+
+/* ── Resume pill (continue where you left off) ───────────────────── */
+.resume-pill {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 26px;
+  padding: 11px 16px 11px 13px; border-radius: 999px;
+  background: var(--paper-2); border: 1px solid color-mix(in srgb, var(--violet) 32%, var(--line));
+  box-shadow: var(--shadow-sm); text-decoration: none; color: var(--ink);
+  font-size: .88rem; font-weight: 600; transition: .2s; animation: anim-fade-up .6s ease both;
+}
+.resume-pill:hover { transform: translateY(-2px); border-color: var(--violet); box-shadow: var(--shadow); }
+.resume-pill .rp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); flex: none; box-shadow: 0 0 10px rgba(146,112,244,.6); }
+.resume-pill .rp-label { font-family: 'IBM Plex Mono', monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+.resume-pill .rp-name { font-weight: 800; }
+.resume-pill .rp-proj { color: var(--ink-faint); font-weight: 600; }
+.resume-pill .rp-arr { color: var(--violet); font-weight: 800; }
+.resume-pill .rp-x { margin-left: 4px; color: var(--ink-faint); font-size: 1.1rem; line-height: 1; padding: 0 2px; border-radius: 6px; }
+.resume-pill .rp-x:hover { color: var(--magenta); background: var(--line-soft); }
+
+/* ── Quick-Start action row (route vs auto-run) ──────────────────── */
+.qs-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.qs-actions .btn { padding: 12px 18px; font-size: .9rem; }
+
+/* ── Auto-run: the per-step result slip injected under each station ─ */
+.station-auto {
+  margin: 12px 0 0; padding: 12px 16px; border-radius: 12px;
+  display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap;
+  background: color-mix(in srgb, var(--accent, var(--magenta)) 7%, var(--paper-2));
+  border: 1px dashed color-mix(in srgb, var(--accent, var(--magenta)) 38%, var(--line));
+  animation: anim-fade-up .5s cubic-bezier(.18,1.4,.25,1) both;
+}
+.station-auto-art { font-size: .92rem; line-height: 1.45; color: var(--ink); font-weight: 600; min-width: 0; }
+.station-auto-art::before { content: '▸ '; color: var(--accent, var(--magenta)); font-weight: 800; }
+.station-auto-open {
+  flex: none; font-family: 'IBM Plex Mono', monospace; font-size: .74rem; font-weight: 700;
+  color: var(--accent, var(--magenta)); white-space: nowrap; padding: 5px 10px; border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent, var(--magenta)) 30%, var(--line)); transition: .15s;
+}
+.station-auto-open:hover { background: color-mix(in srgb, var(--accent, var(--magenta)) 12%, transparent); }
+.story-done {
+  margin: 8px auto 0; max-width: 880px; padding: 16px 22px; border-radius: 14px; text-align: center;
+  background: var(--grad-soft); border: 1px solid color-mix(in srgb, var(--magenta) 24%, var(--line));
+  font-size: .95rem; color: var(--ink); animation: anim-fade-up .6s ease both;
+}
+.story-done b { font-weight: 800; }
+
+@media (prefers-reduced-motion: reduce) {
+  .thread-comet, .station.firing .node, .station.firing .station-card, .station.firing .station-carry,
+  .station.dimmed { transition: none !important; }
+  .thread-comet { display: none !important; }
+  .station-auto, .story-done { animation: none !important; }
+}
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#content">Skip to content</a>
 
 <!-- Liquid drift — ambient motion in the background, always on -->
 <div class="liquid-bg" aria-hidden="true">
@@ -567,7 +792,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 <div class="cursor-glow" aria-hidden="true"></div>
 
 <!-- Brand bar -->
-<div class="bar">
+<header class="bar" role="banner">
   <a class="bar-logo" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">
     <span class="s-mark">S</span>
     <span class="bar-name wordmark">Throughline <span>· by Syed</span></span>
@@ -579,7 +804,9 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <button class="btn-auth" id="authBtn">Sign in</button>
     <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark">🌙</button>
   </div>
-</div>
+</header>
+
+<main id="content" tabindex="-1">
 
 <!-- Hero -->
 <header class="hero">
@@ -589,9 +816,10 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <h1 class="rise d2">From a hunch to a <em>published paper</em>, without losing the thread.</h1>
     <p class="lede rise d3">Most research tools are islands — a citation explorer here, a survey builder there, a stats package somewhere else. <strong>Throughline</strong> is the whole journey as one continuous workflow: each step hands its work to the next, so your question, your theory, your scale, and your data travel with you instead of being re-typed.</p>
     <div class="cta-row rise d4">
-      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener">Start with an idea →</a>
+      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Start with an idea →</a>
       <a class="btn btn-ghost" href="#thread">Follow the thread ↓</a>
     </div>
+    <div id="resumeSlot"></div>
     <div class="hero-foot rise d5">
       <span>No account, runs in your browser</span>
       <span>Methodology baked in</span>
@@ -623,13 +851,16 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <div class="section-head" style="max-width:64ch">
       <div class="kicker">Quick start</div>
       <h2>Tell me what you're <em>researching</em>.</h2>
-      <p class="sub">One line, plain English. I'll route you to the right tool to start — with your topic carried in, ready to explore.</p>
+      <p class="sub">One line, plain English. Either I route you to the best tool to start — or hit <strong>Auto-run</strong> and watch your whole study scaffold itself across the thread, step by step, built for your topic.</p>
     </div>
     <div class="qs-card">
       <textarea id="qs-input" class="qs-input" rows="3" placeholder="e.g. how AI is changing the meaning of work for early-career knowledge workers in India"></textarea>
       <div class="qs-row">
-        <span class="qs-hint">⌘/Ctrl+Enter to launch</span>
-        <button class="btn btn-fill" id="qs-go">✨ Start researching →</button>
+        <span class="qs-hint">⌘/Ctrl+Enter to route · or auto-run the whole thread</span>
+        <span class="qs-actions">
+          <button class="btn btn-ghost" id="qs-auto">🎬 Auto-run the thread</button>
+          <button class="btn btn-fill" id="qs-go">✨ Route me →</button>
+        </span>
       </div>
       <div class="qs-routes anim-stagger" id="qs-routes" hidden></div>
     </div>
@@ -654,6 +885,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
       <div class="kicker">The throughline</div>
       <h2>Eight steps. <em>One thread.</em></h2>
       <p class="sub">Follow a project from first curiosity to submission. Watch what each step carries forward — that hand-off is the whole point.</p>
+      <button class="thread-play" id="threadPlay"><span class="pp">▶</span> Watch one idea travel</button>
     </div>
     <div class="thread" id="threadEl">
       <div class="thread-line"></div>
@@ -690,6 +922,15 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
         <p>A ResearchPack threads your question, scales, and design through Cadence, ToolsScope, and JournalTime.</p>
         <div class="proof-flow">researchflow → #pack → cadence → toolsscope → journaltime</div>
       </div>
+    </div>
+
+    <!-- Live counts — fetched from each tool's published JSON snapshot,
+         so these numbers are real and update themselves. -->
+    <div class="livestat" id="livestat">
+      <div class="livestat-item" data-live-host="theories"><div class="livestat-n" data-live="theories">449</div><div class="livestat-l">theories mapped</div></div>
+      <div class="livestat-item" data-live-host="scales"><div class="livestat-n" data-live="scales">174</div><div class="livestat-l">validated scales</div></div>
+      <div class="livestat-item" data-live-host="terms"><div class="livestat-n" data-live="terms">98</div><div class="livestat-l">trend terms tracked</div></div>
+      <div class="livestat-item"><div class="livestat-n">2,000+</div><div class="livestat-l">journals indexed</div></div>
     </div>
   </div>
 </section>
@@ -740,8 +981,8 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     </div>
     <div class="trust">
       <div class="trust-item"><h4>Real statistics</h4><p>A hand-written stats engine — t-tests through mediation — verified against textbook values, with effect-size benchmarks and APA write-ups.</p></div>
-      <div class="trust-item"><h4>Validated measures</h4><p>Scales carry their reliability, dimensions, and original citations. No improvising the questionnaire.</p></div>
-      <div class="trust-item"><h4>Theory with receipts</h4><p>~400 theories grounded in key studies and applications, mapped by influence and shared constructs.</p></div>
+      <div class="trust-item"><h4>Validated measures</h4><p>All <span data-live="scales">174</span> scales carry their reliability, dimensions, and original citations. No improvising the questionnaire.</p></div>
+      <div class="trust-item"><h4>Theory with receipts</h4><p><span data-live="theories">449</span> theories grounded in key studies and applications, mapped by influence and shared constructs.</p></div>
       <div class="trust-item"><h4>Private by default</h4><p>Everything runs client-side in your browser. Your data and your participants' responses stay on your machine.</p></div>
     </div>
   </div>
@@ -760,14 +1001,16 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap foot-row">
     <span class="mono">THROUGHLINE — the research workflow, end to end</span>
-    <div class="foot-links">
+    <nav class="foot-links" aria-label="Footer">
       <a href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects</a>
       <a href="#thread">The workflow</a>
       <a href="#tools">Tools</a>
-    </div>
+    </nav>
   </div>
 </footer>
 
@@ -863,7 +1106,7 @@ $('emailBtn').addEventListener('click', async () => {
 
 // ── React to auth state ───────────────────────────────────────────
 let currentUserEmail = null;
-function renderAuth(user) {
+async function renderAuth(user) {
   currentUserEmail = user?.email || null;
   const btn = $('authBtn');
   if (user) {
@@ -871,6 +1114,9 @@ function renderAuth(user) {
     btn.classList.add('in');
     $('dash').hidden = false;
     closeModal();
+    // Reconcile the cloud's active-project pointer into the local mirror first
+    // (so a fresh device shows the right active badge), then list.
+    try { await Auth.getActiveProject(); } catch {}
     loadProjects();
   } else {
     btn.textContent = 'Sign in';
@@ -880,23 +1126,19 @@ function renderAuth(user) {
   }
 }
 
-// ── Active project: the workspace context every suite tool will read ──
-// Stored in localStorage so it's shared across the syahmedu.github.io origin
-// — the moment the hub marks a project active, the github.io tools can
-// surface it without any cross-app sync.
-const ACTIVE_ID_KEY = 'active_project_id';
+// ── Active project: the workspace context every suite tool reads ──────
+// Backed by suite-auth: the pointer lives in Supabase user metadata (so it
+// follows the account across devices and origins) and is mirrored to
+// localStorage so the same-origin github.io tools can surface it instantly
+// and anonymous/preview mode keeps working offline.
 const ACTIVE_NAME_KEY = 'active_project_name';
-function getActive() {
-  try { return { id: localStorage.getItem(ACTIVE_ID_KEY), name: localStorage.getItem(ACTIVE_NAME_KEY) }; }
-  catch { return { id: null, name: null }; }
-}
-function setActive(p) {
-  try { localStorage.setItem(ACTIVE_ID_KEY, p.id); localStorage.setItem(ACTIVE_NAME_KEY, p.name); } catch {}
-  loadProjects();
-}
-function clearActive() {
-  try { localStorage.removeItem(ACTIVE_ID_KEY); localStorage.removeItem(ACTIVE_NAME_KEY); } catch {}
-}
+// Active-project state now lives in suite-auth (cloud-backed via user
+// metadata, mirrored to localStorage). getActive() stays synchronous for
+// render by reading the mirror; set/clear push to the cloud so the choice
+// follows the account across devices and origins.
+function getActive() { return Auth.getActiveLocal(); }
+function setActive(p) { Auth.setActiveProject(p).then(loadProjects); }
+function clearActive() { Auth.clearActiveProject(); }
 
 async function loadProjects() {
   const list = $('projList');
@@ -1085,7 +1327,7 @@ if (Auth.isConfigured()) {
       // the topic is somehow empty.
       const href = (r.deeplink || (topic ? buildDeepLink(r.tool, topic) : null) || meta.href);
       const stepNo = i + 1;
-      html += `<a class="qs-route" href="${href}" target="_blank" rel="noopener">`
+      html += `<a class="qs-route" href="${href}" target="_blank" rel="noopener" data-resume="${meta.tool}">`
         + `<span class="qs-route-icon">${meta.icon}</span>`
         + `<span class="qs-route-body">`
         +   `<div class="qs-route-tool"><span style="opacity:.55;font-family:'IBM Plex Mono',monospace;font-size:.78rem;margin-right:6px;">Step ${stepNo}</span>${meta.tool}</div>`
@@ -1094,9 +1336,19 @@ if (Auth.isConfigured()) {
         + `<span class="qs-route-arrow">Open ↗</span>`
         + `</a>`;
     });
-    html += `<p class="qs-hint" style="margin:6px 2px 0;">Topic in hand: <em>${esc(topic).slice(0,160)}</em></p>`;
+    html += `<div class="qs-row" style="margin-top:4px;"><p class="qs-hint" style="margin:0 2px;">Topic in hand: <em>${esc(topic).slice(0,160)}</em></p>`
+      + `<button type="button" class="qs-trace" id="qs-trace">↓ Trace this path on the thread</button></div>`;
     wrap.innerHTML = html;
     wrap.hidden = false;
+    // Mirror the recommended path onto the thread timeline (no scroll yet —
+    // the trace button does that on demand so we don't yank the page away
+    // from the results the user just got).
+    const keys = routes.slice(0, 4).map(r => r.tool);
+    if (window.__highlightThreadPath) window.__highlightThreadPath(keys, false);
+    const trace = $('qs-trace');
+    if (trace) trace.addEventListener('click', () => {
+      if (window.__highlightThreadPath) window.__highlightThreadPath(keys, true);
+    });
   }
 
   async function generateRoutes() {
@@ -1162,6 +1414,90 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
 
   $('qs-go').addEventListener('click', generateRoutes);
 
+  // ── Auto-run: scaffold the WHOLE study across the thread ─────────
+  // One AI call fills in what each of the 9 steps would produce for the
+  // topic; the thread then plays through them automatically, dropping a
+  // concrete result under each station with a deep-link to open that tool
+  // with the topic carried in. Deterministic fallback when AI is offline.
+  function fallbackStory(topic) {
+    const t = topic.length > 64 ? topic.slice(0, 61) + '…' : topic;
+    return [
+      { key:'ib', artifact:`Idea captured: “${t}”.` },
+      { key:'wm', artifact:`Scan ~50 years of literature — what's rising here, what's saturated.` },
+      { key:'pc', artifact:`Pull the seminal papers and map the citation network.` },
+      { key:'rf', artifact:`Sharpen it into one researchable question with a stated gap.` },
+      { key:'ts', artifact:`Pick a theoretical lens to frame the study.` },
+      { key:'ss', artifact:`Operationalise the key construct with a validated scale.` },
+      { key:'cd', artifact:`Design the survey and gather clean responses.` },
+      { key:'to', artifact:`Run the analysis and auto-write the APA results.` },
+      { key:'jt', artifact:`Draft the paper and target the right journal.` },
+    ];
+  }
+  function buildStorySteps(rawSteps, topic) {
+    return rawSteps
+      .filter(s => s && TOOL_INFO[s.key])
+      .map(s => ({
+        key: s.key,
+        artifact: String(s.artifact || '').slice(0, 200),
+        name: TOOL_INFO[s.key].tool,
+        href: topic ? buildDeepLink(s.key, topic) : TOOL_INFO[s.key].href,
+      }));
+  }
+  async function autoRun() {
+    const topic = ($('qs-input').value || '').trim();
+    if (!topic) { $('qs-input').focus(); return; }
+    if (!window.__runThreadStory) { generateRoutes(); return; }  // graceful degrade
+    const btn = $('qs-auto');
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Scaffolding<span class="thinking-dots"><span></span><span></span><span></span></span>';
+    const wrap = $('qs-routes');
+    wrap.hidden = false;
+    wrap.innerHTML = '<div class="qs-loading anim-reveal">Scaffolding your whole study — watch it build across the thread below<span class="thinking-dots"><span></span><span></span><span></span></span></div>';
+    try {
+      const prompt =
+`For the research topic below, show what each step of a 9-stage research workflow would concretely produce. Be specific to THIS topic — name real theories / scales / analyses where relevant.
+
+Topic:
+"""${topic}"""
+
+Steps (use these exact keys, in this order):
+- "ib" the captured idea, restated in one crisp sentence
+- "wm" a trend read: one rising term or angle worth exploring
+- "pc" the kind of seminal work / a key construct to read up on
+- "rf" a sharp, researchable question (with the implied gap)
+- "ts" a fitting theoretical lens — name a real theory
+- "ss" a key construct + a validated scale to measure it
+- "cd" a data-collection plan (who, design, waves)
+- "to" the core analysis that tests the question
+- "jt" the kind of journal / framing to publish it
+
+Return JSON: { "steps": [ { "key": "ib", "artifact": "..." }, ... 9 items ] }
+Each "artifact" under ~18 words, concrete, no preamble.`;
+      let steps = null;
+      try {
+        const r = await fetch(RF_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt, schema_hint: 'Throughline auto-run study scaffold', temperature: 0.5 }),
+        });
+        if (r.ok) {
+          const { result } = await r.json();
+          if (Array.isArray(result?.steps) && result.steps.length) steps = buildStorySteps(result.steps, topic);
+        }
+      } catch (_) { /* fall through to deterministic story */ }
+      if (!steps || !steps.length) steps = buildStorySteps(fallbackStory(topic), topic);
+      wrap.hidden = true;
+      window.__runThreadStory(steps, topic);
+    } catch (err) {
+      wrap.innerHTML = `<div class="qs-err">${esc(err.message || String(err))}</div>`;
+    } finally {
+      btn.disabled = false; btn.innerHTML = original;
+    }
+  }
+  const autoBtn = $('qs-auto');
+  if (autoBtn) autoBtn.addEventListener('click', autoRun);
+
   // Inbound carry from IdeaBox (and anywhere else): ?topic=<text> drops the
   // user straight into Quick Start with the topic pre-filled and routes
   // generated immediately — so a captured idea flows into the suite without
@@ -1221,10 +1557,14 @@ const STAGES = [
 ];
 
 // ── Render the thread ─────────────────────────────────────────────
+// Tool keys, in station order — used to map Quick Start routes back
+// onto the thread (ib=0 … jt=8) and to give each station a stable handle.
+const STAGE_KEYS = ['ib','wm','pc','rf','ts','ss','cd','to','jt'];
 const threadEl = document.getElementById('threadEl');
 STAGES.forEach((s, i) => {
   const el = document.createElement('div');
   el.className = 'station';
+  el.dataset.tool = STAGE_KEYS[i];
   el.style.setProperty('--accent', ACCENT[s.accent]);
   const carry = i < STAGES.length - 1
     ? `<span class="station-carry">carries <b>${s.carry}</b> <span class="arr">→</span></span>`
@@ -1232,7 +1572,7 @@ STAGES.forEach((s, i) => {
   el.innerHTML = `
     <span class="node"></span>
     <div class="phase-tag">${s.phase}</div>
-    <a class="station-card" href="${s.url}" target="_blank" rel="noopener">
+    <a class="station-card" href="${s.url}" target="_blank" rel="noopener" data-resume="${s.name}">
       <div class="station-top">
         <span class="station-num">${s.n}</span>
         <span class="station-name">${s.name}</span>
@@ -1250,6 +1590,7 @@ const grid = document.getElementById('toolsGrid');
 STAGES.forEach(s => {
   const a = document.createElement('a');
   a.className = 'tool'; a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
+  a.dataset.resume = s.name;
   a.style.setProperty('--accent', ACCENT[s.accent]);
   a.innerHTML = `
     <span class="tool-dot"></span>
@@ -1268,18 +1609,25 @@ document.querySelectorAll('.station').forEach(s => io.observe(s));
 
 // ── Thread fill follows scroll through the thread section ─────────
 const fill = document.getElementById('threadFill');
+// Comet that rides the fill line during "watch one idea travel" playback.
+const comet = document.createElement('div');
+comet.className = 'thread-comet';
+threadEl.appendChild(comet);
 let ticking = false;
 function updateFill() {
+  ticking = false;
+  if (window.__threadPlaying) return;  // playback owns the fill line while running
   const r = threadEl.getBoundingClientRect();
   const vh = window.innerHeight;
   const total = r.height + vh * 0.4;
   const progressed = Math.min(total, Math.max(0, vh * 0.7 - r.top));
   fill.style.setProperty('--fill', Math.max(0, Math.min(100, (progressed / r.height) * 100)) + '%');
-  ticking = false;
 }
 window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateFill); ticking = true; } }, { passive: true });
 window.addEventListener('resize', updateFill);
 updateFill();
+// Expose for the playback module so it can hand the fill line back when done.
+window.__updateThreadFill = updateFill;
 
 // ── Theme toggle (shares 'syed-theme' with the rest of the suite) ─
 const root = document.documentElement;
@@ -1295,6 +1643,269 @@ function applyTheme(t) {
   applyTheme(t);
 })();
 themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+</script>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// Up-a-notch behaviours: thread playback, route highlight, live
+// counts, resume pill, "/" shortcut. Runs after the thread is built.
+// ════════════════════════════════════════════════════════════════
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const threadEl = document.getElementById('threadEl');
+  const fill = document.getElementById('threadFill');
+  const comet = threadEl ? threadEl.querySelector('.thread-comet') : null;
+  const stations = threadEl ? Array.from(threadEl.querySelectorAll('.station')) : [];
+  const byTool = {};
+  stations.forEach(s => { byTool[s.dataset.tool] = s; });
+  function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  // Vertical centre of a station's node, in threadEl coordinates.
+  function nodeCenter(st){ return st.offsetTop + 2 + 13; }
+  const threadAnchor = document.getElementById('thread');
+
+  // ── 1. Watch one idea travel ──────────────────────────────────
+  const playBtn = document.getElementById('threadPlay');
+  let playTimer = null, autoTimer = null;
+  function clearAuto(){
+    if (!threadEl) return;
+    threadEl.querySelectorAll('.station-auto').forEach(n => n.remove());
+    const done = document.getElementById('story-done'); if (done) done.remove();
+  }
+  function stopPlay(){
+    if (playTimer) { clearTimeout(playTimer); playTimer = null; }
+    if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
+    window.__threadPlaying = false;
+    if (comet) comet.style.opacity = '0';
+    if (playBtn) { playBtn.disabled = false; playBtn.innerHTML = '<span class="pp">▶</span> Watch one idea travel'; }
+  }
+  function playThread(){
+    if (!threadEl || !stations.length) return;
+    stations.forEach(s => s.classList.remove('firing','dimmed','recommended'));
+    threadEl.querySelectorAll('.rec-step').forEach(b => b.remove());
+    clearAuto();
+    if (threadAnchor) threadAnchor.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (reduce) { stations.forEach(s => s.classList.add('firing')); return; }
+    window.__threadPlaying = true;
+    if (playBtn) { playBtn.disabled = true; playBtn.innerHTML = '<span class="pp">●</span> An idea is travelling…'; }
+    if (comet) {
+      comet.style.transition = 'none';
+      comet.style.top = nodeCenter(stations[0]) + 'px';
+      void comet.getBoundingClientRect();          // flush before re-enabling transition
+      comet.style.transition = '';
+      comet.style.opacity = '1';
+    }
+    const H = threadEl.getBoundingClientRect().height || 1;
+    let i = 0;
+    (function step(){
+      if (i >= stations.length) {
+        playTimer = setTimeout(() => {
+          stations.forEach(s => s.classList.remove('firing'));
+          stopPlay();
+          if (window.__updateThreadFill) window.__updateThreadFill();
+        }, 1500);
+        return;
+      }
+      const st = stations[i];
+      const c = nodeCenter(st);
+      if (comet) comet.style.top = c + 'px';
+      fill.style.setProperty('--fill', Math.min(100, (c / H) * 100) + '%');
+      st.classList.add('firing');
+      i++;
+      playTimer = setTimeout(step, 850);
+    })();
+  }
+  if (playBtn) playBtn.addEventListener('click', () => {
+    if (window.__threadPlaying) {
+      stopPlay();
+      stations.forEach(s => s.classList.remove('firing'));
+      if (window.__updateThreadFill) window.__updateThreadFill();
+    } else playThread();
+  });
+
+  // ── 2. Highlight a recommended path (called from Quick Start) ──
+  let dimTimer = null;
+  window.__highlightThreadPath = function(keys, scroll){
+    if (!stations.length) return;
+    if (window.__threadPlaying) stopPlay();
+    if (dimTimer) { clearTimeout(dimTimer); dimTimer = null; }
+    stations.forEach(s => s.classList.remove('firing','recommended','dimmed'));
+    threadEl.querySelectorAll('.rec-step').forEach(b => b.remove());
+    clearAuto();
+    const picks = (keys || []).filter(k => byTool[k]);
+    if (!picks.length) return;
+    stations.forEach(s => s.classList.add('dimmed'));
+    picks.forEach((k, idx) => {
+      const st = byTool[k];
+      st.classList.remove('dimmed');
+      st.classList.add('recommended');
+      const top = st.querySelector('.station-top');
+      if (top && !top.querySelector('.rec-step')) {
+        const b = document.createElement('span');
+        b.className = 'rec-step'; b.textContent = idx + 1;
+        top.insertBefore(b, top.firstChild);
+      }
+    });
+    // Borrow the fill line: draw it down to the last recommended station.
+    const last = byTool[picks[picks.length - 1]];
+    const H = threadEl.getBoundingClientRect().height || 1;
+    window.__threadPlaying = true;
+    fill.style.setProperty('--fill', Math.min(100, (nodeCenter(last) / H) * 100) + '%');
+    if (scroll && threadAnchor) threadAnchor.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    // After a beat, undim so the page reads normally — the numbered badges
+    // and accent rings stay as the lasting marker, and scroll regains the fill.
+    dimTimer = setTimeout(() => {
+      stations.forEach(s => s.classList.remove('dimmed'));
+      window.__threadPlaying = false;
+      if (window.__updateThreadFill) window.__updateThreadFill();
+    }, 6000);
+  };
+
+  // ── 2b. Auto-run: play the whole study across the thread ──────
+  function injectStoryResult(stn, data){
+    if (!stn || stn.querySelector('.station-auto')) return;
+    const div = document.createElement('div');
+    div.className = 'station-auto';
+    const open = data.href
+      ? '<a class="station-auto-open" href="' + data.href + '" target="_blank" rel="noopener" data-resume="'
+        + esc(data.name || '') + '">Open with your topic ↗</a>'
+      : '';
+    div.innerHTML = '<span class="station-auto-art">' + esc(data.artifact || '') + '</span>' + open;
+    stn.appendChild(div);   // appended to the station (not inside the card's <a>) so the link works
+  }
+  function showStoryDone(topic){
+    if (document.getElementById('story-done')) return;
+    const note = document.createElement('div');
+    note.id = 'story-done'; note.className = 'story-done';
+    note.innerHTML = '<b>That’s your study, scaffolded end to end.</b> Open any step above and your topic travels in with you — '
+      + 'or <a href="#quickstart" style="color:var(--magenta);font-weight:700;">tweak the topic</a> and run it again.';
+    threadEl.appendChild(note);
+  }
+  window.__runThreadStory = function(steps, topic){
+    if (!stations.length || !steps || !steps.length) return;
+    if (window.__threadPlaying) stopPlay();
+    if (dimTimer) { clearTimeout(dimTimer); dimTimer = null; }
+    stations.forEach(s => s.classList.remove('firing','recommended','dimmed'));
+    threadEl.querySelectorAll('.rec-step').forEach(b => b.remove());
+    clearAuto();
+    if (threadAnchor) threadAnchor.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    const map = {}; steps.forEach(s => { if (!map[s.key]) map[s.key] = s; });
+    const order = stations.filter(s => map[s.dataset.tool]);   // stations we have content for, in thread order
+    if (!order.length) return;
+    window.__threadPlaying = true;
+    if (playBtn) playBtn.disabled = true;
+    if (comet) {
+      comet.style.transition = 'none';
+      comet.style.top = nodeCenter(order[0]) + 'px';
+      void comet.getBoundingClientRect();
+      comet.style.transition = '';
+      comet.style.opacity = '1';
+    }
+    const H = threadEl.getBoundingClientRect().height || 1;
+    const dwell = reduce ? 0 : 1550;
+    let i = 0;
+    (function step(){
+      if (i >= order.length) {
+        autoTimer = setTimeout(() => {
+          window.__threadPlaying = false;
+          if (comet) comet.style.opacity = '0';
+          if (playBtn) playBtn.disabled = false;
+          showStoryDone(topic);
+        }, reduce ? 0 : 1100);
+        return;
+      }
+      const stn = order[i];
+      const c = nodeCenter(stn);
+      if (comet) comet.style.top = c + 'px';
+      fill.style.setProperty('--fill', Math.min(100, (c / H) * 100) + '%');
+      stn.classList.add('firing');
+      injectStoryResult(stn, map[stn.dataset.tool]);
+      // keep the freshly-revealed station in view as the story descends
+      if (!reduce && i > 0) stn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      i++;
+      autoTimer = setTimeout(step, dwell || 300);
+    })();
+  };
+
+  // ── 3. Live counts from each tool's published JSON snapshot ────
+  function countUp(el, to){
+    const from = parseInt((el.textContent || '0').replace(/[^\d]/g, ''), 10) || 0;
+    if (reduce || from === to) { el.textContent = to.toLocaleString(); return; }
+    const dur = 900, t0 = performance.now();
+    requestAnimationFrame(function frame(now){
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(from + (to - from) * eased).toLocaleString();
+      if (p < 1) requestAnimationFrame(frame); else el.textContent = to.toLocaleString();
+    });
+  }
+  function setCount(key, n){
+    document.querySelectorAll('[data-live="' + key + '"]').forEach(el => countUp(el, n));
+    const host = document.querySelector('[data-live-host="' + key + '"]');
+    if (host) host.classList.add('is-live');
+  }
+  [
+    ['theories', 'https://theoryscope.vercel.app/data/theories.json', d => d.count || (d.theories && d.theories.length)],
+    ['scales',   'https://scalescope.vercel.app/data/scales.json',    d => d.count || (d.scales && d.scales.length)],
+    ['terms',    'https://syahmedu.github.io/wordmap/words.json',     d => d.terms && d.terms.length],
+  ].forEach(([key, url, pick]) => {
+    fetch(url).then(r => r.ok ? r.json() : null).then(d => {
+      if (!d) return;
+      const n = pick(d);
+      if (typeof n === 'number' && n > 0) setCount(key, n);
+    }).catch(() => { /* keep the baked-in fallback number */ });
+  });
+
+  // ── 4. Resume pill — continue where you left off ──────────────
+  const RKEY = 'throughline_resume';
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-resume]');
+    if (!a) return;
+    try { localStorage.setItem(RKEY, JSON.stringify({ name: a.dataset.resume, url: a.href, ts: Date.now() })); } catch {}
+  });
+  (function renderResume(){
+    const slot = document.getElementById('resumeSlot');
+    if (!slot) return;
+    let rec = null, proj = null;
+    try {
+      const raw = localStorage.getItem(RKEY);
+      if (raw) { const d = JSON.parse(raw); if (d && d.url && (Date.now() - d.ts) < 30 * 864e5) rec = d; }
+      proj = localStorage.getItem('active_project_name');
+    } catch {}
+    if (!rec) return;
+    const a = document.createElement('a');
+    a.className = 'resume-pill';
+    a.href = rec.url; a.target = '_blank'; a.rel = 'noopener'; a.dataset.resume = rec.name;
+    a.innerHTML = '<span class="rp-dot"></span>'
+      + '<span><span class="rp-label">Pick up where you left off</span><br>'
+      + '<span class="rp-name">' + esc(rec.name) + '</span>'
+      + (proj ? ' <span class="rp-proj">· ' + esc(proj) + '</span>' : '')
+      + '</span><span class="rp-arr">→</span>'
+      + '<span class="rp-x" title="Dismiss" role="button">×</span>';
+    a.querySelector('.rp-x').addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      try { localStorage.removeItem(RKEY); } catch {}
+      a.remove();
+    });
+    slot.appendChild(a);
+  })();
+
+  // ── 5. "/" focuses Quick Start ────────────────────────────────
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName || '') && !e.metaKey && !e.ctrlKey) {
+      const qs = document.getElementById('qs-input');
+      if (qs) { e.preventDefault(); qs.focus(); qs.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
+    }
+  });
+})();
+</script>
+
+<!-- Living WebGL aurora — same-origin module from the identity layer -->
+<script src="identity/syed-aurora.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  try { if (window.SyedAurora && SyedAurora.mount({ intensity: 0.8 })) document.body.classList.add('aurora-on'); }
+  catch (e) { /* keep the CSS blobs */ }
+});
 </script>
 </body>
 </html>
