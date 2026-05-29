@@ -1161,6 +1161,26 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
   }
 
   $('qs-go').addEventListener('click', generateRoutes);
+
+  // Inbound carry from IdeaBox (and anywhere else): ?topic=<text> drops the
+  // user straight into Quick Start with the topic pre-filled and routes
+  // generated immediately — so a captured idea flows into the suite without
+  // a copy-paste step.
+  (function maybeAutoStart(){
+    try {
+      const t = new URLSearchParams(location.search).get('topic');
+      if (!t) return;
+      history.replaceState(null, '', location.pathname + (location.hash || ''));
+      const input = $('qs-input');
+      input.value = t;
+      // Focus + soft hint so the user sees the carry happened, then fire.
+      input.focus();
+      input.style.transition = 'box-shadow .8s cubic-bezier(.22,1,.36,1)';
+      input.style.boxShadow = '0 0 0 3px rgba(241,69,117,.18)';
+      setTimeout(() => { input.style.boxShadow = ''; }, 1600);
+      setTimeout(generateRoutes, 350);
+    } catch (e) { /* ignore */ }
+  })();
   $('qs-input').addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); generateRoutes(); }
   });
