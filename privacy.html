@@ -154,7 +154,7 @@
     </ul>
 
     <h2>Research participant data</h2>
-    <p>Cadence collects survey responses. Today, those responses are stored <strong>in the browser</strong>, keyed to the study, and you can pull them out at any time with <strong>"Download my data."</strong></p>
+    <p>Cadence collects survey responses. Before any survey begins, participants are shown an <strong>informed-consent notice</strong> (voluntary, anonymous, withdrawable) and must actively consent; the time of consent is recorded with their response. Today, responses are stored <strong>in the browser</strong>, keyed to the study, and you can pull them out at any time with <strong>"Download my data."</strong></p>
     <div class="callout">
       <strong>Cloud collection of participant data is deliberately not enabled yet.</strong> Holding other people's data at scale carries real obligations — consent, ownership, retention, deletion, and ethics-board review. We're building that governance layer before turning on cloud-backed participant collection, rather than after. Until then, participant data stays on the researcher's device.
     </div>
@@ -171,6 +171,7 @@
     <p>If you're reviewing a study run with these tools, here is the data posture in brief:</p>
     <div class="irb">
       <ol>
+        <li><strong>Informed consent.</strong> Cadence shows participants a voluntary, anonymous, withdrawable consent notice before the survey starts; consent must be given to proceed and is timestamped with the response.</li>
         <li><strong>Local-first by default.</strong> Without an account, all data — including any participant responses in Cadence — stays in the researcher's own browser.</li>
         <li><strong>Cloud sync is opt-in</strong> and currently scoped to the researcher's own working artifacts (plans, drafts, libraries), not pooled participant data.</li>
         <li><strong>Per-user isolation.</strong> Synced data is protected by database row-level security; accounts cannot access each other's data.</li>
