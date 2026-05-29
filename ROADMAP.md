@@ -41,7 +41,7 @@ The suite already works end to end. The gap to "sellable" is not features — it
 **Goal:** make it safe — and honest — to collect real human-subjects data in Cadence.
 
 - **Per-study data ownership**: a study's responses belong to the study owner's account, RLS-enforced, never co-mingled.
-- **Privacy posture, written and visible**: what's stored, where (Supabase region), who can see it, retention, and deletion. A real privacy page, not boilerplate.
+- ✅ **Privacy posture, written and visible** — `privacy.html` (linked from the hub footer): local-first default, opt-in cloud + RLS, per-tool storage table, transparent AI handling, the participant-data gate stated plainly, user controls, and an IRB summary. Done 2026-05-30. *Remaining in this bullet: name the Supabase region + a concrete retention window once set.*
 - **Consent + anonymisation primitives** in Cadence: a consent gate, participant-code-only identification (already the model), an export-and-purge path.
 - **IRB-friendly framing**: a one-page "how Throughline handles participant data" doc an ethics board can read. This is a *sales asset* in the education wedge, not just compliance.
 - Data export in standard formats at every stage (already strong: Cadence JSON, ToolsScope .docx/CSV) — never trap the user's data.
