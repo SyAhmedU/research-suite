@@ -80,6 +80,12 @@ Supabase keeps the session in `localStorage`, which is **per-origin**:
 
 ---
 
+## Reference implementation (copy this)
+
+**JournalTime is wired and is the canonical example** — see the `<script type="module">` block at the end of `journaltime/index.html`. It's the vanilla, same-origin pattern: imports `suite-auth.js` by absolute URL, inherits the hub session (no auth UI), syncs one slice (`jt` → the Article Developer draft), cloud-wins-if-newer on load, pushes on `visibilitychange`/`pagehide` + a best-effort wrap of the existing writer. Clone its shape for the other github.io tools (wordmap, cadence) — change `TOOL_KEY` and the localStorage key(s) you read/write.
+
+Remaining same-origin (free session): **wordmap** (`wm`), **cadence** (`cd` — but gate behind Phase 1, it holds participant data). Cross-origin (own sign-in needed): the five `*.vercel.app` React tools.
+
 ## Definition of done (per tool)
 - [ ] Signed-out / preview behaviour is byte-for-byte unchanged.
 - [ ] Signed in with an active project: edits round-trip across a reload and a second device.
