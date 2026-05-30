@@ -558,6 +558,11 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 .aud h3 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.3rem; margin-bottom: 8px; }
 .aud p { color: var(--ink-soft); font-size: .93rem; }
 
+/* ── For methods teaching (the wedge) ──────────────────────── */
+.teach-grid { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 12px; }
+.teach-note { margin-top: 18px; font-size: .9rem; color: var(--ink-soft); line-height: 1.6; }
+.teach-note a { color: var(--magenta); font-weight: 600; }
+
 /* ── Trust strip ───────────────────────────────────────────── */
 .trust { display: grid; gap: 16px 30px; grid-template-columns: 1fr; margin-top: 14px; }
 .trust-item { padding-left: 18px; border-left: 2px solid var(--magenta); }
@@ -618,6 +623,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   .proof-grid { grid-template-columns: repeat(3, 1fr); }
   .tools-grid { grid-template-columns: 1fr 1fr; }
   .aud-grid { grid-template-columns: repeat(3, 1fr); }
+  .teach-grid { grid-template-columns: 1fr 1fr; }
   .trust { grid-template-columns: 1fr 1fr; }
   .proj-list { grid-template-columns: 1fr 1fr; }
 }
@@ -971,6 +977,28 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   </div>
 </section>
 
+<!-- For methods teaching (the wedge) -->
+<section class="section" id="teaching">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">For research-methods teaching</div>
+      <h2>Built for the <em>methods classroom</em>.</h2>
+      <p class="sub">Where the research chain matters most — and breaks most often. Throughline makes the whole arc visible, so it can be taught, followed, and graded.</p>
+    </div>
+    <div class="teach-grid">
+      <div class="aud">
+        <h3>For instructors</h3>
+        <p>Assign the whole research process as one connected arc — idea to manuscript — instead of five disconnected tools. Every decision a student makes carries forward, so you can see where their thread holds and where it breaks: the hypothesis that doesn't match the design, the scale that doesn't match the construct, the test that doesn't match the data. Rigour is built in, not bolted on.</p>
+      </div>
+      <div class="aud">
+        <h3>For students</h3>
+        <p>Your first independent project — thesis, dissertation, capstone — without stitching it together from a reference manager, a stats package, a survey tool, and a word processor. One guided flow keeps the methodological chain intact, nudges you toward defensible choices, and ends in a submission-ready paper you can keep revising with your guide.</p>
+      </div>
+    </div>
+    <p class="teach-note">Collecting human-subjects data? Participants give informed consent before any survey, responses stay on-device by default, and there's a plain-language <a href="./privacy.html#irb">data &amp; privacy summary for ethics boards</a>.</p>
+  </div>
+</section>
+
 <!-- Trust -->
 <section class="section">
   <div class="wrap">
@@ -1010,6 +1038,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
       <a href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener">All projects</a>
       <a href="#thread">The workflow</a>
       <a href="#tools">Tools</a>
+      <a href="#teaching">For teaching</a>
       <a href="./privacy.html">Data &amp; Privacy</a>
     </nav>
   </div>
