@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Plus Jakarta Sans',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9656"/>
+      <stop offset="52%" stop-color="#F14575"/>
+      <stop offset="100%" stop-color="#9270F4"/>
+    </linearGradient>
+    <linearGradient id="thread" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF9656"/>
+      <stop offset="50%" stop-color="#F14575"/>
+      <stop offset="100%" stop-color="#9270F4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#F14575" stop-opacity="0.16"/>
+      <stop offset="60%" stop-color="#9270F4" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#FBF7EF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#FBF7EF"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- vertical thread with eight stations down the left -->
+  <g transform="translate(150,120)">
+    <rect x="-2" y="0" width="4" height="400" rx="2" fill="url(#thread)"/>
+    <g fill="#FBF7EF" stroke="url(#thread)" stroke-width="3">
+      <circle cx="0" cy="14"  r="11"/>
+      <circle cx="0" cy="69"  r="11"/>
+      <circle cx="0" cy="124" r="11"/>
+      <circle cx="0" cy="179" r="11"/>
+      <circle cx="0" cy="234" r="11"/>
+      <circle cx="0" cy="289" r="11"/>
+      <circle cx="0" cy="344" r="11"/>
+      <circle cx="0" cy="386" r="11"/>
+    </g>
+  </g>
+
+  <!-- wordmark + S mark -->
+  <g transform="translate(250,150)">
+    <rect x="0" y="0" width="64" height="64" rx="18" fill="url(#grad)"/>
+    <text x="32" y="46" text-anchor="middle" font-size="34" font-weight="800" fill="#fff">S</text>
+    <text x="88" y="46" font-size="40" font-weight="800" fill="#211B2E" letter-spacing="-1">Throughline</text>
+  </g>
+
+  <!-- headline -->
+  <text x="250" y="290" font-family="'Fraunces',serif" font-size="74" font-weight="600" fill="#211B2E" letter-spacing="-2">From a hunch to a</text>
+  <text x="250" y="372" font-family="'Fraunces',serif" font-size="74" font-weight="500" font-style="italic" fill="url(#grad)" letter-spacing="-2">published paper.</text>
+
+  <!-- subline -->
+  <text x="252" y="438" font-size="29" fill="#574E64">One continuous research workflow — eight connected tools</text>
+  <text x="252" y="476" font-size="29" fill="#574E64">that carry your work forward, so you never start from blank.</text>
+
+  <!-- footer chips -->
+  <g font-family="'IBM Plex Mono',monospace" font-size="22" fill="#8C8498">
+    <text x="252" y="548">449 theories</text>
+    <text x="452" y="548">·  174 scales</text>
+    <text x="640" y="548">·  98 trend terms</text>
+    <text x="872" y="548">·  free &amp; in-browser</text>
+  </g>
+</svg>

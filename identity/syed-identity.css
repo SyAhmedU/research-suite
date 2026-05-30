@@ -1,0 +1,269 @@
+/* ════════════════════════════════════════════════════════════════════════
+   SYED IDENTITY — the Throughline design system, extracted for reuse.
+   ────────────────────────────────────────────────────────────────────────
+   The single source of truth for the shared visual identity across every
+   project. Origin: research-suite (Throughline). Same tokens, same fonts,
+   same ambience — drop this in and a project instantly reads as part of
+   the family.
+
+   HOW TO USE
+   ──────────
+   1. Load the fonts (once, in <head>):
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+   2. Include this file (same-origin link, or inline its contents).
+   3. Add the ambience markup once in <body> (or let syed-identity.js inject it):
+        <div class="sx-bg" aria-hidden="true"><span class="sx-blob b1"></span><span class="sx-blob b2"></span><span class="sx-blob b3"></span></div>
+        <div class="sx-cursor-glow" aria-hidden="true"></div>
+   4. Include syed-identity.js for cursor glow + theme toggle + scroll reveal.
+
+   NAMING: identity classes are prefixed `sx-` so they never collide with a
+   project's existing styles. Design tokens use the canonical `--paper / --ink
+   / --coral / --magenta / --violet / --grad` names so theming is shared.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
+:root, [data-theme="light"] {
+  --paper:   #FBF7EF;
+  --paper-2: #FFFFFF;
+  --paper-3: #F3ECDF;
+  --ink:     #211B2E;
+  --ink-soft:#574E64;
+  --ink-faint:#8C8498;
+  --line:    rgba(33,27,46,.12);
+  --line-soft:rgba(33,27,46,.07);
+  --coral:   #FF9656;
+  --magenta: #F14575;
+  --violet:  #9270F4;
+  --grad:    linear-gradient(135deg, #FF9656 0%, #F14575 52%, #9270F4 100%);
+  --grad-soft: linear-gradient(135deg, rgba(255,150,86,.14), rgba(241,69,117,.12), rgba(146,112,244,.14));
+  --shadow:  0 24px 60px -28px rgba(33,27,46,.35);
+  --shadow-sm: 0 8px 24px -14px rgba(33,27,46,.3);
+  --r-sm: 10px; --r: 14px; --r-lg: 18px; --r-xl: 24px;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+[data-theme="dark"] {
+  --paper:   #14111C;
+  --paper-2: #1C1827;
+  --paper-3: #241F31;
+  --ink:     #F4EFF8;
+  --ink-soft:#B8AEC6;
+  --ink-faint:#7C7389;
+  --line:    rgba(255,255,255,.13);
+  --line-soft:rgba(255,255,255,.07);
+  --grad-soft: linear-gradient(135deg, rgba(255,150,86,.16), rgba(241,69,117,.13), rgba(146,112,244,.18));
+  --shadow:  0 24px 60px -24px rgba(0,0,0,.7);
+  --shadow-sm: 0 8px 24px -14px rgba(0,0,0,.6);
+}
+
+/* ── Paper grain — the warm, tactile substrate under everything ──────── */
+.sx-grain::before {
+  content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .035; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="dark"] .sx-grain::before { mix-blend-mode: screen; opacity: .05; }
+
+/* ── Liquid drift — slow ambient gradient blobs behind content ───────── */
+.sx-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.sx-blob {
+  position: absolute; width: 60vmax; height: 60vmax;
+  border-radius: 50%; filter: blur(110px); opacity: .18; will-change: transform;
+}
+.sx-blob.b1 { background: var(--coral);   top: -18%; left: -18%;  animation: sx-drift1 32s ease-in-out infinite; }
+.sx-blob.b2 { background: var(--magenta); top:  22%; right: -22%; animation: sx-drift2 38s ease-in-out infinite; }
+.sx-blob.b3 { background: var(--violet);  bottom: -22%; left: 22%; animation: sx-drift3 44s ease-in-out infinite; }
+[data-theme="dark"] .sx-blob { opacity: .28; filter: blur(140px); }
+/* Living WebGL aurora (syed-aurora.js) sits behind content; when it mounts,
+   it retires the static blobs to itself. */
+canvas.sx-aurora { transition: opacity 1.4s ease; }
+.aurora-on .sx-blob { opacity: 0 !important; transition: opacity 1.4s ease; }
+@keyframes sx-drift1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(15vw,10vh) scale(1.15)} 66%{transform:translate(-8vw,18vh) scale(.9)} }
+@keyframes sx-drift2 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-18vw,-8vh) scale(.85)} 70%{transform:translate(10vw,12vh) scale(1.1)} }
+@keyframes sx-drift3 { 0%,100%{transform:translate(0,0) scale(1)} 35%{transform:translate(12vw,-14vh) scale(1.2)} 65%{transform:translate(-15vw,5vh) scale(.95)} }
+
+/* ── Cursor glow — a soft light that lazily trails the pointer ───────── */
+.sx-cursor-glow {
+  position: fixed; pointer-events: none; z-index: 1;
+  width: 520px; height: 520px; border-radius: 50%; left: 0; top: 0;
+  transform: translate(calc(var(--cx, -1000) * 1px - 50%), calc(var(--cy, -1000) * 1px - 50%));
+  background: radial-gradient(circle, rgba(241,69,117,.14) 0%, rgba(146,112,244,.08) 35%, transparent 65%);
+  filter: blur(40px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform;
+}
+[data-theme="dark"] .sx-cursor-glow {
+  background: radial-gradient(circle, rgba(241,69,117,.22) 0%, rgba(146,112,244,.14) 35%, transparent 65%);
+}
+
+/* ── Typography: the signature voice ─────────────────────────────────── */
+/* Display serif — Fraunces, optical-size aware, with the italic-gradient
+   treatment that defines the identity. */
+.sx-display, .sx-h1, .sx-h2, .sx-h3 {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -.02em;
+  line-height: 1.05; color: var(--ink);
+}
+.sx-h1 { font-size: clamp(2.5rem, 6vw, 4.4rem); line-height: 1.02; letter-spacing: -.025em; }
+.sx-h2 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); line-height: 1.08; }
+.sx-h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.sx-display em, .sx-h1 em, .sx-h2 em, .sx-h3 em, .sx-grad-ink {
+  font-style: italic; font-weight: 500;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+  background-size: 220% 220%; background-position: 0% 50%;
+  animation: sx-shimmer 16s ease-in-out infinite;
+}
+@keyframes sx-shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+/* Mono eyebrow — the small uppercase kicker above a heading */
+.sx-eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: .72rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+  padding: 6px 13px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--paper-2);
+}
+.sx-eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--grad); }
+.sx-kicker {
+  font-family: var(--font-mono); font-size: .73rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--magenta); font-weight: 600;
+}
+.sx-mono { font-family: var(--font-mono); }
+
+/* ── Spring interactions: snappy press, luxuriously slow return ──────── */
+.sx-btn, .sx-card, .sx-pill {
+  transition: transform 1.05s cubic-bezier(.18,1.4,.25,1),
+              box-shadow .65s cubic-bezier(.22,1,.36,1),
+              border-color .35s ease-out, filter .45s ease-out;
+}
+.sx-btn:active, .sx-card:active { transform: translateY(3px) scale(.97); transition-duration: .08s; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+.sx-btn {
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  font-family: var(--font-body); font-weight: 700; font-size: .94rem;
+  padding: 13px 22px; border-radius: 13px; border: 1px solid transparent;
+}
+.sx-btn-fill { background: var(--grad); color: #fff; box-shadow: 0 12px 30px -12px rgba(241,69,117,.6); }
+.sx-btn-fill:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(241,69,117,.7); }
+.sx-btn-ghost { background: var(--paper-2); border-color: var(--line); color: var(--ink); }
+.sx-btn-ghost:hover { border-color: var(--magenta); color: var(--magenta); transform: translateY(-2px); }
+
+/* ── Cards ───────────────────────────────────────────────────────────── */
+.sx-card {
+  background: var(--paper-2); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: 22px; box-shadow: var(--shadow-sm);
+}
+.sx-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--magenta) 40%, var(--line)); box-shadow: var(--shadow); }
+.sx-card-accent { border-style: dashed; border-color: color-mix(in srgb, var(--magenta) 35%, var(--line)); }
+
+/* ── Brand bar (Throughline spec) ────────────────────────────────────── */
+.sx-bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 26px;
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--line-soft); font-family: var(--font-body);
+}
+.sx-bar-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.sx-mark {
+  width: 30px; height: 30px; border-radius: 9px; background: var(--grad);
+  display: grid; place-items: center; color: #fff; font-weight: 800; font-size: .82rem;
+  box-shadow: 0 4px 14px -4px rgba(241,69,117,.55); animation: sx-glow 5s ease-in-out infinite;
+}
+@keyframes sx-glow { 0%,100%{box-shadow:0 4px 14px -4px rgba(241,69,117,.45)} 50%{box-shadow:0 7px 24px -4px rgba(146,112,244,.6)} }
+.sx-bar-name { font-weight: 800; letter-spacing: -.02em; font-size: .96rem; color: var(--ink); }
+.sx-bar-name span { color: var(--ink-faint); font-weight: 600; }
+.sx-bar-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.sx-bar-link { font-size: .82rem; font-weight: 600; color: var(--ink-soft); padding: 7px 13px; border-radius: 999px; transition: .15s; text-decoration: none; }
+.sx-bar-link:hover { color: var(--ink); background: var(--line-soft); }
+.sx-theme-btn {
+  width: 36px; height: 36px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--paper-2); color: var(--ink-soft); cursor: pointer; font-size: 1rem;
+  display: grid; place-items: center; transition: .2s; font-family: inherit;
+}
+.sx-theme-btn:hover { color: var(--ink); transform: rotate(15deg); }
+
+/* ── Motion utilities ────────────────────────────────────────────────── */
+@keyframes sx-fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.sx-reveal { opacity: 0; }
+.sx-reveal.sx-in { animation: sx-fade-up .7s cubic-bezier(.22,1,.36,1) both; }
+.sx-rise { opacity: 0; transform: translateY(22px); animation: sx-rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes sx-rise { to { opacity: 1; transform: none; } }
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE-NATIVE FOUNDATION
+   Make a project feel like it was built for the phone when opened on one:
+   real viewport height, safe-area insets, generous tap targets, no sticky
+   hover states, no accidental horizontal scroll, and an opt-in app-shell
+   + bottom-nav pattern.
+   ════════════════════════════════════════════════════════════════════ */
+:root {
+  --sx-vh: 1vh;                              /* JS sets a px-accurate fallback */
+  --sx-safe-t: env(safe-area-inset-top, 0px);
+  --sx-safe-b: env(safe-area-inset-bottom, 0px);
+  --sx-safe-l: env(safe-area-inset-left, 0px);
+  --sx-safe-r: env(safe-area-inset-right, 0px);
+}
+html { -webkit-text-size-adjust: 100%; }
+* { -webkit-tap-highlight-color: transparent; }
+html, body { overflow-x: clip; }            /* never scroll sideways */
+img, svg, video, canvas { max-width: 100%; height: auto; }
+canvas.sx-aurora { height: 100%; }          /* (aurora is fixed/full-bleed) */
+
+/* True full height that survives mobile browser chrome */
+.sx-screen { min-height: 100vh; min-height: 100dvh; min-height: calc(var(--sx-vh, 1vh) * 100); }
+.sx-scroll { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+
+/* Horizontally-scrollable chip rows (filters, tabs) — the native pattern,
+   instead of wrapping into five stacked rows on a narrow screen. */
+.sx-hscroll {
+  display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; scroll-snap-type: x proximity;
+  margin-inline: calc(-1 * var(--sx-pad, 16px)); padding-inline: var(--sx-pad, 16px);
+}
+.sx-hscroll::-webkit-scrollbar { display: none; }
+.sx-hscroll > * { scroll-snap-align: start; flex: 0 0 auto; }
+
+/* Coarse pointers get ≥44px hit areas */
+@media (pointer: coarse) {
+  .sx-btn, .sx-bar-link, .sx-theme-btn { min-height: 44px; }
+}
+/* On touch, hovers stick after a tap — neutralise hover transforms */
+@media (hover: none) {
+  .sx-card:hover, .sx-btn-fill:hover, .sx-btn-ghost:hover, .sx-bar-link:hover { transform: none; }
+  .sx-cursor-glow { display: none; }        /* no pointer to follow */
+}
+
+/* Opt-in app shell: sticky top bar that respects the notch */
+.sx-appbar { padding-top: var(--sx-safe-t); padding-left: var(--sx-safe-l); padding-right: var(--sx-safe-r); }
+
+/* Opt-in bottom tab bar — hidden on desktop, the home row on phones */
+.sx-tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 100; display: none;
+  padding: 8px max(14px, var(--sx-safe-l)) calc(8px + var(--sx-safe-b)) max(14px, var(--sx-safe-r));
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-top: 1px solid var(--line-soft);
+  justify-content: space-around; align-items: center; gap: 4px;
+}
+.sx-tabbar a {
+  flex: 1; display: grid; place-items: center; gap: 3px; min-height: 48px;
+  font-family: var(--font-mono); font-size: .62rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ink-faint); text-decoration: none; border-radius: 12px;
+}
+.sx-tabbar a .ic { font-size: 1.2rem; line-height: 1; }
+.sx-tabbar a.active { color: var(--magenta); }
+@media (max-width: 720px) {
+  .sx-tabbar { display: flex; }
+  body.sx-has-tabbar { padding-bottom: 72px; }
+}
+
+/* ── Accessibility: respect reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sx-blob, .sx-display em, .sx-h1 em, .sx-h2 em, .sx-h3 em, .sx-grad-ink, .sx-mark { animation: none !important; }
+  .sx-cursor-glow { transition: none !important; }
+  .sx-btn, .sx-card, .sx-pill { transition: none !important; }
+  .sx-reveal { opacity: 1 !important; }
+  .sx-reveal.sx-in, .sx-rise { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
