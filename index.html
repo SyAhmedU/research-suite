@@ -1617,7 +1617,12 @@ STAGES.forEach((s, i) => {
 
 // ── Render tools grid ─────────────────────────────────────────────
 const grid = document.getElementById('toolsGrid');
-STAGES.forEach(s => {
+// Reference-tier tools sit outside the linear pipeline but belong in the suite —
+// surface them in the grid so they're discoverable from the hub.
+const REFERENCE_TOOLS = [
+  { name:'ScholarScope', url:'https://syahmedu.github.io/scholarscope/', verb:'Map the field', carry:'institutions, journals & authors (live OpenAlex)', accent:'coral' },
+];
+[...STAGES, ...REFERENCE_TOOLS].forEach(s => {
   const a = document.createElement('a');
   a.className = 'tool'; a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
   a.dataset.resume = s.name;
