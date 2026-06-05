@@ -96,6 +96,16 @@ export const REGISTRY = [
   },
 ];
 
+// Single-file HTML suite-step pages. Only the class-based markup is generated
+// (between <!-- SYED-BAR:START/END --> markers); each page keeps its own CSS + theme JS.
+// Bespoke generic/hub bars (nexus, bachelor-meal-plan, career-compass) and the Next layout
+// are deliberately NOT listed — their link lists are page-specific (see README).
+export const HTML_REGISTRY = [
+  { repoPath: 'cadence/index.html',     projectName: 'Cadence',     activeStep: 'cd' },
+  { repoPath: 'wordmap/index.html',     projectName: 'Word Map',    activeStep: 'wm' },
+  { repoPath: 'journaltime/index.html', projectName: 'JournalTime', activeStep: 'jt' },
+];
+
 // Resolve a generic link-key list to LINK objects.
 export function genericLinks(keys) {
   return (keys || []).map(k => {
