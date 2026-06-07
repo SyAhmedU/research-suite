@@ -1565,7 +1565,7 @@ const STAGES = [
     desc:'Watch concepts rise and fall across 50+ years of literature, and find the white space before you commit to it.',
     carry:'a live topic', url:'https://syahmedu.github.io/wordmap/' },
   { phase:'Discover', n:'02', name:'PaperCards',   verb:'Read the field',  accent:'coral',
-    desc:'Any paper as a glanceable card — its constructs, effects, and method. Trace the citation network to find what to read next.',
+    desc:'Any paper as a glanceable card — constructs, effects, method — or dissected to depth into 13 evidence-grounded facets with facet-timeline and synthesis-matrix views. Trace the citation network to find what to read next.',
     carry:'a set of papers', url:'https://papercards.vercel.app' },
   { phase:'Develop',  n:'03', name:'ResearchFlow', verb:'Frame the study', accent:'magenta',
     desc:'A ten-stage wizard that turns a raw idea into a sharp question, a stated gap, and a defensible design.',
@@ -1622,9 +1622,7 @@ const grid = document.getElementById('toolsGrid');
 // surface them in the grid so they're discoverable from the hub.
 const REFERENCE_TOOLS = [
   { name:'ScholarScope', url:'https://syahmedu.github.io/scholarscope/', verb:'Map the field', carry:'institutions, journals & authors (live OpenAlex)', accent:'coral' },
-  { name:'FallacyScope', url:'https://syahmedu.github.io/fallacyscope/', verb:'Dodge the traps', carry:'37 hand-cited paradoxes, fallacies & biases by research stage', accent:'coral' },
-  { name:'Paper Dissection', url:'https://paper-dissection.vercel.app', verb:'Dissect a paper', carry:'13-facet full-text breakdown from PDF, DOI or journal', accent:'coral' },
-  { name:"Syed's Research Book", url:'https://syahmedu.github.io/syeds-research-book/', verb:'Read the corpus', carry:'9,388 papers across 167 OB/management constructs', accent:'coral' },
+  { name:'FallacyScope', url:'https://syahmedu.github.io/fallacyscope/', verb:'Dodge the traps', carry:'37 hand-cited paradoxes, fallacies & biases by research stage', accent:'coral' },  { name:"Syed's Research Book", url:'https://syahmedu.github.io/syeds-research-book/', verb:'Read the corpus', carry:'9,388 papers across 167 OB/management constructs', accent:'coral' },
   { name:'BookScope', url:'https://bookscope.vercel.app', verb:'Search the shelf', carry:'full-text search across 288 academic reference books (~141K pages)', accent:'coral' },
 ];
 [...STAGES, ...REFERENCE_TOOLS].forEach(s => {
