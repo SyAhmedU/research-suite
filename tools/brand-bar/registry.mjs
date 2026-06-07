@@ -102,7 +102,7 @@ export const REGISTRY = [
 // are deliberately NOT listed — their link lists are page-specific (see README).
 export const HTML_REGISTRY = [
   { repoPath: 'cadence/index.html',     projectName: 'Cadence',     activeStep: 'cd' },
-  { repoPath: 'wordmap/index.html',     projectName: 'Word Map',    activeStep: 'wm' },
+  // wordmap removed — folded into the Library (merge #3); its index.html is now a redirect (no bar).
   { repoPath: 'journaltime/index.html', projectName: 'JournalTime', activeStep: 'jt' },
 ];
 

@@ -12,11 +12,11 @@ export const KEYFRAME_MOBILE =
   "/* Collapse the suite nav on mobile so it can't force a desktop-width layout */\n" +
   '@media (max-width:760px){.syed-suite-nav{display:none!important}}';
 
-// The nine-step Research Suite chain (capture → discovery → core pipeline).
+// The Research Suite chain (discovery → core pipeline). Was 9 steps; IdeaBox (ib)
+// and Wordmap (wm) were cut from the product (simplification merges #3/#4, 2026-06):
+// Wordmap folded into the Library's Term Trends view; IdeaBox decoupled to standalone.
 // EDIT THE STEP LIST / LABELS / HREFS HERE ONLY — every consumer regenerates from this.
 export const SUITE = [
-  { key: 'ib', label: 'IdeaBox',      href: 'https://ideabox-six.vercel.app' },
-  { key: 'wm', label: 'Wordmap',      href: 'https://syahmedu.github.io/wordmap/' },
   { key: 'pc', label: 'PaperCards',   href: 'https://papercards.vercel.app' },
   { key: 'rf', label: 'ResearchFlow', href: 'https://researchflow-syahmedus-projects.vercel.app' },
   { key: 'ts', label: 'TheoryScope',  href: 'https://theoryscope.vercel.app' },

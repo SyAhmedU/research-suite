@@ -912,9 +912,9 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <div class="proof-grid">
       <div class="proof-card">
         <div class="pc-icon">🔍</div>
-        <h3>Discover → Read</h3>
-        <p>A rising term in Wordmap opens straight into PaperCards' citation network, seeded and mapped.</p>
-        <div class="proof-flow">wordmap → #seed=&lt;term&gt; → papercards</div>
+        <h3>Read → Frame</h3>
+        <p>A paper collection in PaperCards carries straight into ResearchFlow — seeded as an idea, a gap, and keywords.</p>
+        <div class="proof-flow">papercards → #discovery=&lt;pack&gt; → researchflow</div>
       </div>
       <div class="proof-card">
         <div class="pc-icon">📦</div>
@@ -1025,7 +1025,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <p>Start anywhere in the workflow. The next step will be waiting with your work already in hand.</p>
     <div class="cta-row" style="justify-content:center">
       <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener">Begin a project →</a>
-      <a class="btn btn-ghost" href="https://syahmedu.github.io/wordmap/" target="_blank" rel="noopener">Or explore a trend</a>
+      <a class="btn btn-ghost" href="https://syahmedu.github.io/syeds-research-book/?view=termtrends" target="_blank" rel="noopener">Or explore the trends</a>
     </div>
   </div>
 </section>
@@ -1319,8 +1319,6 @@ if (Auth.isConfigured()) {
   // Generate input — that's what makes "open tool" actually mean "open
   // tool with my topic already in hand".
   const TOOL_INFO = {
-    ib: { tool: 'IdeaBox',      icon: '💡', href: 'https://ideabox-six.vercel.app',                         param: 'idea'  },
-    wm: { tool: 'Wordmap',      icon: '📈', href: 'https://syahmedu.github.io/wordmap/',                    param: 'brief' },
     pc: { tool: 'PaperCards',   icon: '📑', href: 'https://papercards.vercel.app/',                         param: 'seed'  },
     rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/',    param: 'idea'  },
     ts: { tool: 'TheoryScope',  icon: '🏛️', href: 'https://theoryscope.vercel.app/',                        param: 'q'     },
@@ -1341,9 +1339,9 @@ if (Auth.isConfigured()) {
     // Deterministic routes for when the AI is unreachable — better than
     // nothing. Sends the user to the discovery tier with the topic seeded.
     return [
-      { tool: 'wm', why: "Get a 50-yr trend read on your topic — what's rising, what's saturated, where the white space is." },
       { tool: 'pc', why: 'Map the citation network around the topic and pull foundational papers as cards.' },
       { tool: 'rf', why: 'Frame the study end-to-end — question, theory, instruments, design, analysis.' },
+      { tool: 'ts', why: 'Ground it in a theoretical lens from the 449-theory library.' },
     ];
   }
 
@@ -1400,8 +1398,6 @@ Researcher's topic:
 """${topic}"""
 
 Available tools (use these short keys EXACTLY):
-- "ib" IdeaBox — mobile-first idea catcher (voice + text + tags). When the researcher has a fresh hunch worth saving before doing anything else.
-- "wm" Wordmap — 50-yr term trends, white-space discovery, when they want to see "what's hot / what's been done".
 - "pc" PaperCards — DOI / topic → seed papers + citation network. Best when they want to read the literature.
 - "rf" ResearchFlow — 10-stage wizard from idea to design. Best when they have a topic but need a sharp question, theory, hypotheses, design, analysis plan.
 - "ts" TheoryScope — 449-theory library, AI matchmaker. Best when they need to ground in theory.
@@ -1413,7 +1409,7 @@ Available tools (use these short keys EXACTLY):
 Return JSON:
 {
   "routes": [
-    { "tool": "ib|wm|pc|rf|ts|ss|cd|to|jt", "why": "one sentence on WHY this tool, in this order, for this researcher" }
+    { "tool": "pc|rf|ts|ss|cd|to|jt", "why": "one sentence on WHY this tool, in this order, for this researcher" }
   ]
 }
 Pick 2-4 tools, in the order the researcher should engage them. Start where they ARE in the research process, not always at step 1.`;
@@ -1453,9 +1449,7 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
   function fallbackStory(topic) {
     const t = topic.length > 64 ? topic.slice(0, 61) + '…' : topic;
     return [
-      { key:'ib', artifact:`Idea captured: “${t}”.` },
-      { key:'wm', artifact:`Scan ~50 years of literature — what's rising here, what's saturated.` },
-      { key:'pc', artifact:`Pull the seminal papers and map the citation network.` },
+      { key:'pc', artifact:`Pull the seminal papers and map the citation network for “${t}”.` },
       { key:'rf', artifact:`Sharpen it into one researchable question with a stated gap.` },
       { key:'ts', artifact:`Pick a theoretical lens to frame the study.` },
       { key:'ss', artifact:`Operationalise the key construct with a validated scale.` },
@@ -1557,40 +1551,36 @@ Each "artifact" under ~18 words, concrete, no preamble.`;
 <script>
 // ── Data: the eight stations, in workflow order ──────────────────
 const ACCENT = { coral: 'var(--coral)', magenta: 'var(--magenta)', violet: 'var(--violet)' };
+// IdeaBox (capture) + Wordmap (discover) were cut from the product (merges #3/#4):
+// Wordmap folded into the Library's Term Trends view; IdeaBox is a standalone tool.
 const STAGES = [
-  { phase:'Capture',  n:'00', name:'IdeaBox',      verb:'Catch the hunch', accent:'coral',
-    desc:"Where every research idea starts — the mobile-first scratchpad for half-formed thoughts. Voice or text, auto-categorised, tagged, pinned. A 6 a.m. hunch worth keeping shouldn't die in the Notes app.",
-    carry:'a raw idea', url:'https://ideabox-six.vercel.app' },
-  { phase:'Discover', n:'01', name:'Wordmap',      verb:'Spot the trend',  accent:'coral',
-    desc:'Watch concepts rise and fall across 50+ years of literature, and find the white space before you commit to it.',
-    carry:'a live topic', url:'https://syahmedu.github.io/wordmap/' },
-  { phase:'Discover', n:'02', name:'PaperCards',   verb:'Read the field',  accent:'coral',
+  { phase:'Discover', n:'00', name:'PaperCards',   verb:'Read the field',  accent:'coral',
     desc:'Any paper as a glanceable card — constructs, effects, method — or dissected to depth into 13 evidence-grounded facets with facet-timeline and synthesis-matrix views. Trace the citation network to find what to read next.',
     carry:'a set of papers', url:'https://papercards.vercel.app' },
-  { phase:'Develop',  n:'03', name:'ResearchFlow', verb:'Frame the study', accent:'magenta',
+  { phase:'Develop',  n:'01', name:'ResearchFlow', verb:'Frame the study', accent:'magenta',
     desc:'A ten-stage wizard that turns a raw idea into a sharp question, a stated gap, and a defensible design.',
     carry:'your question + gap', url:'https://researchflow-syahmedus-projects.vercel.app' },
-  { phase:'Develop',  n:'04', name:'TheoryScope',  verb:'Ground it',       accent:'magenta',
+  { phase:'Develop',  n:'02', name:'TheoryScope',  verb:'Ground it',       accent:'magenta',
     desc:'~400 social-science theories, mapped by influence and construct. Pick the lens your study looks through.',
     carry:'a framework', url:'https://theoryscope.vercel.app' },
-  { phase:'Develop',  n:'05', name:'ScaleScope',   verb:'Operationalise',  accent:'magenta',
+  { phase:'Develop',  n:'03', name:'ScaleScope',   verb:'Operationalise',  accent:'magenta',
     desc:'Validated measurement scales with reliability, dimensions, and citations — turn abstract constructs into real items.',
     carry:'your instruments', url:'https://scalescope.vercel.app' },
-  { phase:'Collect',  n:'06', name:'Cadence',      verb:'Gather data',     accent:'violet',
+  { phase:'Collect',  n:'04', name:'Cadence',      verb:'Gather data',     accent:'violet',
     desc:'Immersive, one-question-at-a-time surveys with wave tracking and a built-in analytics dashboard.',
     carry:'clean responses', url:'https://syahmedu.github.io/cadence/' },
-  { phase:'Collect',  n:'07', name:'ToolsScope',   verb:'Analyse',         accent:'violet',
+  { phase:'Collect',  n:'05', name:'ToolsScope',   verb:'Analyse',         accent:'violet',
     desc:'A real stats engine — descriptives to mediation — that writes its own APA results and draws the figures, in the browser.',
     carry:'results + figures', url:'https://toolsscope.vercel.app' },
-  { phase:'Publish',  n:'08', name:'JournalTime',  verb:'Write & place',   accent:'violet',
-    desc:'Draft the article, find the right home from 2,000+ journals, and aim your submission with turnaround data.',
+  { phase:'Publish',  n:'06', name:'JournalTime',  verb:'Write & place',   accent:'violet',
+    desc:'Draft the article and write for your target journal with the guided Journal Studio. (Finding where to publish lives in ScholarScope.)',
     carry:'a manuscript', url:'https://syahmedu.github.io/journaltime/' },
 ];
 
 // ── Render the thread ─────────────────────────────────────────────
 // Tool keys, in station order — used to map Quick Start routes back
-// onto the thread (ib=0 … jt=8) and to give each station a stable handle.
-const STAGE_KEYS = ['ib','wm','pc','rf','ts','ss','cd','to','jt'];
+// onto the thread (pc=0 … jt=6) and to give each station a stable handle.
+const STAGE_KEYS = ['pc','rf','ts','ss','cd','to','jt'];
 const threadEl = document.getElementById('threadEl');
 STAGES.forEach((s, i) => {
   const el = document.createElement('div');
@@ -1884,7 +1874,7 @@ themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-them
   [
     ['theories', 'https://theoryscope.vercel.app/data/theories.json', d => d.count || (d.theories && d.theories.length)],
     ['scales',   'https://scalescope.vercel.app/data/scales.json',    d => d.count || (d.scales && d.scales.length)],
-    ['terms',    'https://syahmedu.github.io/wordmap/words.json',     d => d.terms && d.terms.length],
+    ['terms',    'https://syahmedu.github.io/syeds-research-book/data/words.json', d => d.terms && d.terms.length],
     ['corpus',   'https://syahmedu.github.io/syeds-research-book/data/corpus-snapshot.json', d => d.totalPapers],
   ].forEach(([key, url, pick]) => {
     fetch(url).then(r => r.ok ? r.json() : null).then(d => {
