@@ -1,7 +1,7 @@
 // Emit the class-based HTML brand-bar markup (the `<div class="syed-bar">…</div>` block).
 // Only the MARKUP is generated; each page keeps its own `.syed-bar*` CSS and the
-// `#themeToggle` script. Used for the suite-step single-file apps (cadence, wordmap,
-// journaltime), whose 9-step nav must stay in sync with core.SUITE.
+// `#themeToggle` script. Used for the inline-HTML suite-step apps in HTML_REGISTRY
+// (now just journaltime), whose nav must stay in sync with core.SUITE.
 //
 // Generic/hub bars (nexus, bachelor-meal-plan, career-compass) and the Next layout are
 // intentionally NOT generated — their link lists are bespoke per page (see README).
@@ -19,9 +19,9 @@ const TOGGLE = [
 function suiteStep(s, i, activeStep) {
   const caret = i > 0 ? '<span class="syed-caret" aria-hidden="true">›</span>' : '';
   if (s.key === activeStep) {
-    return `    <span class="syed-suite-step">${caret}< class="syed-link syed-link-active" href="#" aria-current="page">${s.label}</a></span>`;
+    return `    <span class="syed-suite-step">${caret}<a class="syed-link syed-link-active" href="#" aria-current="page">${s.label}</a></span>`;
   }
-  return `    <span class="syed-suite-step">${caret}< class="syed-link" href="${s.href}" target="_blank" rel="noopener">${s.label}</a></span>`;
+  return `    <span class="syed-suite-step">${caret}<a class="syed-link" href="${s.href}" target="_blank" rel="noopener">${s.label}</a></span>`;
 }
 
 // entry: { projectName, activeStep }  (suite-step page)

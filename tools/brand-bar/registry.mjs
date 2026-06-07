@@ -101,8 +101,8 @@ export const REGISTRY = [
 // Bespoke generic/hub bars (nexus, bachelor-meal-plan, career-compass) and the Next layout
 // are deliberately NOT listed — their link lists are page-specific (see README).
 export const HTML_REGISTRY = [
-  { repoPath: 'cadence/index.html',     projectName: 'Cadence',     activeStep: 'cd' },
-  // wordmap removed — folded into the Library (merge #3); its index.html is now a redirect (no bar).
+  // wordmap removed — folded into the Library (merge #3); cadence removed — spun out to
+  // standalone (merge #5, hand-written generic bar). Only journaltime remains a generated inline bar.
   { repoPath: 'journaltime/index.html', projectName: 'JournalTime', activeStep: 'jt' },
 ];
 

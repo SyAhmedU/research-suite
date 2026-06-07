@@ -925,8 +925,8 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
       <div class="proof-card">
         <div class="pc-icon">🧬</div>
         <h3>Design → Collect → Write</h3>
-        <p>A ResearchPack threads your question, scales, and design through Cadence, ToolsScope, and JournalTime.</p>
-        <div class="proof-flow">researchflow → #pack → cadence → toolsscope → journaltime</div>
+        <p>A ResearchPack threads your question, scales, and design straight through to ToolsScope and JournalTime.</p>
+        <div class="proof-flow">researchflow → #pack → toolsscope → journaltime</div>
       </div>
     </div>
 
@@ -1081,7 +1081,6 @@ const TOOLS = [
   ['ResearchFlow', 'https://researchflow-syahmedus-projects.vercel.app'],
   ['PaperCards', 'https://papercards.vercel.app'],
   ['ScaleScope', 'https://scalescope.vercel.app'],
-  ['Cadence', 'https://syahmedu.github.io/cadence/'],
   ['ToolsScope', 'https://toolsscope.vercel.app'],
   ['JournalTime', 'https://syahmedu.github.io/journaltime/'],
 ];
@@ -1323,7 +1322,6 @@ if (Auth.isConfigured()) {
     rf: { tool: 'ResearchFlow', icon: '🧭', href: 'https://researchflow-syahmedus-projects.vercel.app/',    param: 'idea'  },
     ts: { tool: 'TheoryScope',  icon: '🏛️', href: 'https://theoryscope.vercel.app/',                        param: 'q'     },
     ss: { tool: 'ScaleScope',   icon: '📏', href: 'https://scalescope.vercel.app/',                         param: 'q'     },
-    cd: { tool: 'Cadence',      icon: '🧪', href: 'https://syahmedu.github.io/cadence/',                    param: 'gen'   },
     to: { tool: 'ToolsScope',   icon: '🔬', href: 'https://toolsscope.vercel.app/',                         param: 'plan'  },
     jt: { tool: 'JournalTime',  icon: '✍️', href: 'https://syahmedu.github.io/journaltime/',                param: 'topic' },
   };
@@ -1402,7 +1400,6 @@ Available tools (use these short keys EXACTLY):
 - "rf" ResearchFlow — 10-stage wizard from idea to design. Best when they have a topic but need a sharp question, theory, hypotheses, design, analysis plan.
 - "ts" TheoryScope — 449-theory library, AI matchmaker. Best when they need to ground in theory.
 - "ss" ScaleScope — 174 validated scales. Best when they need measurement instruments.
-- "cd" Cadence — survey collection. Best when they have a study and need to gather data.
 - "to" ToolsScope — stats + analysis. Best when they have data.
 - "jt" JournalTime — write + place papers. Best when they have results.
 
@@ -1453,7 +1450,6 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
       { key:'rf', artifact:`Sharpen it into one researchable question with a stated gap.` },
       { key:'ts', artifact:`Pick a theoretical lens to frame the study.` },
       { key:'ss', artifact:`Operationalise the key construct with a validated scale.` },
-      { key:'cd', artifact:`Design the survey and gather clean responses.` },
       { key:'to', artifact:`Run the analysis and auto-write the APA results.` },
       { key:'jt', artifact:`Draft the paper and target the right journal.` },
     ];
@@ -1566,13 +1562,11 @@ const STAGES = [
   { phase:'Develop',  n:'03', name:'ScaleScope',   verb:'Operationalise',  accent:'magenta',
     desc:'Validated measurement scales with reliability, dimensions, and citations — turn abstract constructs into real items.',
     carry:'your instruments', url:'https://scalescope.vercel.app' },
-  { phase:'Collect',  n:'04', name:'Cadence',      verb:'Gather data',     accent:'violet',
-    desc:'Immersive, one-question-at-a-time surveys with wave tracking and a built-in analytics dashboard.',
-    carry:'clean responses', url:'https://syahmedu.github.io/cadence/' },
-  { phase:'Collect',  n:'05', name:'ToolsScope',   verb:'Analyse',         accent:'violet',
+  // Cadence (data collection) spun out to a standalone survey tool (merge #5) — bring cleaned data to ToolsScope.
+  { phase:'Analyse',  n:'04', name:'ToolsScope',   verb:'Analyse',         accent:'violet',
     desc:'A real stats engine — descriptives to mediation — that writes its own APA results and draws the figures, in the browser.',
     carry:'results + figures', url:'https://toolsscope.vercel.app' },
-  { phase:'Publish',  n:'06', name:'JournalTime',  verb:'Write & place',   accent:'violet',
+  { phase:'Publish',  n:'05', name:'JournalTime',  verb:'Write & place',   accent:'violet',
     desc:'Draft the article and write for your target journal with the guided Journal Studio. (Finding where to publish lives in ScholarScope.)',
     carry:'a manuscript', url:'https://syahmedu.github.io/journaltime/' },
 ];
@@ -1580,7 +1574,7 @@ const STAGES = [
 // ── Render the thread ─────────────────────────────────────────────
 // Tool keys, in station order — used to map Quick Start routes back
 // onto the thread (pc=0 … jt=6) and to give each station a stable handle.
-const STAGE_KEYS = ['pc','rf','ts','ss','cd','to','jt'];
+const STAGE_KEYS = ['pc','rf','ts','ss','to','jt'];
 const threadEl = document.getElementById('threadEl');
 STAGES.forEach((s, i) => {
   const el = document.createElement('div');
