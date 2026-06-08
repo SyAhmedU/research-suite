@@ -33,7 +33,7 @@ export const SUITE_STEP_UNION = SUITE.map(s => `'${s.key}'`).join(' | ');
 export const LINK = {
   journaltime: { label: 'JournalTime', href: 'https://syahmedu.github.io/journaltime/' },
   cadence:     { label: 'Cadence',     href: 'https://syahmedu.github.io/cadence/' },
-  taskflow:    { label: 'TaskFlow',    href: 'https://task-manager-production-5683.up.railway.app' },
+  taskflow:    { label: 'TaskFlow',    href: 'https://task-manager-tau-three-25.vercel.app' },
   scalescope:  { label: 'ScaleScope',  href: 'https://scalescope.vercel.app' },
   theoryscope: { label: 'TheoryScope', href: 'https://theoryscope.vercel.app' },
   toolsscope:  { label: 'ToolsScope',  href: 'https://toolsscope.vercel.app' },
