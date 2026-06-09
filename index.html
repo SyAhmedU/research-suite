@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Throughline — the research workflow, end to end</title>
-<meta name="description" content="From a hunch to a published paper, one continuous workflow. Eight connected tools that carry your idea forward — discover, frame, measure, collect, analyse, and write, without re-typing a thing.">
+<meta name="description" content="From a hunch to a published paper, one continuous workflow. Six connected tools that carry your idea forward — read, frame, ground, measure, analyse, and write, without re-typing a thing.">
 <meta name="theme-color" content="#FBF7EF">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Throughline — the research workflow, end to end">
-<meta property="og:description" content="From a hunch to a published paper, one continuous workflow. Eight connected research tools that pass your work forward.">
+<meta property="og:description" content="From a hunch to a published paper, one continuous workflow. Six connected research tools that pass your work forward.">
 <meta property="og:url" content="https://syahmedu.github.io/research-suite/">
 <meta property="og:image" content="https://syahmedu.github.io/research-suite/og.svg">
 <meta property="og:image:width" content="1200">
@@ -16,9 +16,9 @@
 <meta property="og:site_name" content="Throughline">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Throughline — the research workflow, end to end">
-<meta name="twitter:description" content="From a hunch to a published paper, one continuous workflow. Eight connected tools that pass your work forward.">
+<meta name="twitter:description" content="From a hunch to a published paper, one continuous workflow. Six connected tools that pass your work forward.">
 <meta name="twitter:image" content="https://syahmedu.github.io/research-suite/og.svg">
-<meta name="twitter:image:alt" content="Throughline — eight connected research tools as one continuous workflow.">
+<meta name="twitter:image:alt" content="Throughline — six connected research tools as one continuous workflow.">
 <link rel="canonical" href="https://syahmedu.github.io/research-suite/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="Syed Ahmed">
@@ -32,7 +32,7 @@
       "@id": "https://syahmedu.github.io/research-suite/#website",
       "url": "https://syahmedu.github.io/research-suite/",
       "name": "Throughline",
-      "description": "From a hunch to a published paper, one continuous research workflow. Eight connected tools that carry your work forward.",
+      "description": "From a hunch to a published paper, one continuous research workflow. Six connected tools that carry your work forward.",
       "inLanguage": "en",
       "author": { "@id": "https://syahmedu.github.io/research-suite/#author" }
     },
@@ -47,7 +47,7 @@
       "name": "Throughline Research Suite",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Web browser",
-      "description": "An end-to-end research workflow: capture an idea, spot trends, read the literature, frame a question, pick theories, choose validated scales, collect data, run the statistics, and write the paper — each step hands its work to the next.",
+      "description": "An end-to-end research workflow: read the literature, frame a question, ground it in theory, choose validated scales, run the statistics, and write the paper — each step hands its work to the next.",
       "url": "https://syahmedu.github.io/research-suite/",
       "inLanguage": "en",
       "isAccessibleForFree": true,
@@ -818,7 +818,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 <header class="hero">
   <div class="hero-glow"></div>
   <div class="wrap">
-    <div class="eyebrow rise d1"><b></b> One workflow · eight connected tools</div>
+    <div class="eyebrow rise d1"><b></b> One workflow · six connected tools</div>
     <h1 class="rise d2">From a hunch to a <em>published paper</em>, without losing the thread.</h1>
     <p class="lede rise d3">Most research tools are islands — a citation explorer here, a survey builder there, a stats package somewhere else. <strong>Throughline</strong> is the whole journey as one continuous workflow: each step hands its work to the next, so your question, your theory, your scale, and your data travel with you instead of being re-typed.</p>
     <div class="cta-row rise d4">
@@ -889,7 +889,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   <div class="wrap">
     <div class="section-head">
       <div class="kicker">The throughline</div>
-      <h2>Eight steps. <em>One thread.</em></h2>
+      <h2>Six steps. <em>One thread.</em></h2>
       <p class="sub">Follow a project from first curiosity to submission. Watch what each step carries forward — that hand-off is the whole point.</p>
       <button class="thread-play" id="threadPlay"><span class="pp">▶</span> Watch one idea travel</button>
     </div>
@@ -1545,7 +1545,7 @@ Each "artifact" under ~18 words, concrete, no preamble.`;
 </script>
 
 <script>
-// ── Data: the eight stations, in workflow order ──────────────────
+// ── Data: the six stations, in workflow order ────────────────────
 const ACCENT = { coral: 'var(--coral)', magenta: 'var(--magenta)', violet: 'var(--violet)' };
 // IdeaBox (capture) + Wordmap (discover) were cut from the product (merges #3/#4):
 // Wordmap folded into the Library's Term Trends view; IdeaBox is a standalone tool.
@@ -1573,7 +1573,7 @@ const STAGES = [
 
 // ── Render the thread ─────────────────────────────────────────────
 // Tool keys, in station order — used to map Quick Start routes back
-// onto the thread (pc=0 … jt=6) and to give each station a stable handle.
+// onto the thread (pc=0 … jt=5) and to give each station a stable handle.
 const STAGE_KEYS = ['pc','rf','ts','ss','to','jt'];
 const threadEl = document.getElementById('threadEl');
 STAGES.forEach((s, i) => {
