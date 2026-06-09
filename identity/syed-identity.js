@@ -4,9 +4,8 @@
    Self-contained, dependency-free, idempotent. Drop in once:
        <script src="syed-identity.js" defer></script>
    …or inline its contents. It will, only if missing:
-     • inject the ambient blobs (.sx-bg) + cursor glow (.sx-cursor-glow)
+     • inject the ambient blobs (.sx-bg)
      • add the .sx-grain class to <body>
-     • wire the page-wide cursor-following glow
      • initialise + persist the shared theme (localStorage 'syed-theme'),
        and bind any [data-sx-theme-toggle] button
      • reveal [data-sx-reveal] elements on scroll with a soft rise
@@ -69,14 +68,6 @@
       body.insertBefore(bg, body.firstChild);
     }
 
-    // ── Cursor glow (inject if not already present) ────────────────
-    var glow = document.querySelector('.sx-cursor-glow');
-    if (!glow) {
-      glow = document.createElement('div');
-      glow.className = 'sx-cursor-glow'; glow.setAttribute('aria-hidden', 'true');
-      body.appendChild(glow);
-    }
-
     // ── Theme toggle buttons ───────────────────────────────────────
     document.querySelectorAll('[data-sx-theme-toggle]').forEach(function (b) {
       b.addEventListener('click', window.sxToggleTheme);
@@ -84,15 +75,6 @@
     });
 
     if (reduce) return;  // everything below is motion
-
-    // ── Cursor-following glow (lazy lerp) ──────────────────────────
-    var tx = 0.5, ty = 0.5, cx = 0.5, cy = 0.5, raf = null;
-    document.addEventListener('mousemove', function (e) {
-      tx = e.clientX; ty = e.clientY;
-      var root = document.documentElement;
-      root.style.setProperty('--cx', e.clientX);
-      root.style.setProperty('--cy', e.clientY);
-    }, { passive: true });
 
     // ── Scroll reveal for [data-sx-reveal] ─────────────────────────
     var els = document.querySelectorAll('[data-sx-reveal]');

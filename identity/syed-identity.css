@@ -85,17 +85,7 @@ canvas.sx-aurora { transition: opacity 1.4s ease; }
 @keyframes sx-drift2 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-18vw,-8vh) scale(.85)} 70%{transform:translate(10vw,12vh) scale(1.1)} }
 @keyframes sx-drift3 { 0%,100%{transform:translate(0,0) scale(1)} 35%{transform:translate(12vw,-14vh) scale(1.2)} 65%{transform:translate(-15vw,5vh) scale(.95)} }
 
-/* ── Cursor glow — a soft light that lazily trails the pointer ───────── */
-.sx-cursor-glow {
-  position: fixed; pointer-events: none; z-index: 1;
-  width: 520px; height: 520px; border-radius: 50%; left: 0; top: 0;
-  transform: translate(calc(var(--cx, -1000) * 1px - 50%), calc(var(--cy, -1000) * 1px - 50%));
-  background: radial-gradient(circle, rgba(241,69,117,.14) 0%, rgba(146,112,244,.08) 35%, transparent 65%);
-  filter: blur(40px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform;
-}
-[data-theme="dark"] .sx-cursor-glow {
-  background: radial-gradient(circle, rgba(241,69,117,.22) 0%, rgba(146,112,244,.14) 35%, transparent 65%);
-}
+/* (cursor-following glow removed for a calm, professional feel) */
 
 /* ── Typography: the signature voice ─────────────────────────────────── */
 /* Display serif — Fraunces, optical-size aware, with the italic-gradient

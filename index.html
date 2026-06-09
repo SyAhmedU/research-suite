@@ -234,20 +234,7 @@ html, body { overflow-x: clip; }
 /* ── Smooth thread fill (the line down the timeline) ─────────────── */
 .thread-fill { transition: height .45s cubic-bezier(.22, 1, .36, 1); }
 
-/* ── Page-wide cursor glow — soft, lazy, always there ───────────── */
-.cursor-glow {
-  position: fixed; pointer-events: none; z-index: 1;
-  width: 520px; height: 520px; border-radius: 50%;
-  left: 0; top: 0;
-  transform: translate(calc(var(--cx, -1000) * 1px - 50%), calc(var(--cy, -1000) * 1px - 50%));
-  background: radial-gradient(circle, rgba(241, 69, 117, .14) 0%, rgba(146, 112, 244, .08) 35%, transparent 65%);
-  filter: blur(40px);
-  transition: transform .7s cubic-bezier(.22, 1, .36, 1);
-  will-change: transform;
-}
-html[data-theme='dark'] .cursor-glow {
-  background: radial-gradient(circle, rgba(241, 69, 117, .22) 0%, rgba(146, 112, 244, .14) 35%, transparent 65%);
-}
+/* (page-wide cursor-following glow removed for a calm, professional feel) */
 
 /* ── Station cards float gently, each on a different phase ──────── */
 @property --float-y { syntax: '<length>'; inherits: false; initial-value: 0px; }
@@ -794,8 +781,6 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
   <div class="liquid-blob liquid-blob-2"></div>
   <div class="liquid-blob liquid-blob-3"></div>
 </div>
-<!-- A soft glow that lazily follows your cursor anywhere on the page -->
-<div class="cursor-glow" aria-hidden="true"></div>
 
 <!-- Brand bar -->
 <header class="bar" role="banner">
@@ -1255,30 +1240,8 @@ if (Auth.isConfigured()) {
 </script>
 
 <script>
-// ── Wobble: cursor-following CSS vars driving the ambient glows ──
-(function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let mx = .5, my = .5, cx = .5, cy = .5, raf = null;
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX / window.innerWidth;
-    my = e.clientY / window.innerHeight;
-    // Absolute cursor position for the page-wide glow follower.
-    const root = document.documentElement;
-    root.style.setProperty('--cx', e.clientX);
-    root.style.setProperty('--cy', e.clientY);
-    if (!raf) raf = requestAnimationFrame(tick);
-  }, { passive: true });
-  function tick() {
-    cx += (mx - cx) * .065;
-    cy += (my - cy) * .065;
-    const root = document.documentElement;
-    root.style.setProperty('--mx', cx.toFixed(3));
-    root.style.setProperty('--my', cy.toFixed(3));
-    if (Math.abs(mx - cx) > .001 || Math.abs(my - cy) > .001) {
-      raf = requestAnimationFrame(tick);
-    } else { raf = null; }
-  }
-})();
+// (cursor-following ambient-glow parallax removed for a calm, professional feel;
+//  the background blobs keep their own slow ambient drift)
 
 // ── Scroll-reveal: sections rise into view with a soft overshoot ──
 (function(){
