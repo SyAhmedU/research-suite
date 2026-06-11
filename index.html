@@ -473,6 +473,29 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 .section h2 em { font-style: italic; color: var(--magenta); }
 .section .sub { color: var(--ink-soft); font-size: 1.06rem; margin-top: 16px; max-width: 58ch; }
 
+/* ── syed-bose: link grammar after bosefellows.mit.edu, on suite tokens.
+     Two-tone underline link (text + underline swap accents on hover)
+     and a CSS-drawn circle-arrow CTA motif. Static, calm. ─────────── */
+.more-link {
+  display: inline-block; font-family: 'IBM Plex Mono', monospace;
+  font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--violet); border-bottom: 2px solid var(--magenta);
+  padding: 1px 2px 4px; text-decoration: none; white-space: nowrap;
+  transition: color .2s, border-color .2s;
+}
+.more-link:hover { color: var(--magenta); border-bottom-color: var(--violet); }
+.circle-arrow {
+  position: relative; display: inline-block; flex: none; vertical-align: middle;
+  width: 44px; height: 44px; border: 2.5px solid currentColor; border-radius: 50%;
+  color: var(--magenta);
+}
+.circle-arrow::before, .circle-arrow::after {
+  content: ''; position: absolute; left: 13px; width: 15px; height: 2.5px;
+  border-radius: 2px; background: currentColor;
+}
+.circle-arrow::before { top: 25px; transform: rotate(-45deg); }
+.circle-arrow::after  { top: 14px; transform: rotate(45deg); }
+
 /* ── The thread (workflow timeline) ────────────────────────── */
 .thread { position: relative; max-width: 880px; margin: 0 auto; padding: 8px 0; }
 .thread-line, .thread-fill {
@@ -515,8 +538,13 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 }
 .station-carry b { color: var(--ink); font-weight: 600; }
 .station-carry .arr { color: var(--accent, var(--magenta)); }
-.station-open { float: right; font-size: .8rem; font-weight: 700; color: var(--ink-faint); transition: .2s; }
-.station-card:hover .station-open { color: var(--accent, var(--magenta)); }
+.station-open {
+  float: right; font-family: 'IBM Plex Mono', monospace; font-size: .68rem; font-weight: 600;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-faint);
+  border-bottom: 2px solid var(--accent, var(--magenta)); padding-bottom: 3px;
+  transition: color .2s, border-color .2s;
+}
+.station-card:hover .station-open { color: var(--accent, var(--magenta)); border-bottom-color: var(--violet); }
 
 /* ── Integration proof ─────────────────────────────────────── */
 .proof { background: var(--paper-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
@@ -604,7 +632,12 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 .qs-route-body { min-width: 0; }
 .qs-route-tool { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.08rem; color: var(--ink); }
 .qs-route-why { color: var(--ink-soft); font-size: .85rem; margin-top: 2px; line-height: 1.45; }
-.qs-route-arrow { font-family: 'IBM Plex Mono', monospace; color: var(--magenta); font-size: .8rem; font-weight: 700; }
+.qs-route-arrow {
+  font-family: 'IBM Plex Mono', monospace; font-size: .7rem; font-weight: 600;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--violet);
+  border-bottom: 2px solid var(--magenta); padding-bottom: 2px; transition: color .2s, border-color .2s;
+}
+.qs-route:hover .qs-route-arrow { color: var(--magenta); border-bottom-color: var(--violet); }
 .qs-err { padding: 10px 14px; border-radius: 8px; background: color-mix(in srgb, var(--magenta) 8%, transparent); border: 1px solid color-mix(in srgb, var(--magenta) 25%, var(--line)); color: var(--magenta); font-size: .88rem; margin-top: 12px; }
 .qs-loading { color: var(--ink-soft); font-size: .9rem; margin-top: 12px; }
 
@@ -1008,6 +1041,7 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
 <section class="close">
   <div class="close-glow"></div>
   <div class="wrap">
+    <span class="circle-arrow" aria-hidden="true" style="margin-bottom:26px"></span>
     <h2>Pick up the <em>thread</em>.</h2>
     <p>Start anywhere in the workflow. The next step will be waiting with your work already in hand.</p>
     <div class="cta-row" style="justify-content:center">
