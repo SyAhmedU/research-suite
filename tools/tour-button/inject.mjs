@@ -25,6 +25,7 @@ const PROJECTS = [
   { kind: 'html', file: 'ideabox/public/index.html', slug: 'ideabox', name: 'IdeaBox' },
   { kind: 'html', file: 'career-compass/index.html', slug: 'career-compass', name: 'Career Compass' },
   { kind: 'html', file: 'bachelor-meal-plan/index.html', slug: 'bachelor-meal-plan', name: 'Bachelor Meal Plan', bottom: '84px' },
+  { kind: 'html', file: 'throughline-cs/index.html', slug: 'throughline-cs', name: 'Throughline CS' },
   { kind: 'vite', entry: 'researchflow/src/main.tsx', tour: 'researchflow/src/tour.ts', slug: 'researchflow', name: 'ResearchFlow' },
   { kind: 'vite', entry: 'theoryscope/src/main.tsx', tour: 'theoryscope/src/tour.ts', slug: 'theoryscope', name: 'TheoryScope' },
   { kind: 'vite', entry: 'scalebase/client/src/main.tsx', tour: 'scalebase/client/src/tour.ts', slug: 'scalescope', name: 'ScaleScope' },
