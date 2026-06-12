@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-12T02:34:08.657Z",
+  "source": "syeds-research-book recent tier (OpenAlex, 2024→) — titles + abstracts",
+  "papersScanned": 79517,
+  "abstracts": 63188,
+  "method": "deterministic verbatim name match (word-boundary, dash-normalized); acronyms case-sensitive; machine-matched — verify before citing",
+  "note": "NOT in TheoryScope catalog; hand-verify before adding (real source + DOI required)",
+  "candidates": [
+    {
+      "phrase": "Dynamic Capability theory",
+      "n": 16,
+      "dois": [
+        "10.47686/nzcy1g63",
+        "10.1007/s43621-026-03650-7",
+        "10.1002/csr.70740"
+      ]
+    },
+    {
+      "phrase": "Unique Contribution to theory",
+      "n": 13,
+      "dois": [
+        "10.47941/jcomm.3772",
+        "10.47941/jacc.3776",
+        "10.47941/hrlj.3607"
+      ]
+    },
+    {
+      "phrase": "Unified theory",
+      "n": 12,
+      "dois": [
+        "10.25258/ijddt.16.44s.70",
+        "10.1108/jstpm-06-2026-518",
+        "10.1177/09721509261443740"
+      ]
+    },
+    {
+      "phrase": "It advances theory",
+      "n": 12,
+      "dois": [
+        "10.1108/apjba-04-2025-0329",
+        "10.1108/jmd-08-2025-0435",
+        "10.1108/jhom-12-2025-0862"
+      ]
+    },
+    {
+      "phrase": "Cognitive Appraisal theory",
+      "n": 11,
+      "dois": [
+        "10.3389/fpsyg.2026.1786588",
+        "10.3390/bs16060918",
+        "10.3389/fpsyg.2026.1852245"
+      ]
+    },
+    {
+      "phrase": "Ecological Systems theory",
+      "n": 11,
+      "dois": [
+        "10.12692/ijb/28.4.85-97",
+        "10.3389/fpsyg.2026.1754164",
+        "10.69739/jahss.v3i2.1957"
+      ]
+    },
+    {
+      "phrase": "Toward a theory",
+      "n": 11,
+      "dois": [
+        "10.63544/ijss.v5i3.297",
+        "10.63544/ijss.v5i2.273",
+        "10.63544/ijss.v4i4.176"
+      ]
+    },
+    {
+      "phrase": "Organizational Support theory",
+      "n": 11,
+      "dois": [
+        "10.1108/joepp-10-2025-0892",
+        "10.62810/jssh.v3i2.275",
+        "10.6007/ijarbss/v16-i5/28266"
+      ]
+    },
+    {
+      "phrase": "Labour Process theory",
+      "n": 11,
+      "dois": [
+        "10.1332/27324176y2026d000000060",
+        "10.1111/ntwe.12327",
+        "10.1111/ntwe.12327"
+      ]
+    },
+    {
+      "phrase": "Resource-based view theory",
+      "n": 10,
+      "dois": [
+        "10.1108/s1746-979120240000019014",
+        "10.1016/j.rineng.2026.111134",
+        "10.1108/ijis-03-2025-0152"
+      ]
+    },
+    {
+      "phrase": "Diffusion of Innovation theory",
+      "n": 10,
+      "dois": [
+        "10.1108/ejim-08-2025-1065",
+        "10.1108/ejim-08-2025-1065",
+        "10.1177/00139165261449008"
+      ]
+    },
+    {
+      "phrase": "Resource-Based View and dynamic capabilities theory",
+      "n": 9,
+      "dois": [
+        "10.6007/ijarbss/v16-i5/28276",
+        "10.1038/s41598-026-52538-z",
+        "10.36347/sjebm.2026.v13i05.001"
+      ]
+    },
+    {
+      "phrase": "Local Wisdom Globalization theory",
+      "n": 9,
+      "dois": [
+        "10.17605/osf.io/vyzqk",
+        "10.17605/osf.io/vyzqk",
+        "10.17605/osf.io/vyzqk"
+      ]
+    },
+    {
+      "phrase": "We discuss implications for theory",
+      "n": 9,
+      "dois": [
+        "10.1177/10596011261442927",
+        "10.5465/amproc.2025.14918abstract",
+        "10.1080/00223980.2025.2605351"
+      ]
+    },
+    {
+      "phrase": "Family Systems theory",
+      "n": 9,
+      "dois": [
+        "10.1111/jftr.12600",
+        "10.1111/jftr.12600",
+        "10.1111/jftr.12600"
+      ]
+    },
+    {
+      "phrase": "Universal Phase Crystallization theory",
+      "n": 9,
+      "dois": [
+        "10.5281/zenodo.18795785",
+        "10.5281/zenodo.18795785",
+        "10.5281/zenodo.18795785"
+      ]
+    },
+    {
+      "phrase": "Social Influence theory",
+      "n": 9,
+      "dois": [
+        "10.70382/tijssra.v12i6.0111",
+        "10.1108/k-05-2024-1393",
+        "10.1108/k-05-2024-1393"
+      ]
+    },
+    {
+      "phrase": "Dismantled Mindset theory",
+      "n": 9,
+      "dois": [
+        "10.5281/zenodo.20466800",
+        "10.5281/zenodo.20466800",
+        "10.5281/zenodo.20466800"
+      ]
+    },
+    {
+      "phrase": "Bronfenbrenner's ecological systems theory",
+      "n": 8,
+      "dois": [
+        "10.1108/jea-05-2026-450",
+        "10.1155/jonm/1245208",
+        "10.1111/hequ.70143"
+      ]
+    },
+    {
+      "phrase": "Role Congruity theory",
+      "n": 7,
+      "dois": [
+        "10.1002/csr.70677",
+        "10.1108/jsma-02-2025-0057",
+        "10.1108/jsma-02-2025-0057"
+      ]
+    },
+    {
+      "phrase": "Constructivist Learning theory",
+      "n": 7,
+      "dois": [
+        "10.65339/ijsair.v2.i2.543",
+        "10.1108/jieb-07-2024-0081",
+        "10.24940/theijhss/2025/v13/i12/hs2512-012"
+      ]
+    },
+    {
+      "phrase": "Modern Portfolio theory",
+      "n": 7,
+      "dois": [
+        "10.5281/zenodo.20519231",
+        "10.5281/zenodo.20519231",
+        "10.5539/ijbm.v21n2p114"
+      ]
+    },
+    {
+      "phrase": "Institutional Betrayal theory",
+      "n": 7,
+      "dois": [
+        "10.17605/osf.io/kvn78",
+        "10.17605/osf.io/kvn78",
+        "10.17605/osf.io/kvn78"
+      ]
+    },
+    {
+      "phrase": "Expectancy-Value theory",
+      "n": 7,
+      "dois": [
+        "10.4018/979-8-3693-8709-2.ch001",
+        "10.5559/di.34.3.05",
+        "10.1007/s10639-026-14023-y"
+      ]
+    },
+    {
+      "phrase": "Density functional theory",
+      "n": 7,
+      "dois": [
+        "10.32604/cmc.2025.074430",
+        "10.1039/d4ra01471e",
+        "10.1002/adfm.202502952"
+      ]
+    },
+    {
+      "phrase": "Constructivist Grounded theory",
+      "n": 6,
+      "dois": [
+        "10.6007/ijarbss/v16-i6/28343",
+        "10.6007/ijarbss/v16-i6/28344",
+        "10.1108/itp-09-2024-1157"
+      ]
+    },
+    {
+      "phrase": "Herzberg's two-factor theory",
+      "n": 6,
+      "dois": [
+        "10.12968/bjhc.2025.0053",
+        "10.1108/ajems-07-2024-0391",
+        "10.1093/sw/swag002"
+      ]
+    },
+    {
+      "phrase": "Classical Test theory",
+      "n": 6,
+      "dois": [
+        "10.58723/abdigermas.v3i3.453",
+        "10.1093/workar/waag005",
+        "10.2147/jhl.s570560"
+      ]
+    },
+    {
+      "phrase": "It contributes to theory",
+      "n": 6,
+      "dois": [
+        "10.1108/er-06-2025-0448",
+        "10.1108/tg-10-2025-0321",
+        "10.1108/jsbed-05-2025-0323"
+      ]
+    },
+    {
+      "phrase": "Upper Echelon theory",
+      "n": 6,
+      "dois": [
+        "10.1080/00208825.2025.2465002",
+        "10.18845/te.v20i2.8630",
+        "10.14738/assrj.1305.10809"
+      ]
+    },
+    {
+      "phrase": "Mind Perception theory",
+      "n": 5,
+      "dois": [
+        "10.1080/21639159.2026.2667771",
+        "10.1080/00140139.2026.2621032",
+        "10.5296/bms.v16i2.23026"
+      ]
+    },
+    {
+      "phrase": "Purpose Drawing on social exchange theory",
+      "n": 5,
+      "dois": [
+        "10.1108/jhti-07-2025-0849",
+        "10.1108/ebhrm-04-2024-0120",
+        "10.1108/apjba-12-2025-0915"
+      ]
+    },
+    {
+      "phrase": "Solvency Field theory",
+      "n": 5,
+      "dois": [
+        "10.5281/zenodo.18877417",
+        "10.5281/zenodo.18877417",
+        "10.5281/zenodo.18877417"
+      ]
+    }
+  ]
+}

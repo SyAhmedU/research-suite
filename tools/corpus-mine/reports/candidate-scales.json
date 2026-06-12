@@ -1,0 +1,470 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-12T02:34:08.657Z",
+  "source": "syeds-research-book recent tier (OpenAlex, 2024→) — titles + abstracts",
+  "papersScanned": 79517,
+  "abstracts": 63188,
+  "method": "deterministic verbatim name match (word-boundary, dash-normalized); acronyms case-sensitive; machine-matched — verify before citing",
+  "note": "NOT in ScaleScope catalog; hand-verify before adding (real items + citation required)",
+  "candidates": [
+    {
+      "phrase": "UCLA Loneliness Scale",
+      "n": 28,
+      "dois": [
+        "10.5944/rppc.45966",
+        "10.1111/jan.70459",
+        "10.1111/jan.70459"
+      ]
+    },
+    {
+      "phrase": "International Physical Activity Questionnaire",
+      "n": 25,
+      "dois": [
+        "10.3389/fendo.2026.1784397",
+        "10.3390/app16115472",
+        "10.3390/app16115472"
+      ]
+    },
+    {
+      "phrase": "System Usability Scale",
+      "n": 19,
+      "dois": [
+        "10.2337/db26-1467-p",
+        "10.3389/fcomp.2025.1726078",
+        "10.3390/ijerph23060751"
+      ]
+    },
+    {
+      "phrase": "Childhood Trauma Questionnaire",
+      "n": 18,
+      "dois": [
+        "10.5964/ejop.18653",
+        "10.54691/01q83f81",
+        "10.1093/jsxmed/qdag118.244"
+      ]
+    },
+    {
+      "phrase": "Multifactor Leadership Questionnaire",
+      "n": 18,
+      "dois": [
+        "10.17632/zz68fdxc38.1",
+        "10.17632/zz68fdxc38",
+        "10.55041/ijcope.v2i5.480"
+      ]
+    },
+    {
+      "phrase": "Visual Analog Scale",
+      "n": 18,
+      "dois": [
+        "10.2337/db26-1035-or",
+        "10.7759/cureus.106142",
+        "10.25259/nmji_1147_2023"
+      ]
+    },
+    {
+      "phrase": "Hamilton Depression Rating Scale",
+      "n": 16,
+      "dois": [
+        "10.1017/cts.2026.10394",
+        "10.32689/2663-0672-2026-1-2",
+        "10.37506/ptzrp480"
+      ]
+    },
+    {
+      "phrase": "Newcastle-Ottawa Scale",
+      "n": 16,
+      "dois": [
+        "10.3389/fpubh.2026.1817065",
+        "10.70610/jcpa.1361",
+        "10.3390/ijerph23060717"
+      ]
+    },
+    {
+      "phrase": "Visual Analogue Scale",
+      "n": 14,
+      "dois": [
+        "10.3389/fmed.2026.1724038",
+        "10.3389/fresc.2026.1780374",
+        "10.3390/ijerph23060751"
+      ]
+    },
+    {
+      "phrase": "Anxiety and Stress Scale",
+      "n": 13,
+      "dois": [
+        "10.7759/cureus.110395",
+        "10.1136/bmjopen-2025-109056",
+        "10.25258/ijddt.16.46s.70"
+      ]
+    },
+    {
+      "phrase": "Positive and Negative Syndrome Scale",
+      "n": 13,
+      "dois": [
+        "10.1093/schbul/sbag003.189",
+        "10.1016/j.jaac.2026.05.006",
+        "10.1186/s43045-026-00639-w"
+      ]
+    },
+    {
+      "phrase": "Copenhagen Psychosocial Questionnaire",
+      "n": 12,
+      "dois": [
+        "10.1186/s12912-026-04693-x",
+        "10.4103/jets.jets_138_25",
+        "10.1108/ijem-06-2025-0462"
+      ]
+    },
+    {
+      "phrase": "Beck Anxiety Inventory",
+      "n": 12,
+      "dois": [
+        "10.3389/fpsyt.2025.1634323",
+        "10.32350/ccpr.61.05",
+        "10.1177/09727531261424949"
+      ]
+    },
+    {
+      "phrase": "Strengths and Difficulties Questionnaire",
+      "n": 11,
+      "dois": [
+        "10.52380/ijpes.2026.13.1.1321",
+        "10.1002/cpp.70261",
+        "10.1007/s10826-026-03287-0"
+      ]
+    },
+    {
+      "phrase": "Perceived Social Support Scale",
+      "n": 10,
+      "dois": [
+        "10.3389/fpubh.2025.1708061",
+        "10.1186/s43045-026-00623-4",
+        "10.31577/sp.2025.03.921"
+      ]
+    },
+    {
+      "phrase": "Hamilton Anxiety Rating Scale",
+      "n": 10,
+      "dois": [
+        "10.19109/psikis.v10i1.22135",
+        "10.1177/13591053261450562",
+        "10.1186/s12888-026-08225-4"
+      ]
+    },
+    {
+      "phrase": "Social Anxiety Scale",
+      "n": 9,
+      "dois": [
+        "10.1186/s13063-026-09780-7",
+        "10.1080/00223980.2026.2616286",
+        "10.1080/19012276.2024.2448159"
+      ]
+    },
+    {
+      "phrase": "Geriatric Depression Scale",
+      "n": 9,
+      "dois": [
+        "10.1111/sjop.70115",
+        "10.1080/13607863.2026.2672679",
+        "10.1080/13607863.2026.2664687"
+      ]
+    },
+    {
+      "phrase": "Negative Acts Questionnaire",
+      "n": 8,
+      "dois": [
+        "10.3390/culture2020013",
+        "10.1108/ijoa-10-2025-6105",
+        "10.1136/bmjopen-2025-109056"
+      ]
+    },
+    {
+      "phrase": "Practice Environment Scale",
+      "n": 7,
+      "dois": [
+        "10.1097/nmg.0000000000000362",
+        "10.1186/s12912-024-02663-9",
+        "10.1155/jonm/3078316"
+      ]
+    },
+    {
+      "phrase": "Edinburgh Postnatal Depression Scale",
+      "n": 7,
+      "dois": [
+        "10.55606/innovation.v4i2.9203",
+        "10.1007/s12529-026-10436-8",
+        "10.1177/13591053261452198"
+      ]
+    },
+    {
+      "phrase": "Physical Activity Rating Scale",
+      "n": 7,
+      "dois": [
+        "10.3389/fpsyg.2026.1834318",
+        "10.1080/00223980.2025.2585272",
+        "10.32604/jpa.2026.073317"
+      ]
+    },
+    {
+      "phrase": "Barratt Impulsiveness Scale",
+      "n": 7,
+      "dois": [
+        "10.1002/cpp.70277",
+        "10.1002/cpp.70250",
+        "10.17759/cpse.2026150107"
+      ]
+    },
+    {
+      "phrase": "Numerical Rating Scale",
+      "n": 7,
+      "dois": [
+        "10.18231/j.ijca.15174.1772786233",
+        "10.18231/j.ijca.15017.1773310077",
+        "10.31080/asms.2025.09.2168"
+      ]
+    },
+    {
+      "phrase": "Amsterdam Preoperative Anxiety and Information Scale",
+      "n": 7,
+      "dois": [
+        "10.1177/13591053261439923",
+        "10.1177/13591053261439923",
+        "10.1177/17504589261441562"
+      ]
+    },
+    {
+      "phrase": "Mental Health Literacy Scale",
+      "n": 6,
+      "dois": [
+        "10.3389/fpubh.2025.1708061",
+        "10.1080/09581596.2026.2682000",
+        "10.1186/s40359-026-04920-9"
+      ]
+    },
+    {
+      "phrase": "Impact of Event Scale",
+      "n": 6,
+      "dois": [
+        "10.1002/cpp.70235",
+        "10.3390/healthcare14121599",
+        "10.17759/cpse.2025140404"
+      ]
+    },
+    {
+      "phrase": "Individual Work Performance Questionnaire",
+      "n": 6,
+      "dois": [
+        "10.1038/s41598-026-53266-0",
+        "10.18502/jhsw.v15i1.21361",
+        "10.4102/sajip.v52i0.2419"
+      ]
+    },
+    {
+      "phrase": "General Information Questionnaire",
+      "n": 6,
+      "dois": [
+        "10.1111/phn.70133",
+        "10.1108/ijwhm-04-2024-0088",
+        "10.1097/md.0000000000049177"
+      ]
+    },
+    {
+      "phrase": "Behavior Rating Inventory",
+      "n": 6,
+      "dois": [
+        "10.3389/feduc.2026.1805091",
+        "10.17615/bkfb-p812",
+        "10.2337/db26-2804-lb"
+      ]
+    },
+    {
+      "phrase": "Narcissistic Personality Inventory",
+      "n": 6,
+      "dois": [
+        "10.3389/fpsyt.2026.1621098",
+        "10.65138/ijtrp.2026.v2i5.49",
+        "10.1177/08862605261448831"
+      ]
+    },
+    {
+      "phrase": "Trait Anxiety Inventory",
+      "n": 6,
+      "dois": [
+        "10.1093/sleep/zsag091.0187",
+        "10.1002/cdq.70013",
+        "10.17759/cpse.2025140409"
+      ]
+    },
+    {
+      "phrase": "Social Support Rating Scale",
+      "n": 6,
+      "dois": [
+        "10.32604/jpa.2026.079806",
+        "10.1002/nop2.70590",
+        "10.1177/00302228261430464"
+      ]
+    },
+    {
+      "phrase": "Glasgow Coma Scale",
+      "n": 6,
+      "dois": [
+        "10.2147/jhl.s614449",
+        "10.59365/hsj.4(1).2025.184",
+        "10.1016/j.neuroimage.2026.122034"
+      ]
+    },
+    {
+      "phrase": "Eating Disorder Examination Questionnaire",
+      "n": 6,
+      "dois": [
+        "10.1007/s10508-026-03448-8",
+        "10.1186/s40337-026-01660-4",
+        "10.1186/s40337-026-01657-z"
+      ]
+    },
+    {
+      "phrase": "National Institutes of Health Stroke Scale",
+      "n": 6,
+      "dois": [
+        "10.1177/09727531261430099",
+        "10.1093/esj/aakag023.788",
+        "10.1161/jaha.125.048184"
+      ]
+    },
+    {
+      "phrase": "Expanded Disability Status Scale",
+      "n": 6,
+      "dois": [
+        "10.1155/bn/2744955",
+        "10.1155/bn/2744955",
+        "10.1155/bn/6426255"
+      ]
+    },
+    {
+      "phrase": "Child and Adolescent Social Support Scale",
+      "n": 6,
+      "dois": [
+        "10.14421/jpsi.v13i1.3090",
+        "10.14421/jpsi.v13i1.3090",
+        "10.14421/1s5wzm15"
+      ]
+    },
+    {
+      "phrase": "De Jong Gierveld Loneliness Scale",
+      "n": 5,
+      "dois": [
+        "10.1111/jan.70459",
+        "10.1111/jan.70459",
+        "10.1186/s40359-026-04892-w"
+      ]
+    },
+    {
+      "phrase": "Copenhagen Burnout Inventory",
+      "n": 5,
+      "dois": [
+        "10.33546/bnj.4404",
+        "10.3389/fpsyt.2025.1634323",
+        "10.32604/jpa.2025.069675"
+      ]
+    },
+    {
+      "phrase": "Trait Emotional Intelligence Questionnaire",
+      "n": 5,
+      "dois": [
+        "10.12669/pjms.42.6.14634",
+        "10.1080/00049530.2026.2678849",
+        "10.1177/09727531261440667"
+      ]
+    },
+    {
+      "phrase": "Nordic Musculoskeletal Questionnaire",
+      "n": 5,
+      "dois": [
+        "10.1186/s10194-026-02411-1",
+        "10.3390/ijerph23060729",
+        "10.1177/10519815261453346"
+      ]
+    },
+    {
+      "phrase": "Qualities of Hearing Scale",
+      "n": 5,
+      "dois": [
+        "10.1097/01.hj.0001193532.58624.dd",
+        "10.1097/01.hj.0001193532.58624.dd",
+        "10.1097/01.hj.0001193532.58624.dd"
+      ]
+    },
+    {
+      "phrase": "Intrinsic Motivation Inventory",
+      "n": 5,
+      "dois": [
+        "10.25258/ijddt.16.36s.24",
+        "10.21500/20112084.7361",
+        "10.21500/20112084.7361"
+      ]
+    },
+    {
+      "phrase": "Self-Rating Depression Scale",
+      "n": 5,
+      "dois": [
+        "10.3389/fpsyg.2026.1834318",
+        "10.2147/prbm.s550385",
+        "10.2147/prbm.s569508"
+      ]
+    },
+    {
+      "phrase": "Davidson Resilience Scale",
+      "n": 5,
+      "dois": [
+        "10.3390/ijerph23060729",
+        "10.1186/s43045-026-00650-1",
+        "10.1177/09697330261437291"
+      ]
+    },
+    {
+      "phrase": "Social Support Scale",
+      "n": 5,
+      "dois": [
+        "10.22251/jlcci.2025.25.14.533",
+        "10.19109/psikis.v10i2.24537",
+        "10.11113/sh.v17n3.2152"
+      ]
+    },
+    {
+      "phrase": "Posttraumatic Growth Inventory",
+      "n": 5,
+      "dois": [
+        "10.17759/cpse.2025140407",
+        "10.1177/00302228261430464",
+        "10.1080/00223891.2025.2609697"
+      ]
+    },
+    {
+      "phrase": "Young Mania Rating Scale",
+      "n": 5,
+      "dois": [
+        "10.1186/s43045-026-00617-2",
+        "10.1186/s43045-026-00613-6",
+        "10.1177/00207640261446100"
+      ]
+    },
+    {
+      "phrase": "Parental Stress Scale",
+      "n": 5,
+      "dois": [
+        "10.1177/13591053261442612",
+        "10.1111/fare.70174",
+        "10.1111/fare.70174"
+      ]
+    },
+    {
+      "phrase": "Cognitive Emotion Regulation Questionnaire",
+      "n": 5,
+      "dois": [
+        "10.17575/psicologia.1906",
+        "10.2147/prbm.s538134",
+        "10.31820/pt.33.3.6"
+      ]
+    }
+  ]
+}
