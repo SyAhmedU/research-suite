@@ -842,7 +842,8 @@ footer { border-top: 1px solid var(--line-soft); padding: 34px 0; }
     <h1 class="rise d2">From a hunch to a <em>published paper</em>, without losing the thread.</h1>
     <p class="lede rise d3">Most research tools are islands — a citation explorer here, a survey builder there, a stats package somewhere else. <strong>Throughline</strong> is the whole journey as one continuous workflow: each step hands its work to the next, so your question, your theory, your scale, and your data travel with you instead of being re-typed.</p>
     <div class="cta-row rise d4">
-      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Start with an idea →</a>
+      <a class="btn btn-fill" href="https://throughline-studio.vercel.app" target="_blank" rel="noopener">Open the workspace — A→Z →</a>
+      <a class="btn btn-ghost" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Start with an idea</a>
       <a class="btn btn-ghost" href="#thread">Follow the thread ↓</a>
     </div>
     <div id="resumeSlot"></div>
@@ -1362,6 +1363,18 @@ if (Auth.isConfigured()) {
         + `<span class="qs-route-arrow">Open ↗</span>`
         + `</a>`;
     });
+    // Always offer the unified workspace as the closing route: the same topic,
+    // carried through all seven stages in one place (Studio reads ?topic=).
+    if (topic) {
+      html += `<a class="qs-route" href="https://throughline-studio.vercel.app/?topic=${encodeURIComponent(topic)}" target="_blank" rel="noopener">`
+        + `<span class="qs-route-icon">🪡</span>`
+        + `<span class="qs-route-body">`
+        +   `<div class="qs-route-tool"><span style="opacity:.55;font-family:'IBM Plex Mono',monospace;font-size:.78rem;margin-right:6px;">Or</span>Throughline Studio</div>`
+        +   `<div class="qs-route-why">Run the whole journey in one workspace — this question carried through all seven stages.</div>`
+        + `</span>`
+        + `<span class="qs-route-arrow">Open ↗</span>`
+        + `</a>`;
+    }
     html += `<div class="qs-row" style="margin-top:4px;"><p class="qs-hint" style="margin:0 2px;">Topic in hand: <em>${esc(topic).slice(0,160)}</em></p>`
       + `<button type="button" class="qs-trace" id="qs-trace">↓ Trace this path on the thread</button></div>`;
     wrap.innerHTML = html;
