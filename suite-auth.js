@@ -32,11 +32,35 @@ export function isConfigured() {
   return Boolean(SUITE_CONFIG.url && SUITE_CONFIG.anonKey);
 }
 
+// ── Dead-backend circuit breaker ──────────────────────────────────
+// If the Supabase project is gone (hostname NXDOMAINs), supabase-js + the
+// browser retry into a request storm on every page visit. After two
+// consecutive network-level failures (fetch TypeError — DNS/offline only;
+// auth/RLS errors don't count) the breaker opens and every later call fails
+// instantly without touching the network — same UX as preview mode.
+let _netFails = 0;
+let _breakerOpen = false;
+async function guardedFetch(input, init) {
+  if (_breakerOpen) throw new TypeError('suite-auth: Supabase unreachable (circuit open)');
+  try {
+    const r = await fetch(input, init);
+    _netFails = 0;
+    return r;
+  } catch (e) {
+    if (++_netFails >= 2) {
+      _breakerOpen = true;
+      console.warn('[suite-auth] Supabase unreachable — staying offline for this page load.');
+    }
+    throw e;
+  }
+}
+
 export function client() {
   if (!isConfigured()) return null;
   if (!_client) {
     _client = createClient(SUITE_CONFIG.url, SUITE_CONFIG.anonKey, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+      global: { fetch: guardedFetch },
     });
   }
   return _client;
@@ -115,7 +139,7 @@ export async function health() {
 export async function enabledProviders() {
   if (!isConfigured()) return {};
   try {
-    const r = await fetch(SUITE_CONFIG.url + '/auth/v1/settings', { headers: { apikey: SUITE_CONFIG.anonKey } });
+    const r = await guardedFetch(SUITE_CONFIG.url + '/auth/v1/settings', { headers: { apikey: SUITE_CONFIG.anonKey } });
     if (!r.ok) return {};
     return (await r.json()).external || {};
   } catch { return {}; }
