@@ -14,7 +14,16 @@
         "10.5944/rppc.45966",
         "10.1111/jan.70459",
         "10.1111/jan.70459"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t05518-000",
+        "title": "UCLA Loneliness Scale--Version 3",
+        "authors": "Russell, Daniel W.",
+        "year": 1996,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 12,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "International Physical Activity Questionnaire",
@@ -23,7 +32,16 @@
         "10.3389/fendo.2026.1784397",
         "10.3390/app16115472",
         "10.3390/app16115472"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1186/1479-5868-4-62",
+        "title": "International Physical Activity Questionnaire (IPAQ) and New Zealand Physical Activity Questionnaire (NZPAQ): A doubly labelled water validation",
+        "authors": "Maddison, Ralph; Ni Mhurchu, Cliona; Jiang, Yannan; Vander Hoorn, Stephen",
+        "year": 2007,
+        "journal": "International Journal of Behavioral Nutrition and Physical Activity",
+        "citedBy": 186,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "System Usability Scale",
@@ -32,7 +50,16 @@
         "10.2337/db26-1467-p",
         "10.3389/fcomp.2025.1726078",
         "10.3390/ijerph23060751"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.3998/weave.12535642.0001.602",
+        "title": "An Overview of the System Usability Scale in Library Website and System Usability Testing",
+        "authors": "Klug, Brandy",
+        "year": 2017,
+        "journal": "Weave: Journal of Library User Experience",
+        "citedBy": 71,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Childhood Trauma Questionnaire",
@@ -41,7 +68,16 @@
         "10.5964/ejop.18653",
         "10.54691/01q83f81",
         "10.1093/jsxmed/qdag118.244"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t02080-000",
+        "title": "Childhood Trauma Questionnaire",
+        "authors": "Bernstein, David P.; Fink, Laura; Handelsman, Leonard; Foote, Jeffrey",
+        "year": 1994,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 196,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Multifactor Leadership Questionnaire",
@@ -50,7 +86,16 @@
         "10.17632/zz68fdxc38.1",
         "10.17632/zz68fdxc38",
         "10.55041/ijcope.v2i5.480"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t03624-000",
+        "title": "Multifactor Leadership Questionnaire",
+        "authors": "Bass, Bernard M.; Avolio, Bruce J.",
+        "year": 1995,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 379,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Visual Analog Scale",
@@ -59,7 +104,8 @@
         "10.2337/db26-1035-or",
         "10.7759/cureus.106142",
         "10.25259/nmji_1147_2023"
-      ]
+      ],
+      "suggested": null
     },
     {
       "phrase": "Hamilton Depression Rating Scale",
@@ -68,7 +114,16 @@
         "10.1017/cts.2026.10394",
         "10.32689/2663-0672-2026-1-2",
         "10.37506/ptzrp480"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1007/978-3-642-70486-4_14",
+        "title": "The Hamilton Rating Scale for Depression",
+        "authors": "Hamilton, M.",
+        "year": 1986,
+        "journal": "Assessment of Depression",
+        "citedBy": 253,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Newcastle-Ottawa Scale",
@@ -77,7 +132,8 @@
         "10.3389/fpubh.2026.1817065",
         "10.70610/jcpa.1361",
         "10.3390/ijerph23060717"
-      ]
+      ],
+      "suggested": null
     },
     {
       "phrase": "Visual Analogue Scale",
@@ -86,7 +142,8 @@
         "10.3389/fmed.2026.1724038",
         "10.3389/fresc.2026.1780374",
         "10.3390/ijerph23060751"
-      ]
+      ],
+      "suggested": null
     },
     {
       "phrase": "Anxiety and Stress Scale",
@@ -95,7 +152,16 @@
         "10.7759/cureus.110395",
         "10.1136/bmjopen-2025-109056",
         "10.25258/ijddt.16.46s.70"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.3389/fpsyg.2022.799769",
+        "title": "The Depression Anxiety Stress Scale 8-Items Expresses Robust Psychometric Properties as an Ideal Shorter Version of the Depression Anxiety Stress Scale 21 Among Healthy Respondents From Three Continents",
+        "authors": "Ali, Amira Mohammed; Hori, Hiroaki; Kim, Yoshiharu; Kunugi, Hiroshi",
+        "year": 2022,
+        "journal": "Frontiers in Psychology",
+        "citedBy": 113,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Positive and Negative Syndrome Scale",
@@ -104,7 +170,16 @@
         "10.1093/schbul/sbag003.189",
         "10.1016/j.jaac.2026.05.006",
         "10.1186/s43045-026-00639-w"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1016/s0920-9964(03)00087-2",
+        "title": "An excitement subscale of the Positive and Negative Syndrome Scale",
+        "authors": "Lindenmayer, J",
+        "year": 2004,
+        "journal": "Schizophrenia Research",
+        "citedBy": 92,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Copenhagen Psychosocial Questionnaire",
@@ -113,7 +188,16 @@
         "10.1186/s12912-026-04693-x",
         "10.4103/jets.jets_138_25",
         "10.1108/ijem-06-2025-0462"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t46049-000",
+        "title": "Copenhagen Psychosocial Questionnaire",
+        "authors": "Kristensen, Tage S.; Hannerz, Harald; Høgh, Annie; Borg, Vilhelm",
+        "year": 2005,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 5,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Beck Anxiety Inventory",
@@ -122,7 +206,16 @@
         "10.3389/fpsyt.2025.1634323",
         "10.32350/ccpr.61.05",
         "10.1177/09727531261424949"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t02025-000",
+        "title": "Beck Anxiety Inventory",
+        "authors": "Beck, Aaron T.; Epstein, Norman; Brown, Gary; Steer, Robert",
+        "year": 1988,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 131,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Strengths and Difficulties Questionnaire",
@@ -131,7 +224,16 @@
         "10.52380/ijpes.2026.13.1.1321",
         "10.1002/cpp.70261",
         "10.1007/s10826-026-03287-0"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t00540-000",
+        "title": "Strengths and Difficulties Questionnaire",
+        "authors": "Goodman, Robert",
+        "year": 1997,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 51,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Perceived Social Support Scale",
@@ -140,7 +242,16 @@
         "10.3389/fpubh.2025.1708061",
         "10.1186/s43045-026-00623-4",
         "10.31577/sp.2025.03.921"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t06536-000",
+        "title": "Multidimensional Scale of Perceived Social Support--Revised--Turkish Version",
+        "authors": "Eker, D.; Arkar, H.; Yaldiz, H.",
+        "year": 2000,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 35,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Hamilton Anxiety Rating Scale",
@@ -149,7 +260,16 @@
         "10.19109/psikis.v10i1.22135",
         "10.1177/13591053261450562",
         "10.1186/s12888-026-08225-4"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t02824-000",
+        "title": "Hamilton Anxiety Rating Scale",
+        "authors": "Hamilton, Max",
+        "year": 1959,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 25,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Social Anxiety Scale",
@@ -158,7 +278,16 @@
         "10.1186/s13063-026-09780-7",
         "10.1080/00223980.2026.2616286",
         "10.1080/19012276.2024.2448159"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t07671-000",
+        "title": "Liebowitz Social Anxiety Scale",
+        "authors": "Liebowitz, Michael R.",
+        "year": 1987,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 39,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Geriatric Depression Scale",
@@ -167,7 +296,16 @@
         "10.1111/sjop.70115",
         "10.1080/13607863.2026.2672679",
         "10.1080/13607863.2026.2664687"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1097/01.jgp.0000192488.66049.4b",
+        "title": "Test Characteristics of the 15-Item Geriatric Depression Scale and Hamilton Depression Rating Scale in Parkinson Disease",
+        "authors": "Weintraub, Daniel; Oehlberg, Katherine A.; Katz, Ira R.; Stern, Matthew B.",
+        "year": 2006,
+        "journal": "The American Journal of Geriatric Psychiatry",
+        "citedBy": 233,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Negative Acts Questionnaire",
@@ -176,7 +314,16 @@
         "10.3390/culture2020013",
         "10.1108/ijoa-10-2025-6105",
         "10.1136/bmjopen-2025-109056"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1177/2158244017715674",
+        "title": "Investigating Workplace Bullying in India: Psychometric Properties, Validity, and Cutoff Scores of Negative Acts Questionnaire–Revised",
+        "authors": "Gupta, Richa; Bakhshi, Arti; Einarsen, Ståle",
+        "year": 2017,
+        "journal": "Sage Open",
+        "citedBy": 47,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Practice Environment Scale",
@@ -185,7 +332,16 @@
         "10.1097/nmg.0000000000000362",
         "10.1186/s12912-024-02663-9",
         "10.1155/jonm/3078316"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1097/nna.0b013e3182714506",
+        "title": "The Nursing Practice Environment in Rural Hospitals",
+        "authors": "Havens, Donna Sullivan; Warshawsky, Nora; Vasey, Joseph",
+        "year": 2012,
+        "journal": "JONA: The Journal of Nursing Administration",
+        "citedBy": 15,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Edinburgh Postnatal Depression Scale",
@@ -194,7 +350,16 @@
         "10.55606/innovation.v4i2.9203",
         "10.1007/s12529-026-10436-8",
         "10.1177/13591053261452198"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t01756-000",
+        "title": "Edinburgh Postnatal Depression Scale",
+        "authors": "Cox, J. L.; Holden, J. M.; Sagovsky, R.",
+        "year": 1987,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 30,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Physical Activity Rating Scale",
@@ -203,7 +368,16 @@
         "10.3389/fpsyg.2026.1834318",
         "10.1080/00223980.2025.2585272",
         "10.32604/jpa.2026.073317"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1371/journal.pone.0241641",
+        "title": "The Quick Physical Activity Rating (QPAR) scale: A brief assessment of physical activity in older adults with and without cognitive impairment",
+        "authors": "Galvin, James E.; Tolea, Magdalena I.; Rosenfeld, Amie; Chrisphonte, Stephanie",
+        "year": 2020,
+        "journal": "PLOS ONE",
+        "citedBy": 29,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Barratt Impulsiveness Scale",
@@ -212,7 +386,16 @@
         "10.1002/cpp.70277",
         "10.1002/cpp.70250",
         "10.17759/cpse.2026150107"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t05661-000",
+        "title": "Barratt Impulsiveness Scale-11",
+        "authors": "Patton, Jim H.; Stanford, Matthew S.; Barratt, Ernest S.",
+        "year": 1995,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 25,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Numerical Rating Scale",
@@ -221,7 +404,16 @@
         "10.18231/j.ijca.15174.1772786233",
         "10.18231/j.ijca.15017.1773310077",
         "10.31080/asms.2025.09.2168"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1111/jocn.14705",
+        "title": "Patients’ self‐reported nausea: Validation of the Numerical Rating Scale and of a daily summary of repeated Numerical Rating Scale scores",
+        "authors": "Wikström, Lotta; Nilsson, Mats; Broström, Anders; Eriksson, Kerstin",
+        "year": 2018,
+        "journal": "Journal of Clinical Nursing",
+        "citedBy": 37,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Amsterdam Preoperative Anxiety and Information Scale",
@@ -230,7 +422,16 @@
         "10.1177/13591053261439923",
         "10.1177/13591053261439923",
         "10.1177/17504589261441562"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t84734-000",
+        "title": "Amsterdam Preoperative Anxiety and Information Scale--German Version",
+        "authors": "Berth, Hendrik; Petrowski, Katja; Balck, Friedrich",
+        "year": 2007,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 19,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Mental Health Literacy Scale",
@@ -239,7 +440,16 @@
         "10.3389/fpubh.2025.1708061",
         "10.1080/09581596.2026.2682000",
         "10.1186/s40359-026-04920-9"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1016/j.psychres.2015.05.064",
+        "title": "The Mental Health Literacy Scale (MHLS): A new scale-based measure of mental health literacy",
+        "authors": "O’Connor, Matt; Casey, Leanne",
+        "year": 2015,
+        "journal": "Psychiatry Research",
+        "citedBy": 485,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Impact of Event Scale",
@@ -248,7 +458,16 @@
         "10.1002/cpp.70235",
         "10.3390/healthcare14121599",
         "10.17759/cpse.2025140404"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t12199-000",
+        "title": "Impact of Event Scale--Revised",
+        "authors": "Weiss, Daniel S.; Marmar, Charles R.",
+        "year": 1997,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 269,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Individual Work Performance Questionnaire",
@@ -257,7 +476,16 @@
         "10.1038/s41598-026-53266-0",
         "10.18502/jhsw.v15i1.21361",
         "10.4102/sajip.v52i0.2419"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.3233/wor-152237",
+        "title": "Cross-cultural adaptation of the Individual Work Performance Questionnaire",
+        "authors": "Koopmans, Linda; Bernaards, Claire M.; Hildebrandt, Vincent H.; Lerner, Debra",
+        "year": 2016,
+        "journal": "Work",
+        "citedBy": 63,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "General Information Questionnaire",
@@ -266,7 +494,16 @@
         "10.1111/phn.70133",
         "10.1108/ijwhm-04-2024-0088",
         "10.1097/md.0000000000049177"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1186/1471-2296-5-27",
+        "title": "Dissemination of information to General Practitioners: a questionnaire survey",
+        "authors": "Moorjani, Padma; Fortnum, Heather",
+        "year": 2004,
+        "journal": "BMC Family Practice",
+        "citedBy": 13,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Behavior Rating Inventory",
@@ -275,7 +512,16 @@
         "10.3389/feduc.2026.1805091",
         "10.17615/bkfb-p812",
         "10.2337/db26-2804-lb"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t86244-000",
+        "title": "Behavior Rating Inventory of Executive Function®--Adult Version",
+        "authors": "Roth, Robert M.; Isquith, Peter K.; Gioia, G. A.",
+        "year": 2005,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 246,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Narcissistic Personality Inventory",
@@ -284,7 +530,16 @@
         "10.3389/fpsyt.2026.1621098",
         "10.65138/ijtrp.2026.v2i5.49",
         "10.1177/08862605261448831"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t00001-000",
+        "title": "Narcissistic Personality Inventory",
+        "authors": "Raskin, Robert N.; Hall, Calvin S.",
+        "year": 1979,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 14,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Trait Anxiety Inventory",
@@ -293,7 +548,16 @@
         "10.1093/sleep/zsag091.0187",
         "10.1002/cdq.70013",
         "10.17759/cpse.2025140409"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t06496-000",
+        "title": "State-Trait Anxiety Inventory for Adults",
+        "authors": "Spielberger, Charles D.",
+        "year": 1983,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 2347,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Social Support Rating Scale",
@@ -302,7 +566,16 @@
         "10.32604/jpa.2026.079806",
         "10.1002/nop2.70590",
         "10.1177/00302228261430464"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t59285-000",
+        "title": "Social Support Rating Scale",
+        "authors": "Cauce, Ana M.; Felner, Robert D.; Primavera, Judith",
+        "year": 1982,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 12,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Glasgow Coma Scale",
@@ -311,7 +584,8 @@
         "10.2147/jhl.s614449",
         "10.59365/hsj.4(1).2025.184",
         "10.1016/j.neuroimage.2026.122034"
-      ]
+      ],
+      "suggested": null
     },
     {
       "phrase": "Eating Disorder Examination Questionnaire",
@@ -320,7 +594,16 @@
         "10.1007/s10508-026-03448-8",
         "10.1186/s40337-026-01660-4",
         "10.1186/s40337-026-01657-z"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t03974-000",
+        "title": "Eating Disorder Examination Questionnaire",
+        "authors": "Fairburn, Christopher G.; Beglin, Sarah J.",
+        "year": 1994,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 65,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "National Institutes of Health Stroke Scale",
@@ -329,7 +612,16 @@
         "10.1177/09727531261430099",
         "10.1093/esj/aakag023.788",
         "10.1161/jaha.125.048184"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1161/strokeaha.116.015434",
+        "title": "Using the National Institutes of Health Stroke Scale",
+        "authors": "Lyden, Patrick",
+        "year": 2017,
+        "journal": "Stroke",
+        "citedBy": 413,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Expanded Disability Status Scale",
@@ -338,7 +630,16 @@
         "10.1155/bn/2744955",
         "10.1155/bn/2744955",
         "10.1155/bn/6426255"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t28980-000",
+        "title": "Expanded Disability Status Scale",
+        "authors": "Kurtzke, John F.",
+        "year": 1983,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 10,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Child and Adolescent Social Support Scale",
@@ -347,7 +648,16 @@
         "10.14421/jpsi.v13i1.3090",
         "10.14421/jpsi.v13i1.3090",
         "10.14421/1s5wzm15"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t57891-000",
+        "title": "Child and Adolescent Social Support Scale",
+        "authors": "Malecki, C. K.; Demaray, M. K.; Elliott, S. N.; Nolten, P. W.",
+        "year": 1999,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 50,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "De Jong Gierveld Loneliness Scale",
@@ -356,7 +666,16 @@
         "10.1111/jan.70459",
         "10.1111/jan.70459",
         "10.1186/s40359-026-04892-w"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1017/s1041610208007552",
+        "title": "Validation of the Chinese translation of the 6-item De Jong Gierveld Loneliness Scale in elderly Chinese",
+        "authors": "Leung, Grace Tak Yu; de Jong Gierveld, Jenny; Lam, Linda Chiu Wa",
+        "year": 2008,
+        "journal": "International Psychogeriatrics",
+        "citedBy": 149,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Copenhagen Burnout Inventory",
@@ -365,7 +684,16 @@
         "10.33546/bnj.4404",
         "10.3389/fpsyt.2025.1634323",
         "10.32604/jpa.2025.069675"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t62096-000",
+        "title": "Copenhagen Burnout Inventory",
+        "authors": "Kristensen, Tage S.; Borritz, Marianne; Villadsen, Ebbe; Christensen, Karl B.",
+        "year": 2005,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 25,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Trait Emotional Intelligence Questionnaire",
@@ -374,7 +702,16 @@
         "10.12669/pjms.42.6.14634",
         "10.1080/00049530.2026.2678849",
         "10.1177/09727531261440667"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1007/978-0-387-88370-0_5",
+        "title": "Psychometric Properties of the Trait Emotional Intelligence Questionnaire (TEIQue)",
+        "authors": "Petrides, K. V.",
+        "year": 2009,
+        "journal": "The Springer Series on Human Exceptionality",
+        "citedBy": 519,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Nordic Musculoskeletal Questionnaire",
@@ -383,7 +720,16 @@
         "10.1186/s10194-026-02411-1",
         "10.3390/ijerph23060729",
         "10.1177/10519815261453346"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1093/occmed/kqm036",
+        "title": "The Nordic Musculoskeletal Questionnaire",
+        "authors": "Crawford, J. O.",
+        "year": 2007,
+        "journal": "Occupational Medicine",
+        "citedBy": 309,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Qualities of Hearing Scale",
@@ -392,7 +738,16 @@
         "10.1097/01.hj.0001193532.58624.dd",
         "10.1097/01.hj.0001193532.58624.dd",
         "10.1097/01.hj.0001193532.58624.dd"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1080/14992020400050015",
+        "title": "Interaural asymmetry of hearing loss, Speech, Spatial and Qualities of Hearing Scale (SSQ) disabilities, and handicap",
+        "authors": "Noble, William; Gatehouse, Stuart",
+        "year": 2004,
+        "journal": "International Journal of Audiology",
+        "citedBy": 150,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Intrinsic Motivation Inventory",
@@ -401,7 +756,16 @@
         "10.25258/ijddt.16.36s.24",
         "10.21500/20112084.7361",
         "10.21500/20112084.7361"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.2466/pms.97.5.271-280",
+        "title": "TEMPORAL STABILITY OF THE INTRINSIC MOTIVATION INVENTORY",
+        "authors": "TSIGILIS, NIKOLAOS",
+        "year": 2003,
+        "journal": "Perceptual and Motor Skills",
+        "citedBy": 11,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Self-Rating Depression Scale",
@@ -410,7 +774,16 @@
         "10.3389/fpsyg.2026.1834318",
         "10.2147/prbm.s550385",
         "10.2147/prbm.s569508"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t04095-000",
+        "title": "Self-Rating Depression Scale",
+        "authors": "Zung, William W. K.",
+        "year": 1965,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 14,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Davidson Resilience Scale",
@@ -419,7 +792,16 @@
         "10.3390/ijerph23060729",
         "10.1186/s43045-026-00650-1",
         "10.1177/09697330261437291"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1002/da.10113",
+        "title": "Development of a new resilience scale: The Connor-Davidson Resilience Scale (CD-RISC)",
+        "authors": "Connor, Kathryn M.; Davidson, Jonathan R.T.",
+        "year": 2003,
+        "journal": "Depression and Anxiety",
+        "citedBy": 8841,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Social Support Scale",
@@ -428,7 +810,16 @@
         "10.22251/jlcci.2025.25.14.533",
         "10.19109/psikis.v10i2.24537",
         "10.11113/sh.v17n3.2152"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t12441-000",
+        "title": "Social Support Scale",
+        "authors": "Matud, M. P.",
+        "year": 1998,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 17,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Posttraumatic Growth Inventory",
@@ -437,7 +828,16 @@
         "10.17759/cpse.2025140407",
         "10.1177/00302228261430464",
         "10.1080/00223891.2025.2609697"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t03776-000",
+        "title": "Posttraumatic Growth Inventory",
+        "authors": "Tedeschi, Richard G.; Calhoun, Lawrence G.",
+        "year": 1996,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 14,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Young Mania Rating Scale",
@@ -446,7 +846,16 @@
         "10.1186/s43045-026-00617-2",
         "10.1186/s43045-026-00613-6",
         "10.1177/00207640261446100"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t20936-000",
+        "title": "Young Mania Rating Scale",
+        "authors": "Young, R. C.; Biggs, J. T.; Ziegler, V. E.; Meyer, D. A.",
+        "year": 1978,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 9,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Parental Stress Scale",
@@ -455,7 +864,16 @@
         "10.1177/13591053261442612",
         "10.1111/fare.70174",
         "10.1111/fare.70174"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t08257-000",
+        "title": "Chinese Parental Stress Scale",
+        "authors": "Cheung, Siu-Kau",
+        "year": 2000,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 12,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     },
     {
       "phrase": "Cognitive Emotion Regulation Questionnaire",
@@ -464,7 +882,16 @@
         "10.17575/psicologia.1906",
         "10.2147/prbm.s538134",
         "10.31820/pt.33.3.6"
-      ]
+      ],
+      "suggested": {
+        "doi": "10.1037/t03801-000",
+        "title": "Cognitive Emotion Regulation Questionnaire",
+        "authors": "Garnefski, N.; Kraaij, V.; Spinhoven, P.",
+        "year": 2001,
+        "journal": "PsycTESTS Dataset",
+        "citedBy": 93,
+        "note": "Crossref top match — SUGGESTED ONLY, hand-verify before any catalog entry"
+      }
     }
   ]
 }
