@@ -72,7 +72,7 @@ export const REGISTRY = [
   {
     name: 'tracewise',
     repoPath: 'tracewise/src/components/SyedBar.tsx',
-    format: 'react-tsx', themeMode: 'storage-media', toggle: 'inline', mobileCollapse: false,
+    format: 'react-tsx', themeMode: 'storage-media', toggle: 'inline', mobileCollapse: true,
     nav: 'generic-only',
     theme: { ...TXT, ...TXT_TOGGLE },
     generic: ['journaltime', 'cadence', 'scalescope', 'allProjects'],
@@ -80,7 +80,7 @@ export const REGISTRY = [
   {
     name: 'task-manager',
     repoPath: 'task-manager/client/src/components/SyedBar.jsx',
-    format: 'react-jsx', themeMode: 'attr', toggle: 'class', mobileCollapse: false,
+    format: 'react-jsx', themeMode: 'attr', toggle: 'class', mobileCollapse: true,
     nav: 'generic-only',
     theme: BAR,
     generic: ['journaltime', 'cadence', 'scalescope', 'allProjects'],
@@ -88,7 +88,7 @@ export const REGISTRY = [
   {
     name: 'karmamap',
     repoPath: 'karmamap/client/src/components/SyedBar.jsx',
-    format: 'react-jsx', themeMode: 'none', toggle: 'none', mobileCollapse: false,
+    format: 'react-jsx', themeMode: 'none', toggle: 'none', mobileCollapse: true,
     nav: 'generic-only',
     // Static, light-only variant — hardcoded literals, no CSS vars, no toggle.
     theme: { barBg: 'rgba(255,255,255,.82)', border: 'rgba(14,14,24,.08)', name: '#0E0E18', muted: '#6F6F7E', divider: 'rgba(14,14,24,.10)' },
