@@ -187,8 +187,9 @@ html, body { overflow-x: clip; }
   transition: border-color .35s ease-out, box-shadow .55s cubic-bezier(.22, 1, .36, 1);
 }
 
-/* ── Gradient words breathe (slow horizontal shimmer) ────────────── */
+/* ── Gradient words breathe (slow horizontal shimmer) + Fraunces wonk cut ── */
 .hero h1 em, .close h2 em, .section h2 em {
+  font-variation-settings: 'SOFT' 100, 'WONK' 1;
   background-size: 220% 220%; background-position: 0% 50%;
   animation: gradShimmer 16s ease-in-out infinite;
 }
