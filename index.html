@@ -484,9 +484,9 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
 }
 .hero-foot span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--grad); }
 
-/* Load-in animation */
-.rise { opacity: 0; transform: translateY(22px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
-@keyframes rise { to { opacity: 1; transform: none; } }
+/* Load-in animation — ink settling on paper: rises while the blur lifts */
+.rise { opacity: 0; transform: translateY(22px); filter: blur(7px); animation: rise .95s cubic-bezier(.2,.7,.2,1) forwards; }
+@keyframes rise { to { opacity: 1; transform: none; filter: blur(0); } }
 .d1{animation-delay:.05s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.52s}
 
 /* ── Section frames — numbered chapters with ghost folios ──── */
@@ -761,7 +761,8 @@ footer::before { /* the thread, tied off — gradient selvage band */
   .station-verb { margin-left: 0; flex-basis: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .rise, .station { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+  .rise, .station { animation: none !important; opacity: 1 !important; transform: none !important; transition: none !important; filter: none !important; }
+  .eyebrow b, .resume-pill .rp-dot, .circle-arrow, .section-head[data-ch]::before { animation: none !important; }
   html { scroll-behavior: auto; }
 }
 
@@ -912,6 +913,57 @@ footer::before { /* the thread, tied off — gradient selvage band */
   .thread-comet { display: none !important; }
   .station-auto, .story-done { animation: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   LIVING-MOTION LAYER — the page breathes and the story scrolls.
+   Infinite motion stays on the thread + tiny dots; content moves once.
+   ════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+  /* the brand's little dots are alive */
+  .eyebrow b { animation: dot-pulse 3.2s ease-in-out infinite; }
+  .resume-pill .rp-dot { animation: dot-pulse 2.6s ease-in-out .6s infinite; }
+
+  /* stations ignite as the scroll-sewn fill (and its comet) passes them */
+  .station.lit .node {
+    box-shadow: 0 0 0 5px var(--paper),
+                0 0 0 8px color-mix(in srgb, var(--accent, var(--magenta)) 22%, transparent),
+                0 4px 18px -2px color-mix(in srgb, var(--accent, var(--magenta)) 75%, transparent);
+  }
+  .station.lit .node::after { transform: scale(1.25); }
+  .station.lit .phase-tag { text-shadow: 0 0 14px color-mix(in srgb, var(--accent, var(--magenta)) 55%, transparent); }
+
+  /* card grids cascade in as their section reveals */
+  .section-reveal.in .tools-grid .tool,
+  .section-reveal.in .proof-grid .proof-card,
+  .section-reveal.in .aud-grid .aud,
+  .section-reveal.in .trust .trust-item { animation: anim-fade-up .6s cubic-bezier(.22,1,.36,1) both; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(1) { animation-delay: .08s; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(2) { animation-delay: .16s; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(3) { animation-delay: .24s; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(4) { animation-delay: .32s; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(5) { animation-delay: .4s; }
+  .section-reveal.in :is(.tools-grid,.proof-grid,.aud-grid,.trust) > :nth-child(n+6) { animation-delay: .48s; }
+
+  /* the closing circle-arrow spins itself into place */
+  .section-reveal.in .circle-arrow { animation: arrow-pop .75s cubic-bezier(.18,1.4,.25,1) .15s both; }
+}
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(241,69,117,.35); }
+  50%      { transform: scale(1.3); box-shadow: 0 0 0 5px rgba(241,69,117,0); }
+}
+@keyframes arrow-pop { from { transform: scale(.35) rotate(-100deg); opacity: 0; } }
+
+/* ghost chapter folios drift slowly with the scroll (progressive enhancement) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-head[data-ch]::before {
+      animation: folio-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes folio-drift { from { transform: translateY(44px); } to { transform: translateY(-44px); } }
 </style>
 </head>
 <body>
@@ -1766,6 +1818,7 @@ const comet = document.createElement('div');
 comet.className = 'thread-comet';
 threadEl.appendChild(comet);
 let ticking = false;
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function updateFill() {
   ticking = false;
   if (window.__threadPlaying) return;  // playback owns the fill line while running
@@ -1774,6 +1827,14 @@ function updateFill() {
   const total = r.height + vh * 0.4;
   const progressed = Math.min(total, Math.max(0, vh * 0.7 - r.top));
   fill.style.setProperty('--fill', Math.max(0, Math.min(100, (progressed / r.height) * 100)) + '%');
+  // The idea travels as you scroll: the comet rides the tip of the sewn seam
+  // and each station ignites as it passes (playback re-uses the same comet).
+  const px = Math.max(0, Math.min(r.height, progressed));
+  if (!reduceMotion) {
+    comet.style.top = px + 'px';
+    comet.style.opacity = (px > 10 && px < r.height - 4) ? '.95' : '0';
+  }
+  threadEl.querySelectorAll('.station').forEach(st => st.classList.toggle('lit', st.offsetTop + 15 <= px));
 }
 window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateFill); ticking = true; } }, { passive: true });
 window.addEventListener('resize', updateFill);
@@ -1990,10 +2051,28 @@ themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-them
       if (p < 1) requestAnimationFrame(frame); else el.textContent = to.toLocaleString();
     });
   }
+  // Hold the count-up until the stats band is actually on screen — the
+  // numbers rolling 449→462 is the show; don't spend it before the scroll.
+  let liveSeen = false; const pendingCounts = [];
+  (function(){
+    const ls = document.getElementById('livestat');
+    if (!ls || !('IntersectionObserver' in window) || reduce) { liveSeen = true; return; }
+    const lio = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting)) {
+        liveSeen = true;
+        pendingCounts.splice(0).forEach(f => f());
+        lio.disconnect();
+      }
+    }, { threshold: 0.35 });
+    lio.observe(ls);
+  })();
   function setCount(key, n){
-    document.querySelectorAll('[data-live="' + key + '"]').forEach(el => countUp(el, n));
-    const host = document.querySelector('[data-live-host="' + key + '"]');
-    if (host) host.classList.add('is-live');
+    const run = () => {
+      document.querySelectorAll('[data-live="' + key + '"]').forEach(el => countUp(el, n));
+      const host = document.querySelector('[data-live-host="' + key + '"]');
+      if (host) host.classList.add('is-live');
+    };
+    if (liveSeen) run(); else pendingCounts.push(run);
   }
   [
     ['theories', 'https://theoryscope.vercel.app/data/theories.json', d => d.count || (d.theories && d.theories.length)],
