@@ -966,6 +966,14 @@ footer::before { /* the thread, tied off — gradient selvage band */
 }
 @keyframes folio-drift { from { transform: translateY(44px); } to { transform: translateY(-44px); } }
 </style>
+<!-- SYED-PWA -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Throughline">
+<!-- /SYED-PWA -->
 </head>
 <body>
 
@@ -2158,5 +2166,8 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <!-- (magnetic cursor-pull effect removed for a professional, calm feel) -->
+<!-- SYED-PWA-SW -->
+<script>if('serviceWorker' in navigator){addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}</script>
+<!-- /SYED-PWA-SW -->
 </body>
 </html>
