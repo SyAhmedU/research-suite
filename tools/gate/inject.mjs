@@ -6,7 +6,10 @@
 // Excluded by design: letters (#27, own password), cadence (participant-facing),
 // faceprep-campus (#25, real JWT auth), paper-dissection + wordmap (retired redirects),
 // throughline-studio (#23, SHIPPED PUBLIC — the capstone is the suite's front door,
-//   intentionally ungated; do not re-add it here).
+//   intentionally ungated; do not re-add it here),
+// + the 4 read-only reference libraries Studio deep-links into — syeds-research-book,
+//   bookscope, theoryscope, scalebase — also SHIPPED PUBLIC so the front-door's
+//   "open in …" links work for everyone. Read-only data, no secrets; do not re-add.
 //
 // Run from anywhere:  node research-suite/tools/gate/inject.mjs [--dry]
 import fs from "node:fs";
@@ -43,7 +46,6 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
 const TARGETS = [
   // ── static single-file apps (index.html IS the deployed file) ──
   "bachelor-meal-plan/index.html",
-  "bookscope/index.html",
   "career-compass/index.html",
   "fallacyscope/index.html",
   "journal-timelines/index.html",
@@ -54,19 +56,18 @@ const TARGETS = [
   "research-suite/index.html",
   "rethink-with-ai/index.html",
   "scholarscope/index.html",
-  "syeds-research-book/index.html",
   "throughline-cs/index.html",
+  // syeds-research-book + bookscope intentionally ungated — shipped public (reference libraries)
   // ── Vite root shells (gate survives the build as an inline script) ──
   "researchflow/index.html",
-  "theoryscope/index.html",
   "toolsscope/index.html",
   "paperpulse/index.html",
   "tracewise/index.html",
-  // throughline-studio intentionally ungated — shipped public as the suite's front door
+  // throughline-studio + theoryscope intentionally ungated — shipped public (front door + library)
   // ── Vite apps with a client/ subdir ──
   "task-manager/client/index.html",
-  "scalebase/client/index.html",
   "karmamap/client/index.html",
+  // scalebase/client intentionally ungated — shipped public (reference library)
   // ── other static ──
   "ideabox/public/index.html",
   // NOTE: timetable-generator (Next.js) is gated separately in app/layout.tsx.
