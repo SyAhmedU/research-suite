@@ -4,7 +4,9 @@
 //
 // NOTE: this is obscurity, not real security — the password lives in the page source.
 // Excluded by design: letters (#27, own password), cadence (participant-facing),
-// faceprep-campus (#25, real JWT auth), paper-dissection + wordmap (retired redirects).
+// faceprep-campus (#25, real JWT auth), paper-dissection + wordmap (retired redirects),
+// throughline-studio (#23, SHIPPED PUBLIC — the capstone is the suite's front door,
+//   intentionally ungated; do not re-add it here).
 //
 // Run from anywhere:  node research-suite/tools/gate/inject.mjs [--dry]
 import fs from "node:fs";
@@ -60,7 +62,7 @@ const TARGETS = [
   "toolsscope/index.html",
   "paperpulse/index.html",
   "tracewise/index.html",
-  "throughline-studio/index.html",
+  // throughline-studio intentionally ungated — shipped public as the suite's front door
   // ── Vite apps with a client/ subdir ──
   "task-manager/client/index.html",
   "scalebase/client/index.html",
