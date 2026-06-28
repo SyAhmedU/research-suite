@@ -36,7 +36,9 @@ const PROJECTS = [
 
   // --- Vercel root-domain, single-file static ---
   { slug: 'bookscope',           html: 'bookscope/index.html',           base: '/', theme: '#0d0a15', name: 'BookScope',                     short: 'BookScope',    desc: 'Full-text search over 288 reference books (141,077 pages).' },
+  { slug: 'callback',            html: 'callback/index.html',            base: '/', theme: '#FBF7EF', name: 'Callback — Resume Grader',      short: 'Callback',     desc: 'A transparent, rule-based resume & LinkedIn grader with No-fab AI rewrites.' },
   { slug: 'career-compass',      html: 'career-compass/index.html',      base: '/', theme: '#FBF7EF', name: 'Career Compass',                short: 'Career Compass', desc: 'Class-10 career counselling — RIASEC, Big Five, aptitude & values in one report.' },
+  { slug: 'greenroom',           html: 'greenroom/index.html',           base: '/', theme: '#FBF7EF', name: 'Greenroom — Interview Coach',    short: 'Greenroom',    desc: 'Mock-interview practice — speak or type an answer, get rule-based feedback + AI coaching.' },
 
   // --- Vercel root-domain, Vite/React (assets live in public/) ---
   { slug: 'researchflow',        html: 'researchflow/index.html',        base: '/', pub: 'researchflow/public',        theme: '#FBF7EF', name: 'ResearchFlow',          short: 'ResearchFlow', desc: 'A 10-stage research wizard with stage-by-stage pitfalls.' },

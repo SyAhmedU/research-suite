@@ -46,8 +46,10 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
 const TARGETS = [
   // ── static single-file apps (index.html IS the deployed file) ──
   "bachelor-meal-plan/index.html",
+  "callback/index.html",
   "career-compass/index.html",
   "fallacyscope/index.html",
+  "greenroom/index.html",
   "journal-timelines/index.html",
   "journaltime/index.html",
   "mirrorscope/index.html",
