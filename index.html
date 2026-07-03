@@ -60,6 +60,13 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='9' fill='url(%23g)'/><text x='50%25' y='57%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='900' font-size='17' fill='white'>T</text><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23FF9656'/><stop offset='52%25' stop-color='%23F14575'/><stop offset='100%25' stop-color='%239270F4'/></linearGradient></defs></svg>" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- warm up the tool hops — every CTA leads to one of these origins -->
+<link rel="dns-prefetch" href="https://throughline-studio.vercel.app">
+<link rel="dns-prefetch" href="https://researchflow-syahmedus-projects.vercel.app">
+<link rel="dns-prefetch" href="https://papercards.vercel.app">
+<link rel="dns-prefetch" href="https://theoryscope.vercel.app">
+<link rel="dns-prefetch" href="https://scalescope.vercel.app">
+<link rel="dns-prefetch" href="https://toolsscope.vercel.app">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0,0;1,9..144,400..600,0,1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ════════════════════════════════════════════════════════════════
@@ -727,6 +734,11 @@ footer::before { /* the thread, tied off — gradient selvage band */
 .qs-input:focus { border-color: var(--magenta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--magenta) 16%, transparent); }
 .qs-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 12px; }
 .qs-hint { font-family: 'IBM Plex Mono', monospace; font-size: .72rem; color: var(--ink-faint); }
+.qs-examples { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 2px 2px; }
+.qs-ex-label { font-family: 'IBM Plex Mono', monospace; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+.qs-ex { font: inherit; font-size: .8rem; color: var(--ink-soft); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; cursor: pointer; transition: border-color .15s, color .15s; }
+.qs-ex:hover { border-color: var(--magenta); color: var(--magenta); }
+.grid-divider { grid-column: 1 / -1; font-family: 'IBM Plex Mono', monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); padding: 14px 2px 0; border-top: 1px dashed var(--line); margin-top: 8px; }
 .qs-routes { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line-soft); display: grid; gap: 10px; }
 .qs-routes[hidden] { display: none; }
 .qs-route {
@@ -1047,7 +1059,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <a class="btn btn-ghost" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Start with an idea</a>
       <a class="btn btn-ghost" href="#thread">Follow the thread ↓</a>
     </div>
-    <div id="resumeSlot"></div>
+    <div id="resumeSlot" aria-live="polite"></div>
     <div class="hero-foot rise d5">
       <span>No account, runs in your browser</span>
       <span>Methodology baked in</span>
@@ -1083,6 +1095,12 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     </div>
     <div class="qs-card">
       <textarea id="qs-input" class="qs-input" rows="3" placeholder="e.g. how AI is changing the meaning of work for early-career knowledge workers in India"></textarea>
+      <div class="qs-examples" aria-label="Example topics">
+        <span class="qs-ex-label">Try:</span>
+        <button type="button" class="qs-ex">burnout &amp; engagement in nurses</button>
+        <button type="button" class="qs-ex">AI and the meaning of work</button>
+        <button type="button" class="qs-ex">green HRM and pro-environmental behaviour</button>
+      </div>
       <div class="qs-row">
         <span class="qs-hint">⌘/Ctrl+Enter to route · or auto-run the whole thread</span>
         <span class="qs-actions">
@@ -1090,7 +1108,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
           <button class="btn btn-fill" id="qs-go">✨ Route me →</button>
         </span>
       </div>
-      <div class="qs-routes anim-stagger" id="qs-routes" hidden></div>
+      <div class="qs-routes anim-stagger" id="qs-routes" aria-live="polite" hidden></div>
     </div>
   </div>
 </section>
@@ -1155,11 +1173,11 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     <!-- Live counts — fetched from each tool's published JSON snapshot,
          so these numbers are real and update themselves. -->
     <div class="livestat" id="livestat">
-      <div class="livestat-item" data-live-host="theories"><div class="livestat-n" data-live="theories">449</div><div class="livestat-l">theories mapped</div></div>
-      <div class="livestat-item" data-live-host="scales"><div class="livestat-n" data-live="scales">174</div><div class="livestat-l">validated scales</div></div>
-      <div class="livestat-item" data-live-host="terms"><div class="livestat-n" data-live="terms">98</div><div class="livestat-l">trend terms tracked</div></div>
+      <div class="livestat-item" data-live-host="theories"><div class="livestat-n" data-live="theories">632</div><div class="livestat-l">theories mapped</div></div>
+      <div class="livestat-item" data-live-host="scales"><div class="livestat-n" data-live="scales">332</div><div class="livestat-l">validated scales</div></div>
+      <div class="livestat-item" data-live-host="terms"><div class="livestat-n" data-live="terms">425</div><div class="livestat-l">trend terms tracked</div></div>
       <div class="livestat-item" data-live-host="corpus"><div class="livestat-n" data-live="corpus">9388</div><div class="livestat-l">papers in the corpus</div></div>
-      <div class="livestat-item"><div class="livestat-n">2,000+</div><div class="livestat-l">journals indexed</div></div>
+      <div class="livestat-item"><div class="livestat-n">1,959</div><div class="livestat-l">journals indexed</div></div>
     </div>
   </div>
 </section>
@@ -1232,8 +1250,8 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     </div>
     <div class="trust">
       <div class="trust-item"><h4>Real statistics</h4><p>A hand-written stats engine — t-tests through mediation — verified against textbook values, with effect-size benchmarks and APA write-ups.</p></div>
-      <div class="trust-item"><h4>Validated measures</h4><p>All <span data-live="scales">174</span> scales carry their reliability, dimensions, and original citations. No improvising the questionnaire.</p></div>
-      <div class="trust-item"><h4>Theory with receipts</h4><p><span data-live="theories">449</span> theories grounded in key studies and applications, mapped by influence and shared constructs.</p></div>
+      <div class="trust-item"><h4>Validated measures</h4><p>All <span data-live="scales">332</span> scales carry their reliability, dimensions, and original citations. No improvising the questionnaire.</p></div>
+      <div class="trust-item"><h4>Theory with receipts</h4><p><span data-live="theories">632</span> theories grounded in key studies and applications, mapped by influence and shared constructs.</p></div>
       <div class="trust-item"><h4>Private by default</h4><p>Everything runs client-side in your browser. Your data and your participants' responses stay on your machine.</p></div>
     </div>
   </div>
@@ -1247,7 +1265,8 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     <h2>Pick up the <em>thread</em>.</h2>
     <p>Start anywhere in the workflow. The next step will be waiting with your work already in hand.</p>
     <div class="cta-row" style="justify-content:center">
-      <a class="btn btn-fill" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener">Begin a project →</a>
+      <a class="btn btn-fill" href="https://throughline-studio.vercel.app" target="_blank" rel="noopener">Open the workspace — A→Z →</a>
+      <a class="btn btn-ghost" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Begin with a question</a>
       <a class="btn btn-ghost" href="https://syahmedu.github.io/syeds-research-book/?view=termtrends" target="_blank" rel="noopener">Or explore the trends</a>
     </div>
   </div>
@@ -1301,8 +1320,10 @@ import * as Auth from './suite-auth.js';
 
 const $ = (id) => document.getElementById(id);
 const TOOLS = [
-  ['ResearchFlow', 'https://researchflow-syahmedus-projects.vercel.app'],
+  ['Studio', 'https://throughline-studio.vercel.app'],
   ['PaperCards', 'https://papercards.vercel.app'],
+  ['ResearchFlow', 'https://researchflow-syahmedus-projects.vercel.app'],
+  ['TheoryScope', 'https://theoryscope.vercel.app'],
   ['ScaleScope', 'https://scalescope.vercel.app'],
   ['ToolsScope', 'https://toolsscope.vercel.app'],
   ['JournalTime', 'https://syahmedu.github.io/journaltime/'],
@@ -1540,7 +1561,7 @@ if (Auth.isConfigured()) {
     return [
       { tool: 'pc', why: 'Map the citation network around the topic and pull foundational papers as cards.' },
       { tool: 'rf', why: 'Frame the study end-to-end — question, theory, instruments, design, analysis.' },
-      { tool: 'ts', why: 'Ground it in a theoretical lens from the 449-theory library.' },
+      { tool: 'ts', why: 'Ground it in a theoretical lens from the 632-theory library.' },
     ];
   }
 
@@ -1595,6 +1616,7 @@ if (Auth.isConfigured()) {
     const topic = ($('qs-input').value || '').trim();
     const wrap = $('qs-routes');
     if (!topic) { $('qs-input').focus(); return; }
+    rememberTopic(topic);
     const btn = $('qs-go');
     const original = btn.innerHTML;
     btn.disabled = true;
@@ -1611,8 +1633,8 @@ Researcher's topic:
 Available tools (use these short keys EXACTLY):
 - "pc" PaperCards — DOI / topic → seed papers + citation network. Best when they want to read the literature.
 - "rf" ResearchFlow — 10-stage wizard from idea to design. Best when they have a topic but need a sharp question, theory, hypotheses, design, analysis plan.
-- "ts" TheoryScope — 449-theory library, AI matchmaker. Best when they need to ground in theory.
-- "ss" ScaleScope — 174 validated scales. Best when they need measurement instruments.
+- "ts" TheoryScope — 632-theory library, AI matchmaker. Best when they need to ground in theory.
+- "ss" ScaleScope — 332 validated scales. Best when they need measurement instruments.
 - "to" ToolsScope — stats + analysis. Best when they have data.
 - "jt" JournalTime — write + place papers. Best when they have results.
 
@@ -1643,13 +1665,26 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
       if (!routes.length) { renderRoutes(fallbackRoutes(topic), topic); return; }
       renderRoutes(routes, topic);
     } catch (err) {
-      wrap.innerHTML = `<div class="qs-err">${esc(err.message || String(err))}</div>`;
+      // Network hiccup or backend down — the deterministic routes are still
+      // genuinely useful, so never leave the user with a raw error.
+      console.warn('[quickstart] AI routing unavailable, using fallback:', err.message || err);
+      renderRoutes(fallbackRoutes(topic), topic);
     } finally {
       btn.disabled = false; btn.innerHTML = original;
     }
   }
 
   $('qs-go').addEventListener('click', generateRoutes);
+
+  // Example chips: one tap fills the box and routes — nobody freezes at a blank input.
+  document.querySelectorAll('.qs-ex').forEach(b => b.addEventListener('click', () => {
+    $('qs-input').value = b.textContent;
+    generateRoutes();
+  }));
+
+  // Remember what they were exploring, so a return visit picks up the thread.
+  const TOPIC_KEY = 'tl_last_topic';
+  const rememberTopic = t => { try { localStorage.setItem(TOPIC_KEY, t); } catch (e) {} };
 
   // ── Auto-run: scaffold the WHOLE study across the thread ─────────
   // One AI call fills in what each of the 9 steps would produce for the
@@ -1680,6 +1715,7 @@ Pick 2-4 tools, in the order the researcher should engage them. Start where they
   async function autoRun() {
     const topic = ($('qs-input').value || '').trim();
     if (!topic) { $('qs-input').focus(); return; }
+    rememberTopic(topic);
     if (!window.__runThreadStory) { generateRoutes(); return; }  // graceful degrade
     const btn = $('qs-auto');
     const original = btn.innerHTML;
@@ -1739,7 +1775,12 @@ Each "artifact" under ~18 words, concrete, no preamble.`;
   (function maybeAutoStart(){
     try {
       const t = new URLSearchParams(location.search).get('topic');
-      if (!t) return;
+      if (!t) {
+        // no inbound carry — quietly restore what they explored last time
+        const last = localStorage.getItem(TOPIC_KEY);
+        if (last && !$('qs-input').value) $('qs-input').value = last;
+        return;
+      }
       history.replaceState(null, '', location.pathname + (location.hash || ''));
       const input = $('qs-input');
       input.value = t;
@@ -1770,7 +1811,7 @@ const STAGES = [
     desc:'A ten-stage wizard that turns a raw idea into a sharp question, a stated gap, and a defensible design.',
     carry:'your question + gap', url:'https://researchflow-syahmedus-projects.vercel.app' },
   { phase:'Develop',  n:'02', name:'TheoryScope',  verb:'Ground it',       accent:'magenta',
-    desc:'~400 social-science theories, mapped by influence and construct. Pick the lens your study looks through.',
+    desc:'600+ social-science theories, mapped by influence and construct. Pick the lens your study looks through.',
     carry:'a framework', url:'https://theoryscope.vercel.app' },
   { phase:'Develop',  n:'03', name:'ScaleScope',   verb:'Operationalise',  accent:'magenta',
     desc:'Validated measurement scales with reliability, dimensions, and citations — turn abstract constructs into real items.',
@@ -1823,7 +1864,14 @@ const REFERENCE_TOOLS = [
   { name:"Syed's Research Book", url:'https://syahmedu.github.io/syeds-research-book/', verb:'Read the corpus', carry:'9,388 papers across 167 OB/management constructs', accent:'coral' },
   { name:'BookScope', url:'https://bookscope.vercel.app', verb:'Search the shelf', carry:'full-text search across 288 academic reference books (~141K pages)', accent:'coral' },
 ];
-[...STAGES, ...REFERENCE_TOOLS].forEach(s => {
+[...STAGES, ...REFERENCE_TOOLS].forEach((s, i) => {
+  if (i === STAGES.length) {
+    // visually separate the linear workflow from the reference shelf
+    const d = document.createElement('div');
+    d.className = 'grid-divider';
+    d.textContent = 'Reference shelf — the suite’s live-data libraries';
+    grid.appendChild(d);
+  }
   const a = document.createElement('a');
   a.className = 'tool'; a.href = s.url; a.target = '_blank'; a.rel = 'noopener';
   a.dataset.resume = s.name;
@@ -1880,6 +1928,9 @@ const themeBtn = document.getElementById('themeBtn');
 function applyTheme(t) {
   root.setAttribute('data-theme', t);
   themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  // keep the mobile address bar in step with the page background
+  const tc = document.querySelector('meta[name="theme-color"]');
+  if (tc) tc.setAttribute('content', t === 'dark' ? '#161320' : '#FBF7EF');
   try { localStorage.setItem('syed-theme', t); } catch {}
 }
 (function initTheme(){
