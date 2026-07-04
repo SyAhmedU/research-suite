@@ -44,6 +44,9 @@ const PROJECTS = [
   { kind: 'vite', entry: 'paperpulse/src/main.tsx', mod: 'paperpulse/src/dynamic.ts', slug: 'papercards' },
   { kind: 'vite', entry: 'tracewise/src/main.tsx', mod: 'tracewise/src/dynamic.ts', slug: 'tracewise' },
   { kind: 'vite', entry: 'task-manager/client/src/main.jsx', mod: 'task-manager/client/src/dynamic.js', slug: 'taskflow' },
+  { kind: 'vite', entry: 'throughline-studio/src/main.tsx', mod: 'throughline-studio/src/dynamic.ts', slug: 'throughline-studio' },
+  { kind: 'vite', entry: 'faceprep-campus/client/src/main.jsx', mod: 'faceprep-campus/client/src/dynamic.js', slug: 'faceprep-campus' },
+  { kind: 'vite', entry: 'campusdesk/client/src/main.jsx', mod: 'campusdesk/client/src/dynamic.js', slug: 'campusdesk' },
 ];
 
 function snippetJs() {
@@ -74,7 +77,7 @@ function snippetJs() {
     var list = [];
     for (var i = 0; i < cand.length && list.length < 40; i++) {
       var el = cand[i];
-      if (el.children.length || el.closest('[data-no-dynamic]')) continue;
+      if (el.__sdyn || el.children.length || el.closest('[data-no-dynamic]')) continue;
       var t = (el.textContent || '').trim();
       if (!t || t.length > 14) continue;
       var m = /^([^0-9+-]{0,3})([0-9][0-9,]*)(\\.[0-9]+)?( ?[%+kKMx\\u00d7]?)$/.exec(t);
@@ -106,44 +109,62 @@ function snippetJs() {
     list.forEach(function (d) { d.el.__sdyn = d; io.observe(d.el); });
   }
 
+  var revList = [], rio = null;
+  function getRio() {
+    if (rio) return rio;
+    rio = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var t = en.target;
+        rio.unobserve(t);
+        t.style.setProperty('--sdyn-d', (Math.min(n++, 5) * 70) + 'ms');
+        t.classList.add('sdyn-show');
+        setTimeout(function () { t.classList.remove('sdyn-hide', 'sdyn-show'); t.style.removeProperty('--sdyn-d'); }, 1500);
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+    window.addEventListener('beforeprint', function () {
+      revList.forEach(function (el) { el.classList.remove('sdyn-hide', 'sdyn-show'); });
+    });
+    return rio;
+  }
+
   function arm() {
     if (!('IntersectionObserver' in window)) return;
     try {
       var vh = window.innerHeight, vw = window.innerWidth;
       var els = document.querySelectorAll(SEL);
-      var reveal = [];
-      for (var i = 0; i < els.length && reveal.length < 140; i++) {
+      for (var i = 0; i < els.length && revList.length < 200; i++) {
         var el = els[i];
-        if (el.closest('[data-no-dynamic]') || el.closest('#syed-ambient')) continue;
+        if (el.__sdynSeen) continue;
+        // another reveal system (e.g. studio juice [data-reveal]) already owns it
+        if (el.classList.contains('is-watched') || el.classList.contains('is-revealed')) { el.__sdynSeen = 1; continue; }
+        if (el.closest('[data-no-dynamic]') || el.closest('#syed-ambient')) { el.__sdynSeen = 1; continue; }
         var cs = getComputedStyle(el);
-        if (cs.position === 'fixed' || cs.position === 'sticky' || cs.display === 'none') continue;
+        if (cs.display === 'none') continue; // may become visible later — rescan
+        if (cs.position === 'fixed' || cs.position === 'sticky') { el.__sdynSeen = 1; continue; }
         var r = el.getBoundingClientRect();
-        if (r.height < 24 || r.width < 40 || r.height > vh * 0.9) continue;
+        if (r.height < 24 || r.width < 40 || r.height > vh * 0.9) continue; // may grow — rescan
+        el.__sdynSeen = 1;
         if (r.height < vh * 0.7 && r.width < vw * 0.92 && !/transform|all/.test(cs.transitionProperty)) el.classList.add('sdyn-lift');
-        if (r.top > vh * 0.88 && !el.closest('.sdyn-hide')) { el.classList.add('sdyn-hide'); reveal.push(el); }
-      }
-      if (reveal.length) {
-        var io = new IntersectionObserver(function (entries) {
-          var n = 0;
-          entries.forEach(function (en) {
-            if (!en.isIntersecting) return;
-            var t = en.target;
-            io.unobserve(t);
-            t.style.setProperty('--sdyn-d', (Math.min(n++, 5) * 70) + 'ms');
-            t.classList.add('sdyn-show');
-            setTimeout(function () { t.classList.remove('sdyn-hide', 'sdyn-show'); t.style.removeProperty('--sdyn-d'); }, 1500);
-          });
-        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
-        reveal.forEach(function (el) { io.observe(el); });
-        window.addEventListener('beforeprint', function () {
-          reveal.forEach(function (el) { el.classList.remove('sdyn-hide', 'sdyn-show'); });
-        });
+        if (r.top > vh * 0.88 && !el.closest('.sdyn-hide')) { el.classList.add('sdyn-hide'); revList.push(el); getRio().observe(el); }
       }
       countUp();
     } catch (e) { /* never break the host page */ }
   }
 
-  function boot() { setTimeout(arm, 350); }
+  // SPA-aware: re-arm (new nodes only — __sdynSeen guards; nothing is ever
+  // re-hidden) on route changes and DOM growth, debounced.
+  var mt = null;
+  function queueArm() { clearTimeout(mt); mt = setTimeout(arm, 450); }
+  function boot() {
+    setTimeout(arm, 350);
+    if (window.MutationObserver && document.body) {
+      new MutationObserver(queueArm).observe(document.body, { childList: true, subtree: true });
+    }
+    window.addEventListener('hashchange', queueArm);
+    window.addEventListener('popstate', queueArm);
+  }
   if (document.readyState === 'complete') boot();
   else window.addEventListener('load', boot);
 })();`;
@@ -184,8 +205,10 @@ for (const p of PROJECTS) {
         entry = entry.replace("import './ambient'", "import './ambient'\nimport './dynamic'");
       } else if (entry.includes("import './juice'")) {
         entry = entry.replace("import './juice'", "import './juice'\nimport './dynamic'");
+      } else if (entry.includes("import './index.css'")) {
+        entry = entry.replace("import './index.css'", "import './index.css'\nimport './dynamic'");
       } else {
-        throw new Error(`${p.entry}: no ambient/juice import anchor`);
+        throw new Error(`${p.entry}: no ambient/juice/index.css import anchor`);
       }
       fs.writeFileSync(entryFile, entry);
     }
