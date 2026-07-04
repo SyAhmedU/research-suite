@@ -5,7 +5,10 @@
 //   3. count-up animation on bare-number stats (final text restored VERBATIM —
 //      no-fab safe; year-like integers skipped)
 //   4. hover depth on card-shaped elements that don't already animate transform
-// Plus brand-coloured :focus-visible and smooth anchor scrolling.
+//   5. (v3) calm sheen sweep on gradient CTAs — suite grammar, auto-detected
+//      via computed backgroundImage; skips buttons that already own a ::after
+// Plus brand-coloured :focus-visible, a soft brand focus ring on text inputs,
+// and smooth anchor scrolling.
 // Everything transform/opacity-only; every failure mode ends "content visible"
 // (classes added by JS, IntersectionObserver failsafes, print + reduced-motion
 // overrides). NO particles, NO confetti, NO cursor-reactive effects.
@@ -53,7 +56,8 @@ function snippetJs() {
   return `(function () {
   if (typeof document === 'undefined' || document.getElementById('syed-dynamic')) return;
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var css = ':where(a,button,input,select,textarea,summary,[role=button]):focus-visible{outline:2px solid #F14575;outline-offset:2px}';
+  var css = ':where(a,button,input,select,textarea,summary,[role=button]):focus-visible{outline:2px solid #F14575;outline-offset:2px}'
+    + ':where(input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select):focus-visible{box-shadow:0 0 0 3px rgba(241,69,117,.16)}';
   if (!RM) css += [
     'html{scroll-behavior:smooth}',
     '@keyframes sdyn-page{from{opacity:0}to{opacity:1}}',
@@ -61,6 +65,7 @@ function snippetJs() {
     '.sdyn-hide{opacity:0;transform:translateY(16px)}',
     '.sdyn-show{opacity:1;transform:none;transition:opacity .65s cubic-bezier(.22,1,.36,1) var(--sdyn-d,0ms),transform .65s cubic-bezier(.22,1,.36,1) var(--sdyn-d,0ms)}',
     '@media (hover:hover){.sdyn-lift{transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s cubic-bezier(.22,1,.36,1)}.sdyn-lift:hover{transform:translateY(-3px);box-shadow:0 2px 8px rgba(20,17,28,.08),0 14px 32px -12px rgba(146,112,244,.30)}}',
+    '@media (hover:hover){.sdyn-cta{position:relative;overflow:hidden}.sdyn-cta::after{content:"";position:absolute;top:0;bottom:0;left:-70%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.33),transparent);transform:skewX(-18deg);transition:left .6s cubic-bezier(.22,1,.36,1);pointer-events:none}.sdyn-cta:hover::after{left:125%}}',
     '@media print{.sdyn-hide{opacity:1!important;transform:none!important}}'
   ].join('');
   var style = document.createElement('style');
@@ -148,6 +153,23 @@ function snippetJs() {
         el.__sdynSeen = 1;
         if (r.height < vh * 0.7 && r.width < vw * 0.92 && !/transform|all/.test(cs.transitionProperty)) el.classList.add('sdyn-lift');
         if (r.top > vh * 0.88 && !el.closest('.sdyn-hide')) { el.classList.add('sdyn-hide'); revList.push(el); getRio().observe(el); }
+      }
+      // suite grammar: gradient CTAs get the calm sheen sweep on hover (skips
+      // buttons that already own a ::after, e.g. papercards/scalebase natives)
+      var ctas = document.querySelectorAll('button,[role=button],a,input[type=submit]');
+      var tagged = 0;
+      for (var j = 0; j < ctas.length && tagged < 60; j++) {
+        var b = ctas[j];
+        if (b.__sdynCta) continue;
+        b.__sdynCta = 1;
+        if (b.closest('[data-no-dynamic]')) continue;
+        var bs = getComputedStyle(b);
+        if (bs.backgroundImage.indexOf('gradient') === -1) continue;
+        if (getComputedStyle(b, '::after').content !== 'none') continue;
+        var br = b.getBoundingClientRect();
+        if (!br.width || br.width > 480) continue;
+        b.classList.add('sdyn-cta');
+        tagged++;
       }
       countUp();
     } catch (e) { /* never break the host page */ }
