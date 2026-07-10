@@ -315,6 +315,7 @@ html, body { overflow-x: clip; }
   .section-reveal { opacity: 1 !important; transform: none !important; }
   .anim-reveal, .anim-stagger > * { animation: none !important; opacity: 1 !important; }
   .thinking-dots span { animation: none !important; opacity: .7 !important; }
+  .hero-stars::before, .hero-stars::after, .hero-vitals .hv-live i { animation: none !important; }
 }
 
 /* ── Brand bar ─────────────────────────────────────────────── */
@@ -491,6 +492,51 @@ html[data-theme="dark"] .dash-status.ok { color: #4ade9a; }
   padding: 8px 14px; border: 1px dashed var(--line); border-radius: 999px; background: var(--paper-2);
 }
 .hero-foot span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--grad); }
+
+/* ── Observatory vitals — a live readout of the suite's real counts ──
+   Same data-live keys as the proof-band livestat: the snapshot fetches
+   update both; each element counts up only once it's on screen. */
+.hero-vitals {
+  margin-top: 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 26px;
+  font-family: 'IBM Plex Mono', monospace; font-size: .74rem; color: var(--ink-soft);
+}
+.hero-vitals .hv-item { display: inline-flex; align-items: baseline; gap: 7px; }
+.hero-vitals .hv-item b {
+  font-family: 'Fraunces', serif; font-weight: 560; font-size: 1.34rem; letter-spacing: -.01em;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.hero-vitals .hv-item.is-live b {
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero-vitals .hv-live { display: inline-flex; align-items: center; gap: 7px; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
+.hero-vitals .hv-live i {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--good, #22C58D);
+  animation: hvPulse 2.6s ease-in-out infinite;
+}
+@keyframes hvPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(34,197,141,.45); } 50% { box-shadow: 0 0 0 5px rgba(34,197,141,0); } }
+
+/* Night-sky starfield behind the hero — dark theme only (light stays paper).
+   Two layers of box-shadow stars with a slow counter-phased twinkle. */
+.hero-stars { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+html[data-theme="dark"] .hero-stars { opacity: 1; }
+.hero-stars::before, .hero-stars::after {
+  content: ''; position: absolute; width: 2px; height: 2px; border-radius: 50%; background: transparent;
+}
+.hero-stars::before {
+  box-shadow: 6vw 8vh rgba(255,255,255,.5), 14vw 22vh rgba(255,255,255,.3), 23vw 5vh rgba(255,255,255,.45),
+    31vw 30vh rgba(244,127,190,.4), 38vw 12vh rgba(255,255,255,.35), 47vw 26vh rgba(255,255,255,.5),
+    55vw 7vh rgba(167,139,250,.45), 63vw 34vh rgba(255,255,255,.3), 71vw 15vh rgba(255,255,255,.5),
+    79vw 28vh rgba(255,255,255,.35), 87vw 9vh rgba(244,127,190,.4), 94vw 24vh rgba(255,255,255,.45);
+  animation: starTwinkle 9s ease-in-out infinite;
+}
+.hero-stars::after {
+  box-shadow: 10vw 38vh rgba(255,255,255,.25), 19vw 14vh rgba(255,255,255,.4), 27vw 42vh rgba(167,139,250,.35),
+    35vw 20vh rgba(255,255,255,.3), 43vw 44vh rgba(255,255,255,.25), 52vw 16vh rgba(255,255,255,.4),
+    60vw 40vh rgba(255,150,86,.3), 68vw 23vh rgba(255,255,255,.25), 76vw 45vh rgba(255,255,255,.35),
+    84vw 18vh rgba(167,139,250,.3), 91vw 36vh rgba(255,255,255,.4);
+  animation: starTwinkle 13s ease-in-out -4s infinite;
+}
+@keyframes starTwinkle { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
 
 /* Load-in animation — ink settling on paper: rises while the blur lifts */
 .rise { opacity: 0; transform: translateY(22px); filter: blur(7px); animation: rise .95s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -1041,6 +1087,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
 <!-- Hero -->
 <header class="hero">
   <div class="hero-glow"></div>
+  <div class="hero-stars" aria-hidden="true"></div>
   <div class="wrap">
     <div class="eyebrow rise d1"><b></b> One workflow · six connected tools</div>
     <h1 class="rise d2">From a hunch to a <em>published paper</em>, without losing the thread.</h1>
@@ -1064,6 +1111,16 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <span>No account, runs in your browser</span>
       <span>Methodology baked in</span>
       <span>Your data stays local</span>
+    </div>
+    <!-- Observatory readout — real counts, live from each tool's published
+         snapshot (same data-live keys as the proof band below). -->
+    <div class="hero-vitals rise d5" aria-label="Live counts from across the suite">
+      <span class="hv-item" data-live-host="corpus"><b data-live="corpus">9,388</b> papers</span>
+      <span class="hv-item" data-live-host="theories"><b data-live="theories">632</b> theories</span>
+      <span class="hv-item" data-live-host="scales"><b data-live="scales">332</b> scales</span>
+      <span class="hv-item"><b>1,959</b> journals</span>
+      <span class="hv-item"><b>288</b> books</span>
+      <span class="hv-live"><i></i> live from the suite</span>
     </div>
   </div>
 </header>
@@ -2134,28 +2191,25 @@ themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-them
       if (p < 1) requestAnimationFrame(frame); else el.textContent = to.toLocaleString();
     });
   }
-  // Hold the count-up until the stats band is actually on screen — the
-  // numbers rolling 449→462 is the show; don't spend it before the scroll.
-  let liveSeen = false; const pendingCounts = [];
-  (function(){
-    const ls = document.getElementById('livestat');
-    if (!ls || !('IntersectionObserver' in window) || reduce) { liveSeen = true; return; }
-    const lio = new IntersectionObserver(es => {
-      if (es.some(e => e.isIntersecting)) {
-        liveSeen = true;
-        pendingCounts.splice(0).forEach(f => f());
-        lio.disconnect();
-      }
-    }, { threshold: 0.35 });
-    lio.observe(ls);
-  })();
+  // Hold each count-up until ITS number is actually on screen — the hero
+  // vitals roll on load, while the proof band keeps its scroll reveal.
+  // (Same key can live in both places; each element gates itself.)
+  const liveVals = Object.create(null);
+  const liveSeenEls = new WeakSet();
+  const noGate = reduce || !('IntersectionObserver' in window);
+  const lio = noGate ? null : new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    lio.unobserve(e.target); liveSeenEls.add(e.target);
+    const k = e.target.dataset.live;
+    if (liveVals[k] != null) countUp(e.target, liveVals[k]);
+  }), { threshold: 0.35 });
+  if (lio) document.querySelectorAll('[data-live]').forEach(el => lio.observe(el));
   function setCount(key, n){
-    const run = () => {
-      document.querySelectorAll('[data-live="' + key + '"]').forEach(el => countUp(el, n));
-      const host = document.querySelector('[data-live-host="' + key + '"]');
-      if (host) host.classList.add('is-live');
-    };
-    if (liveSeen) run(); else pendingCounts.push(run);
+    liveVals[key] = n;
+    document.querySelectorAll('[data-live="' + key + '"]').forEach(el => {
+      if (noGate || liveSeenEls.has(el)) countUp(el, n);
+    });
+    document.querySelectorAll('[data-live-host="' + key + '"]').forEach(h => h.classList.add('is-live'));
   }
   [
     ['theories', 'https://theoryscope.vercel.app/data/theories.json', d => d.count || (d.theories && d.theories.length)],
