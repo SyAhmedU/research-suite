@@ -72,6 +72,8 @@ const TARGETS = [
   // scalebase/client intentionally ungated — shipped public (reference library)
   // ── other static ──
   "ideabox/public/index.html",
+  "faceprep-knowledge-base/index.html",
+  "faceprep-knowledge-base/whatsapp.html",
   // NOTE: timetable-generator (Next.js) is gated separately in app/layout.tsx.
 ];
 
