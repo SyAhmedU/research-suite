@@ -59,6 +59,7 @@ const TARGETS = [
   "rethink-with-ai/index.html",
   "scholarscope/index.html",
   "throughline-cs/index.html",
+  "launchpad/index.html",
   // syeds-research-book + bookscope intentionally ungated — shipped public (reference libraries)
   // ── Vite root shells (gate survives the build as an inline script) ──
   "researchflow/index.html",
