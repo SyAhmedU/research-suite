@@ -20,6 +20,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const HOME = resolve(HERE, '..', '..', '..');           // tools/pwa -> tools -> research-suite -> HOME
 const DRY = process.argv.includes('--dry');
+const ONLY = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : null;
 
 // base: '.'  -> served under a path prefix (GitHub Pages /<project>/) — relative refs
 // base: '/'  -> served at a domain root (Vercel *.vercel.app)          — absolute refs
@@ -113,7 +114,7 @@ function swJS(slug) {
 // onto a fresh cache. Scope is derived from this worker's own URL, so the same code
 // works at a domain root and under a /<project>/ path.
 const PREFIX = 'syed-pwa-${slug}-';
-const CACHE = PREFIX + 'v1';
+const CACHE = PREFIX + '${slug === 'syeds-research-book' ? 'v2-management-20261005' : 'v1'}';
 const ROOT = new URL('./', self.location).href;          // scope root (absolute)
 const SHELL = [ROOT, ROOT + 'manifest.webmanifest', ROOT + 'icon.svg'];
 
@@ -233,6 +234,7 @@ function writeFile(abs, content) {
 let ok = 0;
 const skipped = [];
 for (const p of PROJECTS) {
+  if (ONLY && p.slug !== ONLY) continue;
   const htmlAbs = join(HOME, p.html);
   if (!existsSync(htmlAbs)) { skipped.push(`${p.slug}: missing ${p.html}`); continue; }
 
