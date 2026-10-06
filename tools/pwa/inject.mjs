@@ -114,7 +114,7 @@ function swJS(slug) {
 // onto a fresh cache. Scope is derived from this worker's own URL, so the same code
 // works at a domain root and under a /<project>/ path.
 const PREFIX = 'syed-pwa-${slug}-';
-const CACHE = PREFIX + '${slug === 'syeds-research-book' ? 'v5-reference-targets-20261005' : 'v1'}';
+const CACHE = PREFIX + '${slug === 'syeds-research-book' ? 'v6-full-management-20261006' : 'v1'}';
 const ROOT = new URL('./', self.location).href;          // scope root (absolute)
 const SHELL = [ROOT, ROOT + 'manifest.webmanifest', ROOT + 'icon.svg'];
 
