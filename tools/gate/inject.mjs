@@ -60,7 +60,6 @@ const TARGETS = [
   "scholarscope/index.html",
   "throughline-cs/index.html",
   "launchpad/index.html",
-  "output/research-completion/site-src/index.html", // private Working Papers reader (built into site/)
   // syeds-research-book + bookscope intentionally ungated — shipped public (reference libraries)
   // ── Vite root shells (gate survives the build as an inline script) ──
   "researchflow/index.html",
@@ -74,6 +73,8 @@ const TARGETS = [
   // scalebase/client intentionally ungated — shipped public (reference library)
   // ── other static ──
   "ideabox/public/index.html",
+  // output/research-completion (Working Papers reader) intentionally excluded — real server-side Basic Auth
+  // (site-src/middleware.js, WP_PASSWORD env), not the shared client-side gate.
   // faceprep-knowledge-base intentionally excluded — real server-side password
   // auth (api/ + signed session cookie), not the shared client-side gate.
   // NOTE: timetable-generator (Next.js) is gated separately in app/layout.tsx.
