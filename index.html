@@ -1366,9 +1366,9 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <div id="connState" class="conn-state" hidden></div>
     </div>
     <div id="authSetup" class="modal-setup" hidden>
-      <h3>Almost there — one setup step</h3>
-      <p class="modal-sub">Accounts need a free Supabase project (yours, ~10 min). Create it, then paste the project URL + anon key into <code>suite-auth.js</code> → <code>SUITE_CONFIG</code>. Full steps are in <strong>SETUP.md</strong>.</p>
-      <p class="modal-sub">Until then, everything else on the page works as a preview.</p>
+      <h3>Your research stays on this device</h3>
+      <p class="modal-sub">Cloud accounts are currently unavailable. You can create a project in Throughline Studio, save your work on this device, and export a backup.</p>
+      <a class="btn btn-primary" href="https://throughline-studio.vercel.app">Open Throughline Studio ↗</a>
     </div>
   </div>
 </div>
@@ -1552,6 +1552,7 @@ if (Auth.isConfigured()) {
     }
   });
 } else {
+  $('authBtn').textContent = 'Saved on this device';
   console.info('[suite-auth] preview mode — add your Supabase keys to suite-auth.js (see SETUP.md) to enable accounts.');
 }
 </script>

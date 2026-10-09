@@ -1,8 +1,9 @@
 # Accounts setup — Throughline (Research Suite hub)
 
 Accounts run on **Supabase** (free tier). This is a one-time, ~10-minute setup.
-Until it's done, the hub runs in **preview mode** — everything works except the
-"Sign in" button, which just shows this reminder.
+Until it's done, the hub shows **Saved on this device** and links to Throughline
+Studio's local workspace and JSON backups. Cloud login is unavailable. The old
+Supabase project was retired; do not restore its hostname or keys.
 
 The `anon` key you'll paste below is **public by design** — it's safe to commit
 and ship in the browser. Every row is protected by row-level security (RLS), so a
@@ -25,6 +26,9 @@ signed-in user can only ever touch their own projects. (Never paste the
      anonKey: 'eyJhbGciOi...the long anon key...',
    };
    ```
+4. Set the same project URL and public key as `VITE_SUPABASE_URL` and
+   `VITE_SUPABASE_ANON_KEY` in Throughline Studio's Vercel project, then rebuild
+   and redeploy Studio. These Vite variables are included at build time.
 
 ## 3. Create the `projects` table + RLS
 In Supabase: **SQL Editor → New query**, paste and run:
