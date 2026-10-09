@@ -1325,7 +1325,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     <div class="cta-row" style="justify-content:center">
       <a class="btn btn-fill" href="https://throughline-studio.vercel.app" target="_blank" rel="noopener">Open the workspace — A→Z →</a>
       <a class="btn btn-ghost" href="https://researchflow-syahmedus-projects.vercel.app" target="_blank" rel="noopener" data-resume="ResearchFlow">Begin with a question</a>
-      <a class="btn btn-ghost" href="https://syahmedu.github.io/syeds-research-book/?view=termtrends" target="_blank" rel="noopener">Or explore the trends</a>
+      <a class="btn btn-ghost" href="https://syeds-research-book.vercel.app/?view=termtrends" target="_blank" rel="noopener">Or explore the trends</a>
     </div>
   </div>
 </section>
@@ -1920,7 +1920,7 @@ const grid = document.getElementById('toolsGrid');
 const REFERENCE_TOOLS = [
   { name:'ScholarScope', url:'https://syahmedu.github.io/scholarscope/', verb:'Map the field', carry:'institutions, journals & authors (live OpenAlex)', accent:'coral' },
   // FallacyScope demoted (merge #6) — its 48 pitfalls are now embedded in ResearchFlow as a stage-aware resource.
-  { name:"Syed's Research Book", url:'https://syahmedu.github.io/syeds-research-book/', verb:'Read the corpus', carry:'9,388 papers across 167 OB/management constructs', accent:'coral' },
+  { name:"Syed's Research Book", url:'https://syeds-research-book.vercel.app/', verb:'Read the corpus', carry:'9,388 hand-coded papers + dated imported tiers', accent:'coral' },
   { name:'BookScope', url:'https://bookscope.vercel.app', verb:'Search the shelf', carry:'full-text search across 288 academic reference books (~141K pages)', accent:'coral' },
 ];
 [...STAGES, ...REFERENCE_TOOLS].forEach((s, i) => {
@@ -2216,8 +2216,8 @@ themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-them
   [
     ['theories', 'https://theoryscope.vercel.app/data/theories.json', d => d.count || (d.theories && d.theories.length)],
     ['scales',   'https://scalescope.vercel.app/data/scales.json',    d => d.count || (d.scales && d.scales.length)],
-    ['terms',    'https://syahmedu.github.io/syeds-research-book/data/words.json', d => d.terms && d.terms.length],
-    ['corpus',   'https://syahmedu.github.io/syeds-research-book/data/corpus-snapshot.json', d => d.totalPapers],
+    ['terms',    'https://syeds-research-book.vercel.app/data/words.json', d => d.terms && d.terms.length],
+    ['corpus',   'https://syeds-research-book.vercel.app/data/corpus-snapshot.json', d => d.totalPapers],
   ].forEach(([key, url, pick]) => {
     fetch(url).then(r => r.ok ? r.json() : null).then(d => {
       if (!d) return;
