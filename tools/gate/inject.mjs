@@ -60,6 +60,7 @@ const TARGETS = [
   "scholarscope/index.html",
   "throughline-cs/index.html",
   "launchpad/index.html",
+  "output/research-completion/site-src/index.html", // private Working Papers reader (built into site/)
   // syeds-research-book + bookscope intentionally ungated — shipped public (reference libraries)
   // ── Vite root shells (gate survives the build as an inline script) ──
   "researchflow/index.html",
