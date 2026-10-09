@@ -1,9 +1,11 @@
 # Accounts setup — Throughline (Research Suite hub)
 
 Accounts run on **Supabase** (free tier). This is a one-time, ~10-minute setup.
-Until it's done, the hub shows **Saved on this device** and links to Throughline
-Studio's local workspace and JSON backups. Cloud login is unavailable. The old
-Supabase project was retired; do not restore its hostname or keys.
+**Status (2026-10-09): LIVE** on project `hpupaqzebvrjhrpywtzl` (org
+`research-suite`). It had only been *paused* by the free tier's inactivity rule;
+restored, data intact. A paused project's hostname stops resolving (NXDOMAIN) —
+that is a pause, not a deletion: restore it (dashboard, or Management API
+`POST /v1/projects/{ref}/restore`) before ever creating a replacement.
 
 The `anon` key you'll paste below is **public by design** — it's safe to commit
 and ship in the browser. Every row is protected by row-level security (RLS), so a
@@ -54,8 +56,9 @@ create policy "users manage their own projects"
 ## 4. Allow the hub URL to redirect back
 **Authentication → URL Configuration:**
 - **Site URL:** `https://syahmedu.github.io/research-suite/`
-- **Redirect URLs:** add `https://syahmedu.github.io/research-suite/`
-  (and `http://localhost:*` if you test locally).
+- **Redirect URLs:** add `https://syahmedu.github.io/research-suite/**`
+  **and** `https://throughline-studio.vercel.app/**` (Studio sends magic links /
+  OAuth back to itself), plus `http://localhost:*/**` for local testing.
 
 ## 5. Login methods
 
