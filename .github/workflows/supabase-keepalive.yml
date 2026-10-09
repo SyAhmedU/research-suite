@@ -1,0 +1,28 @@
+# Keeps the free-tier Supabase project (suite accounts) from auto-pausing.
+# Free projects pause after ~7 days without activity; a paused project's
+# hostname NXDOMAINs and the hub + Studio silently fall back to on-device mode.
+# This makes a real Postgres round-trip (RLS returns 0 rows to anon) twice a week.
+# The key is the public publishable key already shipped in suite-auth.js.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: '17 6 * * 1,4'   # Mon + Thu, 06:17 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query projects table
+        env:
+          URL: https://hpupaqzebvrjhrpywtzl.supabase.co
+          KEY: sb_publishable_HwG-E4cFEuoeV_XlVxSrdA_E8x7UweQ
+        run: |
+          code=$(curl -s -o body.txt -w '%{http_code}' \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/projects?select=id&limit=1")
+          echo "HTTP $code: $(cat body.txt)"
+          # Non-200 (or a DNS failure → curl exit) fails the run, so GitHub emails
+          # the owner — that's the signal the project paused and needs restoring.
+          test "$code" = "200"
