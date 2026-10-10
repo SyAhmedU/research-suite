@@ -13,3 +13,5 @@ The Working Papers reader (`../output/research-completion/`) links `https://thro
 Verification: `python output/research-completion/check-connections.py` (append `--live` after deployment). Checks directory/navigation, every source pack against archive bytes, meta/participant imports, resumed edits, invalid IDs, truthful stage state and 390px layout. It uses isolated unsigned-in browser storage.
 
 Existing six-stage thread and quick-start functionality remain below the directory. They are routes to specialist tools, not a claim that all tool storage is merged. Full Research Book host: https://syeds-research-book.vercel.app/. The 9,388-paper compact grounding feed remains intentionally distinct from the full dated corpus.
+
+2026-10-10 workflow continuation: hero primary CTA now opens Studio directly, where all 22 papers can be selected and continued through author-reviewed checkpoints. Archive reading remains a separate secondary link; libraries remain supporting destinations.
