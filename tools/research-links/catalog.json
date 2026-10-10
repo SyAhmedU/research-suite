@@ -1,0 +1,19 @@
+[
+  {"group":"Continue your work","name":"Working Papers","url":"https://syed-papers.vercel.app/","description":"22 review drafts, 22 proposed study protocols and 17 ethics packs. Continue a paper in Studio."},
+  {"group":"Continue your work","name":"Throughline Studio","url":"https://throughline-studio.vercel.app/","description":"The main research workspace: Discover → Frame → Measure → Collect → Analyze → Write → Publish. Research Kitchen lives inside Analyze."},
+  {"group":"Continue your work","name":"Solo Publish","url":"https://solo-publish.asrarsaa.chatgpt.site","description":"Separate private workspace for publication planning, journal evidence and submission tracking. Its saved work stays there."},
+  {"group":"Four research libraries","name":"Research Book","url":"https://syeds-research-book.vercel.app/","description":"1,952,655 records across the hand-coded and imported tiers of the checked dated release. Includes construct maps and term trends."},
+  {"group":"Four research libraries","name":"BookScope","url":"https://bookscope.vercel.app/","description":"288 reference books; available extracted text indexed for 283. Search methods and concepts across the shelf."},
+  {"group":"Four research libraries","name":"TheoryScope","url":"https://theoryscope.vercel.app/","description":"Theory catalogue, comparisons, influence maps, construct maps and Canvas."},
+  {"group":"Four research libraries","name":"ScaleScope","url":"https://scalescope.vercel.app/","description":"Measurement scales, available verbatim items, comparisons and reliability analysis."},
+  {"group":"Plan, analyze and write","name":"ResearchFlow","url":"https://researchflow-syahmedus-projects.vercel.app/","description":"Ten-stage proposal wizard with catalogue grounding and stage-specific research pitfalls."},
+  {"group":"Plan, analyze and write","name":"ToolsScope","url":"https://toolsscope.vercel.app/","description":"Analysis workbench and 12 executable R workflows. The R engines also run directly in Studio’s Research Kitchen."},
+  {"group":"Plan, analyze and write","name":"JournalTime","url":"https://syahmedu.github.io/journaltime/","description":"Writing and document formatting. AI drafting depends on backend availability; check every generated citation."},
+  {"group":"Specialist companions","name":"PaperCards","url":"https://papercards.vercel.app/","description":"Inspect and compare papers, dissect their evidence and explore citation networks."},
+  {"group":"Specialist companions","name":"ScholarScope / Journal Explorer","url":"https://syahmedu.github.io/scholarscope/","description":"Journal selection, institutions and authors; open the Journal Explorer for the journal research collection."},
+  {"group":"Specialist companions","name":"Journal Explorer","url":"https://syahmedu.github.io/scholarscope/explorer/","description":"Browse the journal research collection and journal-specific evidence."},
+  {"group":"Specialist companions","name":"Journal Timelines","url":"https://syahmedu.github.io/journal-timelines/","description":"Index-coverage filters and observed publication timing where lifecycle evidence exists."},
+  {"group":"Specialist companions","name":"Cadence","url":"https://syahmedu.github.io/cadence/","description":"Survey design and collection. Export responses for analysis in ToolsScope."},
+  {"group":"Specialist companions","name":"FallacyScope","url":"https://syahmedu.github.io/fallacyscope/","description":"Sourced field guide to research pitfalls, also embedded in ResearchFlow."},
+  {"group":"Separate research workspace","name":"Throughline CS","url":"https://syahmedu.github.io/throughline-cs/","description":"The computer-science research workflow, with its own projects and experiment records."}
+]
