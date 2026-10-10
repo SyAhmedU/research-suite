@@ -1,7 +1,7 @@
 [
   {"group":"Continue your work","name":"Working Papers","url":"https://syed-papers.vercel.app/","description":"22 review drafts, 22 proposed study protocols and 17 ethics packs. Continue a paper in Studio."},
   {"group":"Continue your work","name":"Throughline Studio","url":"https://throughline-studio.vercel.app/","description":"The main research workspace: Discover → Frame → Measure → Collect → Analyze → Write → Publish. Research Kitchen lives inside Analyze."},
-  {"group":"Continue your work","name":"Solo Publish","url":"https://solo-publish.asrarsaa.chatgpt.site","description":"Separate private workspace for publication planning, journal evidence and submission tracking. Its saved work stays there."},
+  {"group":"Continue your work","name":"Solo Publish","url":"https://solo-publish.vercel.app","description":"Separate private workspace for publication planning, journal evidence and submission tracking. Its saved work stays there."},
   {"group":"Four research libraries","name":"Research Book","url":"https://syeds-research-book.vercel.app/","description":"1,952,655 records across the hand-coded and imported tiers of the checked dated release. Includes construct maps and term trends."},
   {"group":"Four research libraries","name":"BookScope","url":"https://bookscope.vercel.app/","description":"288 reference books; available extracted text indexed for 283. Search methods and concepts across the shelf."},
   {"group":"Four research libraries","name":"TheoryScope","url":"https://theoryscope.vercel.app/","description":"Theory catalogue, comparisons, influence maps, construct maps and Canvas."},
