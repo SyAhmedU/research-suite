@@ -2,7 +2,7 @@
 // Consumed by emit-react.mjs. Edit here, then run: node tools/brand-bar/build.mjs
 // See README.md.
 
-export const WARM_GRAD = 'linear-gradient(135deg,#FF9656 0%,#F14575 55%,#9270F4 100%)';
+export const WARM_GRAD = 'linear-gradient(var(--product-accent,#176557),var(--product-accent,#176557))';
 
 // Base keyframe (always present). The mobile-collapse line is appended per-project
 // (entries with mobileCollapse:true), because it only matters when the suite nav renders.
@@ -18,7 +18,7 @@ export const KEYFRAME_MOBILE =
 // EDIT THE STEP LIST / LABELS / HREFS HERE ONLY — every consumer regenerates from this.
 export const SUITE = [
   { key: 'pc', label: 'PaperCards',   href: 'https://papercards.vercel.app' },
-  { key: 'rf', label: 'ResearchFlow', href: 'https://researchflow-syahmedus-projects.vercel.app' },
+  { key: 'rf', label: 'ResearchFlow', href: 'https://researchflow-alpha.vercel.app' },
   { key: 'ts', label: 'TheoryScope',  href: 'https://theoryscope.vercel.app' },
   { key: 'ss', label: 'ScaleScope',   href: 'https://scalescope.vercel.app' },
   { key: 'to', label: 'ToolsScope',   href: 'https://toolsscope.vercel.app' },
@@ -37,7 +37,7 @@ export const LINK = {
   scalescope:  { label: 'ScaleScope',  href: 'https://scalescope.vercel.app' },
   theoryscope: { label: 'TheoryScope', href: 'https://theoryscope.vercel.app' },
   toolsscope:  { label: 'ToolsScope',  href: 'https://toolsscope.vercel.app' },
-  allProjects: { label: 'All Projects →', href: 'https://syahmedu.github.io/nexus/', primary: true },
+  allProjects: { label: 'All Projects →', href: 'https://syed-launchpad.vercel.app', primary: true },
 };
 
 export const GENERATED_HEADER =

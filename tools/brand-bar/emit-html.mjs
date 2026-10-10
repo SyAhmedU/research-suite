@@ -8,7 +8,7 @@
 import { SUITE } from './core.mjs';
 
 const STD_LOGO =
-  '  <a class="syed-bar-logo" href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener"><span class="syed-mark">S</span><span class="syed-name">Syed</span></a>';
+  '  <a class="syed-bar-logo" href="https://syed-launchpad.vercel.app" target="_blank" rel="noopener"><span class="syed-mark">S</span><span class="syed-name">Projects</span></a>';
 
 const TOGGLE = [
   '  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark">',
@@ -17,7 +17,7 @@ const TOGGLE = [
 ].join('\n');
 
 function suiteStep(s, i, activeStep) {
-  const caret = i > 0 ? '<span class="syed-caret" aria-hidden="true">›</span>' : '';
+  const caret = i > 0 ? '<span class="syed-caret" aria-hidden="true">·</span>' : '';
   if (s.key === activeStep) {
     return `    <span class="syed-suite-step">${caret}<a class="syed-link syed-link-active" href="#" aria-current="page">${s.label}</a></span>`;
   }
@@ -33,7 +33,7 @@ export function emitHtmlBar(entry) {
     '  <span class="syed-divider"></span>',
     `  <span class="syed-project">${entry.projectName}</span>`,
     '  <nav class="syed-links" aria-label="Research Suite">',
-    '    <span class="syed-suite-label">Research Suite</span>',
+    '    <a class="syed-suite-label" href="https://throughline-studio.vercel.app" target="_blank" rel="noopener">Studio ↗</a>',
     steps,
     '  </nav>',
     TOGGLE,

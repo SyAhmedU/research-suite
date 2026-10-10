@@ -1047,7 +1047,7 @@ function mk(){
 mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mk);
 })();</script>
 <!-- /SYED-GATE -->
-<link rel="stylesheet" href="product-design.css?v=20260912">
+<link rel="stylesheet" href="product-design.css?v=20261010">
 <!-- SYED-PWA -->
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -1143,7 +1143,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <p class="sub">Each project is a named home for one study. Open any suite tool from here — soon, your work in each will sync back into the project so you can pick up the thread on any device.</p>
     </div>
     <div class="dash-new">
-      <input id="projName" class="dash-input" placeholder="Name a new project — e.g. Burnout & engagement in nurses" maxlength="120">
+      <input id="projName" aria-label="New project name" class="dash-input" placeholder="Name a new project — e.g. Burnout & engagement in nurses" maxlength="120">
       <button id="projAdd" class="btn btn-fill">Create project</button>
     </div>
     <div id="projStatus" class="dash-status" hidden></div>
@@ -1161,7 +1161,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <p class="sub">One line, plain English. Either I route you to the best tool to start — or hit <strong>Auto-run</strong> and watch your whole study scaffold itself across the thread, step by step, built for your topic.</p>
     </div>
     <div class="qs-card">
-      <textarea id="qs-input" class="qs-input" rows="3" placeholder="e.g. how AI is changing the meaning of work for early-career knowledge workers in India"></textarea>
+      <textarea id="qs-input" aria-label="Research topic" class="qs-input" rows="3" placeholder="e.g. how AI is changing the meaning of work for early-career knowledge workers in India"></textarea>
       <div class="qs-examples" aria-label="Example topics">
         <span class="qs-ex-label">Try:</span>
         <button type="button" class="qs-ex">burnout &amp; engagement in nurses</button>
@@ -1368,7 +1368,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
       <div class="modal-or" id="authOr"><span>or</span></div>
       <label class="modal-label" for="emailIn">Email a magic link</label>
       <div class="modal-emailrow">
-        <input id="emailIn" class="dash-input" type="email" placeholder="you@university.edu" autocomplete="email">
+        <input id="emailIn" aria-label="Account email" class="dash-input" type="email" placeholder="you@university.edu" autocomplete="email">
         <button class="btn btn-ghost" id="emailBtn">Send link</button>
       </div>
       <div id="authStatus" class="dash-status" hidden></div>

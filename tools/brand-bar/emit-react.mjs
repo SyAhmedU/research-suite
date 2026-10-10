@@ -48,10 +48,10 @@ function genericNavSrc(entry, indent) {
 function suiteNavSrc(entry, indent) {
   const cls = entry.mobileCollapse ? ' className="syed-suite-nav"' : '';
   return `${indent}<nav${cls} style={links} aria-label="Research Suite">
-${indent}  <span style={suiteLabel}>Research Suite</span>
+${indent}  <a style={suiteLabel} href="https://throughline-studio.vercel.app" target="_blank" rel="noopener noreferrer">Studio ↗</a>
 ${indent}  {SUITE.map((s, i) => (
 ${indent}    <span key={s.key} style={{ display: 'inline-flex', alignItems: 'center' }}>
-${indent}      {i > 0 && <span style={linkCaret} aria-hidden="true">›</span>}
+${indent}      {i > 0 && <span style={linkCaret} aria-hidden="true">·</span>}
 ${indent}      <a
 ${indent}        style={s.key === currentSuiteStep ? linkActive : link}
 ${indent}        href={s.href}
@@ -201,10 +201,10 @@ export function emitReact(entry) {
   L.push('  return (');
   L.push('    <>');
   L.push('      <style>{KEYFRAMES}</style>');
-  L.push('      <div style={bar}>');
-  L.push('        <a style={logo} href="https://syahmedu.github.io/nexus/" target="_blank" rel="noopener noreferrer">');
+  L.push('      <div className="syed-bar" style={bar}>');
+  L.push('        <a style={logo} href="https://syed-launchpad.vercel.app" target="_blank" rel="noopener noreferrer">');
   L.push('          <span style={mark}>S</span>');
-  L.push('          <span style={nm}>Syed</span>');
+  L.push('          <span style={nm}>Projects</span>');
   L.push('        </a>');
   L.push('        <span style={divider} />');
   L.push('        <span style={project}>{projectName}</span>');

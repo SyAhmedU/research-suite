@@ -219,7 +219,9 @@ function inject(p, html) {
   if (/<\/head>/i.test(out)) out = insertBefore(out, /<\/head>/i, head);
   else return { out: null, why: 'no </head>' };
 
-  if (/<\/body>/i.test(out)) out = insertBefore(out, /<\/body>/i, swBlock(p));
+  // Export templates can contain a literal </body>; use the actual page ending.
+  const bodyEnd = out.toLowerCase().lastIndexOf('</body>');
+  if (bodyEnd !== -1) out = out.slice(0, bodyEnd) + swBlock(p) + '\n' + out.slice(bodyEnd);
   else return { out: null, why: 'no </body>' };
 
   return { out, why: null };
