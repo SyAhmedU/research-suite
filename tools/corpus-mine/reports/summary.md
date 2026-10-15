@@ -1,67 +1,63 @@
-# Corpus-mention mining — 2026-06-12T02:34:08.657Z
+# Corpus-mention mining — 2026-10-15T15:18:45.845Z
 
-Scanned **79517** recent-tier papers (63188 with abstracts). Deterministic verbatim matching, no AI.
+Scanned **77852** recent-tier papers (63188 with abstracts). Deterministic verbatim matching, no AI.
 
-## Matched: 462/632 theories, 265/332 scales
+## Matched: 460/632 theories, 265/332 scales
 
 ### Top theories
-- Structural Equation Modeling — 4071
-- Meta-analysis — 917
-- Psychological Well-being — 636
-- Work Engagement — 542
+- Structural Equation Modeling — 4047
+- Meta-analysis — 905
+- Psychological Well-being — 630
+- Work Engagement — 540
 - Resource-Based View — 504
-- Dynamic Capabilities — 497
-- Transformational Leadership — 475
-- Conservation of Resources Theory — 469
-- Social Exchange Theory — 462
-- Psychological Safety — 441
-- Social Capital — 435
-- Self-Determination Theory — 428
-- Mentoring (Phases & Functions) — 391
-- Organizational Citizenship Behavior — 373
-- Embeddedness — 369
-- Equity Theory — 337
+- Dynamic Capabilities — 496
+- Transformational Leadership — 473
+- Conservation of Resources Theory — 463
+- Social Exchange Theory — 461
+- Psychological Safety — 435
+- Social Capital — 430
+- Self-Determination Theory — 422
+- Mentoring (Phases & Functions) — 388
+- Organizational Citizenship Behavior — 367
+- Embeddedness — 364
+- Equity Theory — 332
 - Theory of Planned Behavior — 318
-- Job Demands–Resources Model — 317
-- Technology Acceptance Model — 291
-- Institutional Theory — 279
-- Subjective Well-being — 268
-- Psychological Capital — 265
+- Job Demands–Resources Model — 315
+- Technology Acceptance Model — 289
+- Institutional Theory — 278
 - Grounded Theory — 262
-- Ethical Leadership — 245
-- Job Crafting — 240
+- Psychological Capital — 261
+- Subjective Well-being — 261
+- Ethical Leadership — 241
+- Job Crafting — 239
 
 ### Top scales
-- Organizational Citizenship Behavior Scale — 235
-- Technology Acceptance Model Scale — 194
-- Perceived Organizational Support Scale — 125
+- Organizational Citizenship Behavior Scale — 229
+- Technology Acceptance Model Scale — 192
+- Perceived Organizational Support Scale — 123
 - Patient Health Questionnaire — 123
-- Student Engagement Scale — 119
+- Student Engagement Scale — 115
 - Patient Health Questionnaire — 9 — 79
-- Maslach Burnout Inventory — General Survey — 78
+- Maslach Burnout Inventory — General Survey — 77
 - Pittsburgh Sleep Quality Index — 77
-- Depression Anxiety Stress Scales — 70
-- Passion Scale — 66
-- Perceived Stress Scale — 64
+- Depression Anxiety Stress Scales — 69
+- Perceived Stress Scale — 63
+- Passion Scale — 63
 - Innovative Work Behavior Scale — 61
-- Psychological Safety Scale — 60
+- Psychological Safety Scale — 59
 - Unified Theory of Acceptance and Use of Technology 2 — 59
-- Psychological Safety Survey — 58
 - Generalized Anxiety Disorder Scale — 58
+- Psychological Safety Survey — 57
 - Generalized Anxiety Disorder — 7 — 56
 - Customer Satisfaction Scale — 52
 - Work-Family Conflict Scale — 45
 - Fear of Missing Out Scale — 45
 - Utrecht Work Engagement Scale — 44
-- State–Trait Anxiety Inventory — 41
 - Self-Control Scale — 40
-- Beck Depression Inventory — 2nd Edition — 38
-- Satisfaction with Life Scale — 37
+- State–Trait Anxiety Inventory — 40
+- Beck Depression Inventory — 2nd Edition — 37
+- Satisfaction with Life Scale — 36
 
 ## Candidates (hand-verification queue — NOT auto-added)
 - candidate-theories.json: 33 phrases (≥5 papers)
 - candidate-scales.json: 51 phrases (≥5 papers)
-
-## Cadence coverage (2026-06-12)
-- 150 of the 265 corpus-mentioned scales carry verbatim items in ScaleScope → all portable ones are in Cadence (port run added ids 197–198, now 192 scales).
-- 115 mentioned scales are metadata-only in ScaleScope (e.g. BDI-II, STAI, SF-36 — copyrighted items); they need hand-verified/licensed items before Cadence can field them.
