@@ -1048,6 +1048,7 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
 })();</script>
 <!-- /SYED-GATE -->
 <link rel="stylesheet" href="product-design.css?v=20261010">
+<link rel="stylesheet" href="river.css?v=20261015">
 <!-- SYED-PWA -->
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -1131,6 +1132,22 @@ mk();if(document.readyState==="loading")document.addEventListener("DOMContentLoa
     </div>
   </div>
 </header>
+
+<!-- Corpus river — the hand-coded Research Book as one river (river.js · data/corpus-river.json,
+     built by tools/river/build.mjs; every number below is filled from that snapshot). -->
+<section class="river-band" id="river" aria-labelledby="riverTitle" data-no-dynamic>
+  <div class="wrap">
+    <div class="river-head">
+      <div>
+        <div class="river-kicker">The corpus, as a river</div>
+        <h2 class="river-title" id="riverTitle">Every hand-coded paper, <em>flowing by year.</em></h2>
+      </div>
+      <p class="river-read">Each current is one of <b data-river="constructs">the</b> constructs; the river's width is the papers published that year
+        (a paper coded to <i>k</i> constructs adds 1/<i>k</i> to each, so nothing is counted twice). <span data-river="span"></span> Hover to read a current, click to open it.</p>
+    </div>
+    <corpus-river></corpus-river>
+  </div>
+</section>
 
 <section style="opacity:1;transform:none" data-no-dynamic class="section" id="research-directory" aria-label="All research projects"><div class="wrap"><research-directory></research-directory></div></section>
 
@@ -2279,6 +2296,7 @@ themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-them
 })();
 </script>
 
+<script src="river.js?v=20261015" defer></script>
 <!-- Living WebGL aurora — same-origin module from the identity layer -->
 <script src="identity/syed-aurora.js" defer></script>
 <script>

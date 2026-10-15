@@ -2,6 +2,11 @@
 
 Main entry: https://syahmedu.github.io/research-suite/ (GitHub Pages, master).
 
+
+## 15 October 2026 — corpus river (hero visual)
+
+`<corpus-river>` (`river.js` + `river.css`, no deps) sits under the hero: the hand-coded Research Book as a wiggle-baseline streamgraph — 165 construct currents, 2000–2024 (earlier papers counted as "upstream", not drawn). Data `data/corpus-river.json` is built by **`node research-suite/tools/river/build.mjs`** from `syeds-research-book/data/papers.index.json` (hand-coded tier only; re-run after Book changes). **No-fab mechanics:** a paper on k constructs adds 1/k to each current, so each year's width = that year's real paper count (build self-checks the sums); hover readouts use exact integer counts (`c`), never the fractional weights; 2024 is hatched as a partial (coding-in-progress) year; all copy numbers are filled from the snapshot. Colour = rank of a construct's average paper year (forest = established → coral = newer). Lenses: **Papers** (volume) | **Share of year** (each year full height — composition drift), remembered in `localStorage.river_mode`. Click a current → Research Book `?construct=&year=`; legend chips light their current. Motion = slow dash "water-lines" clipped to each current + one-time reveal; under `prefers-reduced-motion` it is still and a **▶ Let it flow** opt-in appears (`localStorage.river_flow`); paused off-screen/hidden. Smoke + screenshots: `_mobile-audit/_river.mjs <outdir>`.
+
 ## 10 October 2026 — connect existing work
 
 The hero now prioritizes the 22 Working Papers, Studio/Research Kitchen and the complete research directory. It no longer promises automatic data sharing across independent apps. The directory contains 17 destinations, including the four libraries, Journal Explorer, Solo Publish and the separate CS workspace. Solo Publish requires its own signed-in access (unauthenticated check returns 401); the other 16 destination URLs returned HTTP 200 at this check.
