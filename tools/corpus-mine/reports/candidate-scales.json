@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-15T15:18:45.845Z",
+  "generatedAt": "2026-10-15T16:31:11.093Z",
   "source": "syeds-research-book recent tier (OpenAlex, 2024→) — titles + abstracts",
-  "papersScanned": 77852,
+  "papersScanned": 77411,
   "abstracts": 63188,
   "method": "deterministic verbatim name match (word-boundary, dash-normalized); acronyms case-sensitive; machine-matched — verify before citing",
   "note": "NOT in ScaleScope catalog; hand-verify before adding (real items + citation required)",
@@ -206,15 +206,6 @@
       ]
     },
     {
-      "phrase": "Hamilton Anxiety Rating Scale",
-      "n": 7,
-      "dois": [
-        "10.19109/psikis.v10i1.22135",
-        "10.1177/13591053261450562",
-        "10.1186/s12888-026-08225-4"
-      ]
-    },
-    {
       "phrase": "Numerical Rating Scale",
       "n": 7,
       "dois": [
@@ -311,6 +302,15 @@
         "10.1007/s10508-026-03448-8",
         "10.1186/s40337-026-01660-4",
         "10.1186/s40337-026-01657-z"
+      ]
+    },
+    {
+      "phrase": "Hamilton Anxiety Rating Scale",
+      "n": 6,
+      "dois": [
+        "10.19109/psikis.v10i1.22135",
+        "10.1177/13591053261450562",
+        "10.1186/s12888-026-08225-4"
       ]
     },
     {

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-10-15T15:18:45.845Z",
+  "generatedAt": "2026-10-15T16:31:11.093Z",
   "source": "syeds-research-book recent tier (OpenAlex, 2024→) — titles + abstracts",
-  "papersScanned": 77852,
+  "papersScanned": 77411,
   "abstracts": 63188,
   "method": "deterministic verbatim name match (word-boundary, dash-normalized); acronyms case-sensitive; machine-matched — verify before citing",
   "note": "NOT in TheoryScope catalog; hand-verify before adding (real source + DOI required)",
@@ -116,15 +116,6 @@
       ]
     },
     {
-      "phrase": "Local Wisdom Globalization theory",
-      "n": 9,
-      "dois": [
-        "10.17605/osf.io/vyzqk",
-        "10.17605/osf.io/vyzqk",
-        "10.17605/osf.io/vyzqk"
-      ]
-    },
-    {
       "phrase": "We discuss implications for theory",
       "n": 9,
       "dois": [
@@ -143,30 +134,12 @@
       ]
     },
     {
-      "phrase": "Universal Phase Crystallization theory",
-      "n": 9,
-      "dois": [
-        "10.5281/zenodo.18795785",
-        "10.5281/zenodo.18795785",
-        "10.5281/zenodo.18795785"
-      ]
-    },
-    {
       "phrase": "Social Influence theory",
       "n": 9,
       "dois": [
         "10.70382/tijssra.v12i6.0111",
         "10.1108/k-05-2024-1393",
         "10.1108/k-05-2024-1393"
-      ]
-    },
-    {
-      "phrase": "Dismantled Mindset theory",
-      "n": 9,
-      "dois": [
-        "10.5281/zenodo.20466800",
-        "10.5281/zenodo.20466800",
-        "10.5281/zenodo.20466800"
       ]
     },
     {
@@ -194,24 +167,6 @@
         "10.65339/ijsair.v2.i2.543",
         "10.1108/jieb-07-2024-0081",
         "10.24940/theijhss/2025/v13/i12/hs2512-012"
-      ]
-    },
-    {
-      "phrase": "Modern Portfolio theory",
-      "n": 7,
-      "dois": [
-        "10.5281/zenodo.20519231",
-        "10.5281/zenodo.20519231",
-        "10.5539/ijbm.v21n2p114"
-      ]
-    },
-    {
-      "phrase": "Institutional Betrayal theory",
-      "n": 7,
-      "dois": [
-        "10.17605/osf.io/kvn78",
-        "10.17605/osf.io/kvn78",
-        "10.17605/osf.io/kvn78"
       ]
     },
     {
@@ -296,12 +251,12 @@
       ]
     },
     {
-      "phrase": "Solvency Field theory",
+      "phrase": "Modern Portfolio theory",
       "n": 5,
       "dois": [
-        "10.5281/zenodo.18877417",
-        "10.5281/zenodo.18877417",
-        "10.5281/zenodo.18877417"
+        "10.5539/ijbm.v21n2p114",
+        "10.5539/ijbm.v21n2p114",
+        "10.24940/theijbm/2026/v14/i2/bm2602-014"
       ]
     }
   ]
