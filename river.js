@@ -98,6 +98,7 @@
     connectedCallback() {
       if (this._init) return; this._init = true;
       this.innerHTML = `
+        <p class="cr-finding"></p>
         <div class="cr-stage">
           <svg class="cr-svg" role="img" aria-labelledby="crTitle crDesc"><title id="crTitle">The Research Book as a river</title><desc id="crDesc">Loading the hand-coded corpus…</desc></svg>
           <div class="cr-tip" role="status" aria-live="polite" hidden></div>
@@ -112,7 +113,7 @@
             <button type="button" class="cr-flow" hidden>▶ Let it flow</button>
           </div>
         </div>
-        <nav class="cr-currents" aria-label="Largest currents — open in the Research Book"></nav>`;
+        <nav class="cr-currents" aria-label="Rising, fading and largest currents — open in the Research Book"></nav>`;
       this.svg = this.querySelector('.cr-svg');
       this.tip = this.querySelector('.cr-tip');
       this.reduce = matchMedia('(prefers-reduced-motion: reduce)');
@@ -185,9 +186,35 @@
         e.textContent = `Drawn ${this.yrs[0]}–${this.yrs[this.yrs.length - 1]}: ${fmt(N)} of ${fmt(d.totalPapers)} papers` +
           ` (${fmt(this.upstream)} earlier, ${fmt(d.after)} later and ${fmt(d.noYear)} undated aren't drawn).`;
       });
+      // rising / fading: each current's share of its years' papers, the last four complete years
+      // vs the four years five earlier (both straight from the snapshot; small currents skipped as noise)
+      const done = d.years.map((y, i) => [y, i]).filter(([y]) => !(d.partialYears || []).includes(y));
+      const late = done.slice(-4), early = done.filter(([y]) => y <= late[0][0] - 2 && y >= late[0][0] - 5);
+      const sum = (ix, arr) => ix.reduce((t, [, i]) => t + arr[i], 0);
+      const nE = sum(early, d.papersByYear), nL = sum(late, d.papersByYear);
+      const MIN = 40;
+      const moves = early.length === 4 && nE && nL ? d.streams
+        .map((s) => { const a = sum(early, s.s), b = sum(late, s.s); return { s, a, b, pa: (a / nE) * 100, pb: (b / nL) * 100 }; })
+        .filter((m) => m.a + m.b >= MIN)
+        .map((m) => ({ ...m, dp: m.pb - m.pa })) : [];
+      const rising = [...moves].sort((x, y) => y.dp - x.dp).filter((m) => m.dp > 0).slice(0, 4);
+      const fading = [...moves].sort((x, y) => x.dp - y.dp).filter((m) => m.dp < 0).slice(0, 4);
+      const span = (w) => `${w[0][0]}–${String(w[w.length - 1][0]).slice(2)}`;
+      const pct = (v) => `${v.toFixed(1)}%`;
+      const fd = this.querySelector('.cr-finding');
+      if (rising.length && fading.length) {
+        const r = rising[0], f = fading[0];
+        fd.innerHTML = `<b>${esc(shortName(r.s.name))}</b> rose furthest: ${pct(r.pa)} of each year's papers in ${span(early)} → <b>${pct(r.pb)}</b> in ${span(late)}. ` +
+          `<b>${esc(shortName(f.s.name))}</b> fell furthest: ${pct(f.pa)} → <b>${pct(f.pb)}</b>.` +
+          `<span class="cr-finding-k"> Share of hand-coded papers, so a current can shrink while its count still grows · currents under ${MIN} papers across both windows skipped.</span>`;
+      } else fd.hidden = true;
+      const chip = (s, val, ttl) => `<a data-code="${esc(s.code)}" href="${BOOK}?construct=${encodeURIComponent(s.code)}" target="_blank" rel="noopener" style="--c:${ramp(s.t, false)}" title="${esc(ttl)}"><i></i>${esc(shortName(s.name))}<b>${val}</b></a>`;
+      const mv = (m) => chip(m.s, `${m.dp > 0 ? '+' : '−'}${Math.abs(m.dp).toFixed(1)} pts`, `${m.s.name}: ${pct(m.pa)} of papers in ${span(early)} → ${pct(m.pb)} in ${span(late)}`);
       const nav = this.querySelector('.cr-currents');
-      nav.innerHTML = '<span class="cr-currents-k">Largest currents</span>' + d.streams.slice(0, 8).map((s) =>
-        `<a data-code="${esc(s.code)}" href="${BOOK}?construct=${encodeURIComponent(s.code)}" target="_blank" rel="noopener" style="--c:${ramp(s.t, false)}" title="${esc(s.name)}"><i></i>${esc(shortName(s.name))}<b>${fmt(s.c.reduce((a, b) => a + b, 0))}</b></a>`).join('');
+      nav.innerHTML =
+        (rising.length ? `<div class="cr-row"><span class="cr-currents-k">Rising</span>${rising.map(mv).join('')}</div>` : '') +
+        (fading.length ? `<div class="cr-row"><span class="cr-currents-k">Fading</span>${fading.map(mv).join('')}</div>` : '') +
+        `<div class="cr-row"><span class="cr-currents-k">Largest</span>${d.streams.slice(0, 6).map((s) => { const n = s.c.reduce((a, b) => a + b, 0); return chip(s, fmt(n), `${s.name} · ${fmt(n)} papers`); }).join('')}</div>`;
     }
 
     // light one current from outside the river (legend chips) — same look as hovering it
