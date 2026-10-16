@@ -16,7 +16,7 @@ const SITES = [
   { kind: 'html', file: 'research-suite/index.html', slug: 'hub', name: 'Throughline hub', tour: true },
   { kind: 'html', file: 'syeds-research-book/index.html', slug: 'book', name: "Syed's Research Book", tour: true },
   { kind: 'html', file: 'journaltime/index.html', slug: 'jt', name: 'JournalTime', tour: true },
-  { kind: 'vite', entry: 'paperpulse/src/main.tsx', out: 'paperpulse/src/guide.ts', slug: 'pc', name: 'PaperCards' },
+  { kind: 'vite', entry: 'paperpulse/src/main.tsx', out: 'paperpulse/src/guide.ts', slug: 'pc', name: 'PaperCards', tour: true },
   { kind: 'vite', entry: 'researchflow/src/main.tsx', out: 'researchflow/src/guide.ts', slug: 'rf', name: 'ResearchFlow', tour: true },
   { kind: 'vite', entry: 'theoryscope/src/main.tsx', out: 'theoryscope/src/guide.ts', slug: 'ts', name: 'TheoryScope', tour: true },
   { kind: 'vite', entry: 'scalebase/client/src/main.tsx', out: 'scalebase/client/src/guide.ts', slug: 'ss', name: 'ScaleScope', tour: true },
