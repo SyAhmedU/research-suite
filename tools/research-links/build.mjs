@@ -11,7 +11,10 @@ for(const [entry,output,src] of [
  ['output/research-completion/site-src/index.html','output/research-completion/site/research-links.js','research-links.js'],
 ]){
  writeFileSync(resolve(root,output),code);
- let html=readFileSync(resolve(root,entry),'utf8').replace(/<!-- RESEARCH-LINKS:START -->[\s\S]*?<!-- RESEARCH-LINKS:END -->\s*/g,'');
+ let html=readFileSync(resolve(root,entry),'utf8');
+ // a page that has folded the bar into its own header says so in the marker block — leave it alone
+ if(/<!-- RESEARCH-LINKS:START -->[\s\S]*?integrated into[\s\S]*?<!-- RESEARCH-LINKS:END -->/.test(html)){console.log('skip script tag (opted out):',entry);continue;}
+ html=html.replace(/<!-- RESEARCH-LINKS:START -->[\s\S]*?<!-- RESEARCH-LINKS:END -->\s*/g,'');
  html=html.replace('</head>',`<!-- RESEARCH-LINKS:START -->\n<script defer src="${src}"></script>\n<!-- RESEARCH-LINKS:END -->\n</head>`);
  writeFileSync(resolve(root,entry),html);
 }
