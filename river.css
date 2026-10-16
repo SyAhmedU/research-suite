@@ -1,6 +1,12 @@
 /* <corpus-river> — hub hero river. Tokens follow the hub (product-design 2026 green). */
 .river-band { position: relative; padding: 8px 0 56px; }
 .river-band .wrap { position: relative; }
+/* the ambient marble used to wash through the chart — the whole band now sits on a near-solid sheet */
+.river-band > .wrap { padding: 26px 28px 24px; border-radius: 24px;
+  background: color-mix(in srgb, var(--product-surface, #fffefb) 90%, transparent);
+  box-shadow: inset 0 0 0 1px var(--line-soft, rgba(23,40,32,.08));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+@media (max-width: 640px) { .river-band > .wrap { padding: 18px 14px; border-radius: 18px; } }
 .river-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 28px; margin-bottom: 14px; }
 .river-kicker { font: 600 11px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--product-accent, #176557); }
 .river-title { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-weight: 500; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.08; letter-spacing: -.02em; color: var(--ink); margin-top: 8px; text-wrap: balance; }
@@ -12,7 +18,7 @@ corpus-river { display: block; position: relative; }
 .cr-stage { position: relative; border-radius: 18px; overflow: hidden;
   background:
     radial-gradient(120% 90% at 50% 120%, color-mix(in srgb, var(--product-accent, #176557) 9%, transparent), transparent 60%),
-    color-mix(in srgb, var(--product-surface, #fffefb) 70%, transparent);
+    color-mix(in srgb, var(--product-surface, #fffefb) 96%, transparent);
   box-shadow: inset 0 0 0 1px var(--line-soft, rgba(23,40,32,.08)), 0 30px 60px -40px rgba(15,77,66,.35);
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .cr-svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
