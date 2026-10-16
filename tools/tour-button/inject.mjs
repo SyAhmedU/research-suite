@@ -16,6 +16,7 @@ const BASE = 'https://syahmedu.github.io/throughline-media/videos/tours/';
 // guard: cadence participants arrive with the study config in the hash —
 // never show the tour button over a running survey.
 const PROJECTS = [
+  { kind: 'html', file: 'research-suite/index.html', slug: 'research-suite', name: 'Lazy Research Lad' },
   { kind: 'html', file: 'journaltime/index.html', slug: 'journaltime', name: 'JournalTime' },
   { kind: 'html', file: 'scholarscope/index.html', slug: 'scholarscope', name: 'ScholarScope' },
   { kind: 'html', file: 'syeds-research-book/index.html', slug: 'syeds-research-book', name: "Syed's Research Book" },
