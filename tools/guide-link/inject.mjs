@@ -13,7 +13,7 @@ import path from 'path';
 const HOME = 'C:/Users/Syed Asrar';
 const BASE = 'https://throughline-guidebooks.vercel.app/guide/';
 const SITES = [
-  { kind: 'html', file: 'research-suite/index.html', slug: 'hub', name: 'Throughline hub' },
+  { kind: 'html', file: 'research-suite/index.html', slug: 'hub', name: 'Throughline hub', tour: true },
   { kind: 'html', file: 'syeds-research-book/index.html', slug: 'book', name: "Syed's Research Book", tour: true },
   { kind: 'html', file: 'journaltime/index.html', slug: 'jt', name: 'JournalTime', tour: true },
   { kind: 'vite', entry: 'paperpulse/src/main.tsx', out: 'paperpulse/src/guide.ts', slug: 'pc', name: 'PaperCards' },
