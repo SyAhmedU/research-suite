@@ -15,5 +15,6 @@
   {"group":"Specialist companions","name":"Journal Timelines","url":"https://syahmedu.github.io/journal-timelines/","description":"Index-coverage filters and observed publication timing where lifecycle evidence exists."},
   {"group":"Specialist companions","name":"Cadence","url":"https://syahmedu.github.io/cadence/","description":"Survey design and collection. Export responses for analysis in ToolsScope."},
   {"group":"Specialist companions","name":"FallacyScope","url":"https://syahmedu.github.io/fallacyscope/","description":"Sourced field guide to research pitfalls, also embedded in ResearchFlow."},
-  {"group":"Separate research workspace","name":"Throughline CS","url":"https://syahmedu.github.io/throughline-cs/","description":"The computer-science research workflow, with its own projects and experiment records."}
+  {"group":"Separate research workspace","name":"Throughline CS","url":"https://syahmedu.github.io/throughline-cs/","description":"The computer-science research workflow, with its own projects and experiment records."},
+  {"group":"Guides","name":"Throughline Guidebooks","url":"https://throughline-guidebooks.vercel.app/","description":"Illustrated PDF guides to every research site — 9 volumes and an omnibus, with real screenshots, DOI-verified references and a version history."}
 ]
