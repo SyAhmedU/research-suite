@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 128" role="img" aria-labelledby="t">
+  <title id="t">Lazy Research Lad</title>
+  <!-- Horizontal lockup: mark + wordmark. "Lazy" in Fraunces italic (the voice), "Research Lad" in Plus Jakarta Sans (the work). -->
+  <defs>
+    <linearGradient id="lrl-fire2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF9656"/>
+      <stop offset=".55" stop-color="#F14575"/>
+      <stop offset="1" stop-color="#9270F4"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect width="128" height="128" rx="30" fill="#17121f"/>
+    <circle cx="56" cy="54" r="31" fill="none" stroke="url(#lrl-fire2)" stroke-width="9"/>
+    <path d="M38 55 Q56 44 74 55" fill="none" stroke="#f6efe2" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M42 57 Q56 66 70 57" fill="none" stroke="#f6efe2" stroke-width="3.2" stroke-linecap="round" opacity=".55"/>
+    <circle cx="56" cy="58.5" r="4.2" fill="#f6efe2"/>
+    <path d="M78 77 L99 98" stroke="url(#lrl-fire2)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="103" cy="102" r="6" fill="#9270F4"/>
+  </g>
+  <text x="152" y="62" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="500" font-size="46" fill="#F14575">Lazy</text>
+  <text x="152" y="108" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="700" font-size="40" letter-spacing="-0.5" fill="#17121f">Research Lad</text>
+</svg>
