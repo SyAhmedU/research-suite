@@ -99,3 +99,8 @@ html[data-theme="dark"] .cr-mode button[aria-pressed="true"] { color: #10201a; }
   .cr-currents a:nth-of-type(n+4) { display: none; }
 }
 @media print { .cr-flow, .cr-tip { display: none; } }
+
+.cr-topic { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; margin: 0 0 12px; font: 600 10.5px/1 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--product-accent, #176557); }
+.cr-topic input { font: 500 14px 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: 0; text-transform: none; color: var(--ink); width: min(320px, 100%); padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line-soft, rgba(23,40,32,.16)); background: var(--product-surface, #fffefb); outline: none; }
+.cr-topic input:focus { border-color: var(--product-accent, #176557); box-shadow: 0 0 0 3px color-mix(in srgb, var(--product-accent, #176557) 14%, transparent); }
+.cr-topic em { font: italic 400 12px 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: 0; text-transform: none; color: var(--ink-faint, #8a978e); }

@@ -42,6 +42,18 @@
       .trim();
   }
 
+  // "you are here" matching — the same deterministic helper the suite apps use (lib/topic.ts):
+  // content words → 6-letter stems; a current matches when a word in its name starts with one;
+  // only the best-scoring tier lights up. A reading aid, never a claim.
+  const STOP = new Set(('work works working study studies effect effects impact impacts role roles among between within ' +
+    'organizational organisational organization organisation organizations organisations research using based relationship ' +
+    'relationships influence influences outcome outcomes affect affects does what which their from into with this that these ' +
+    'those across toward towards factors factor case context contexts evidence analysis approach perspective level levels ' +
+    'employee employees firms firm people theory theories scale scales measure measures model models about under over').split(' '));
+  const topicStems = (q) => [...new Set(q.toLowerCase().replace(/[-‐–]/g, '').split(/[^a-z0-9]+/).filter((w) => w.length >= 4 && !STOP.has(w)).map((w) => w.slice(0, 6)))];
+  const contentWords = (q) => [...new Set(q.toLowerCase().replace(/[-‐–]/g, '').split(/[^a-z0-9]+/).filter((w) => w.length >= 4 && !STOP.has(w)))];
+  const topicScore = (stems, text) => { const t = ' ' + text.toLowerCase().replace(/[-‐–]/g, '').replace(/[^a-z0-9]+/g, ' '); return stems.reduce((n, st) => n + (t.includes(' ' + st) ? 1 : 0), 0); };
+
   // d3.curveBasis, hand-rolled: a uniform B-spline never overshoots its control polygon,
   // so thin currents stay non-negative and shared edges between neighbours match exactly.
   function basis(pts, cmd) {
@@ -98,6 +110,7 @@
     connectedCallback() {
       if (this._init) return; this._init = true;
       this.innerHTML = `
+        <label class="cr-topic"><span>Your topic</span><input type="search" placeholder="e.g. burnout in nurses" aria-label="Light the currents for your topic"><em hidden></em></label>
         <p class="cr-finding"></p>
         <div class="cr-stage">
           <svg class="cr-svg" role="img" aria-labelledby="crTitle crDesc"><title id="crTitle">The Research Book as a river</title><desc id="crDesc">Loading the hand-coded corpus…</desc></svg>
@@ -155,6 +168,13 @@
         this.data = d;
         this.prep();
         this.render();
+        // one topic for the page: the river's box and the Quick Start box mirror each other
+        const mine = this.querySelector('.cr-topic input'), qs = document.getElementById('qs-input');
+        let t;
+        const apply = (v) => { clearTimeout(t); t = setTimeout(() => this.setTopic(v), 120); };
+        mine.addEventListener('input', () => { if (qs) qs.value = mine.value; apply(mine.value); });
+        qs?.addEventListener('input', () => { mine.value = qs.value; apply(qs.value); });
+        if (qs?.value) { mine.value = qs.value; this.setTopic(qs.value); }
         let w = this.clientWidth;
         new ResizeObserver(() => { if (Math.abs(this.clientWidth - w) > 8) { w = this.clientWidth; clearTimeout(this._rt); this._rt = setTimeout(() => this.render(), 120); } }).observe(this);
       }).catch(() => { this.hidden = true; });  // no snapshot → no river, never a fake one
@@ -187,27 +207,32 @@
           ` (${fmt(this.upstream)} earlier, ${fmt(d.after)} later and ${fmt(d.noYear)} undated aren't drawn).`;
       });
       // rising / fading: each current's share of its years' papers, the last four complete years
-      // vs the four years five earlier (both straight from the snapshot; small currents skipped as noise)
+      // vs the four years ending two before them (both straight from the snapshot; small currents skipped as noise)
       const done = d.years.map((y, i) => [y, i]).filter(([y]) => !(d.partialYears || []).includes(y));
       const late = done.slice(-4), early = done.filter(([y]) => y <= late[0][0] - 2 && y >= late[0][0] - 5);
       const sum = (ix, arr) => ix.reduce((t, [, i]) => t + arr[i], 0);
       const nE = sum(early, d.papersByYear), nL = sum(late, d.papersByYear);
       const MIN = 40;
-      const moves = early.length === 4 && nE && nL ? d.streams
-        .map((s) => { const a = sum(early, s.s), b = sum(late, s.s); return { s, a, b, pa: (a / nE) * 100, pb: (b / nL) * 100 }; })
-        .filter((m) => m.a + m.b >= MIN)
-        .map((m) => ({ ...m, dp: m.pb - m.pa })) : [];
-      const rising = [...moves].sort((x, y) => y.dp - x.dp).filter((m) => m.dp > 0).slice(0, 4);
-      const fading = [...moves].sort((x, y) => x.dp - y.dp).filter((m) => m.dp < 0).slice(0, 4);
       const span = (w) => `${w[0][0]}–${String(w[w.length - 1][0]).slice(2)}`;
       const pct = (v) => `${v.toFixed(1)}%`;
+      const moves = early.length === 4 && nE && nL ? d.streams
+        .map((s) => { const a = sum(early, s.s), b = sum(late, s.s); return { s, a, b, pa: (a / nE) * 100, pb: (b / nL) * 100 }; })
+        .map((m) => ({ ...m, dp: m.pb - m.pa })) : [];
+      this.moveOf = new Map(moves.map((m) => [m.s.code, m]));
+      this.span = early.length === 4 ? [span(early), span(late)] : null;
+      this.MIN = MIN;
+      const solid = moves.filter((m) => m.a + m.b >= MIN);
+      const rising = [...solid].sort((x, y) => y.dp - x.dp).filter((m) => m.dp > 0).slice(0, 4);
+      const fading = [...solid].sort((x, y) => x.dp - y.dp).filter((m) => m.dp < 0).slice(0, 4);
       const fd = this.querySelector('.cr-finding');
+      this.pct = pct;
       if (rising.length && fading.length) {
         const r = rising[0], f = fading[0];
         fd.innerHTML = `<b>${esc(shortName(r.s.name))}</b> rose furthest: ${pct(r.pa)} of each year's papers in ${span(early)} → <b>${pct(r.pb)}</b> in ${span(late)}. ` +
           `<b>${esc(shortName(f.s.name))}</b> fell furthest: ${pct(f.pa)} → <b>${pct(f.pb)}</b>.` +
           `<span class="cr-finding-k"> Share of hand-coded papers, so a current can shrink while its count still grows · currents under ${MIN} papers across both windows skipped.</span>`;
       } else fd.hidden = true;
+      this.findingHTML = fd.innerHTML;
       const chip = (s, val, ttl) => `<a data-code="${esc(s.code)}" href="${BOOK}?construct=${encodeURIComponent(s.code)}" target="_blank" rel="noopener" style="--c:${ramp(s.t, false)}" title="${esc(ttl)}"><i></i>${esc(shortName(s.name))}<b>${val}</b></a>`;
       const mv = (m) => chip(m.s, `${m.dp > 0 ? '+' : '−'}${Math.abs(m.dp).toFixed(1)} pts`, `${m.s.name}: ${pct(m.pa)} of papers in ${span(early)} → ${pct(m.pb)} in ${span(late)}`);
       const nav = this.querySelector('.cr-currents');
@@ -218,7 +243,42 @@
     }
 
     // light one current from outside the river (legend chips) — same look as hovering it
+    // the topic's currents stay lit whenever nothing else is being read
+    restTopic() {
+      const on = this.topicCodes || new Set();
+      this.paths?.forEach((p, k) => p.classList.toggle('is-on', on.has(this.order[k].code)));
+      this.svg.classList.toggle('is-reading', on.size > 0);
+    }
+
+    setTopic(q) {
+      const d = this.data; if (!d) return;
+      const stems = topicStems(q), em = this.querySelector('.cr-topic em'), fd = this.querySelector('.cr-finding');
+      const sc = d.streams.map((s) => topicScore(stems, s.name)), best = Math.max(0, ...sc);
+      const hits = best ? d.streams.filter((_, i) => sc[i] === best) : [];
+      this.topicCodes = new Set(hits.map((s) => s.code));
+      em.hidden = !(stems.length && !hits.length);
+      em.textContent = 'no construct current names this';
+      if (!hits.length) { fd.innerHTML = this.findingHTML || ''; fd.hidden = !this.findingHTML; this.restTopic(); return; }
+      const n = (s) => s.c.reduce((a, b) => a + b, 0);
+      let thin = 0;
+      const parts = hits.slice(0, 4).map((s) => {
+        const m = this.moveOf?.get(s.code);
+        const ok = m && this.span && m.a + m.b >= this.MIN;
+        if (m && this.span && !ok) thin++;
+        const trend = ok ? ` — ${this.pct(m.pa)} of each year's papers in ${this.span[0]} → <b>${this.pct(m.pb)}</b> in ${this.span[1]}` : '';
+        return `<b>${esc(shortName(s.name))}</b>: ${fmt(n(s))} hand-coded papers${trend}`;
+      });
+      const thinNote = thin ? ` ${thin === parts.length ? 'Too' : 'The rest have too'} few papers in ${this.span[0]} and ${this.span[1]} to call a trend.` : '';
+      fd.hidden = false;
+      const names = d.streams.map((s) => ' ' + s.name.toLowerCase().replace(/[-‐–]/g, '').replace(/[^a-z0-9]+/g, ' '));
+      const missing = contentWords(q).filter((w) => !names.some((t) => t.includes(' ' + w.slice(0, 6))));
+      fd.innerHTML = `“${esc(q.trim())}” in the corpus${missing.length ? ` (no current is named “${esc(missing.join('”, “'))}” — lit on the other words only)` : ''} — ${parts.join('; ')}${hits.length > 4 ? `; +${hits.length - 4} more lit` : ''}.${thinNote}` +
+        `<span class="cr-finding-k">Matched by words in the construct names — a reading aid. Click a lit current to open its papers.</span>`;
+      this.restTopic();
+    }
+
     focusCode(code) {
+      if (code == null) { this.restTopic(); return; }
       const i = code == null ? -1 : this.order.findIndex((s) => s.code === code);
       this.paths?.forEach((p, k) => p.classList.toggle('is-on', k === i));
       this.svg.classList.toggle('is-reading', i >= 0);
@@ -358,6 +418,7 @@
       // scrubber
       this.scrub = el('line', { class: 'cr-scrub', x1: 0, x2: 0, y1: PAD, y2: H - AX }, svg);
       this.bindPointer();
+      this.restTopic();
     }
 
     hit(px, py) {
@@ -375,7 +436,7 @@
       if (this._bound) return; this._bound = true;
       const svg = this.svg, d = this.data;
       const pos = (e) => { const r = svg.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top, r]; };
-      const clear = () => { svg.classList.remove('is-reading'); this.paths?.forEach((p) => p.classList.remove('is-on')); this.tip.hidden = true; this.scrub.style.opacity = 0; this._on = null; };
+      const clear = () => { this.restTopic(); this.tip.hidden = true; this.scrub.style.opacity = 0; this._on = null; };
       const move = (e) => {
         const [px, py, r] = pos(e); const { i, j } = this.hit(px, py);
         const { x } = this.geo;

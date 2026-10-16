@@ -20,3 +20,6 @@ Verification: `python output/research-completion/check-connections.py` (append `
 Existing six-stage thread and quick-start functionality remain below the directory. They are routes to specialist tools, not a claim that all tool storage is merged. Full Research Book host: https://syeds-research-book.vercel.app/. The 9,388-paper compact grounding feed remains intentionally distinct from the full dated corpus.
 
 2026-10-10 workflow continuation: hero primary CTA now opens Studio directly, where all 22 papers can be selected and continued through author-reviewed checkpoints. Archive reading remains a separate secondary link; libraries remain supporting destinations.
+
+## 2026-10-16 — River topic box
+**"Your topic" highlight (2026-10-16):** `lib/topic.ts` (same helper copied in scalebase · theoryscope · paperpulse; hub `river.js` inlines it) — deterministic stem match (content words → 6-letter stems, stopwords dropped, best-scoring tier only) + `topicUnmatched` so a partial match says which words found nothing. A reading aid, never a claim. Smoke `_mobile-audit/_viztopic.mjs <outdir>`. River: "Your topic" box above the finding line, mirrored both ways with Quick Start `#qs-input`; lit currents + per-current share trend (or one "too few papers" note); `restTopic()` keeps them lit after hover/chip focus.
