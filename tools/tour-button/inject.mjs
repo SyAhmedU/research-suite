@@ -17,7 +17,7 @@ const BASE = 'https://syahmedu.github.io/throughline-media/videos/tours/';
 // never show the tour button over a running survey.
 const PROJECTS = [
   { kind: 'html', file: 'research-suite/index.html', slug: 'research-suite', name: 'Lazy Research Lad' },
-  { kind: 'html', file: 'journaltime/index.html', slug: 'journaltime', name: 'JournalTime', langs: ['ta', 'hi'] },
+  { kind: 'html', file: 'journaltime/index.html', slug: 'journaltime', name: 'JournalTime', langs: ['ta'] },
   { kind: 'html', file: 'scholarscope/index.html', slug: 'scholarscope', name: 'ScholarScope' },
   { kind: 'html', file: 'syeds-research-book/index.html', slug: 'syeds-research-book', name: "Syed's Research Book" },
   { kind: 'html', file: 'bookscope/index.html', slug: 'bookscope', name: 'BookScope' },
