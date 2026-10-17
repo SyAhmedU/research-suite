@@ -17,7 +17,7 @@ const BASE = 'https://syahmedu.github.io/throughline-media/videos/tours/';
 // never show the tour button over a running survey.
 const PROJECTS = [
   { kind: 'html', file: 'research-suite/index.html', slug: 'research-suite', name: 'Lazy Research Lad' },
-  { kind: 'html', file: 'journaltime/index.html', slug: 'journaltime', name: 'JournalTime' },
+  { kind: 'html', file: 'journaltime/index.html', slug: 'journaltime', name: 'JournalTime', langs: ['ta', 'hi'] },
   { kind: 'html', file: 'scholarscope/index.html', slug: 'scholarscope', name: 'ScholarScope' },
   { kind: 'html', file: 'syeds-research-book/index.html', slug: 'syeds-research-book', name: "Syed's Research Book" },
   { kind: 'html', file: 'bookscope/index.html', slug: 'bookscope', name: 'BookScope' },
@@ -44,7 +44,9 @@ const PROJECTS = [
   { kind: 'vite', entry: 'task-manager/client/src/main.jsx', tour: 'task-manager/client/src/tour.js', slug: 'taskflow', name: 'TaskFlow' },
 ];
 
-function snippetJs({ slug, name, bottom = '18px', guard = '', ts = false }) {
+// langs: extra narration tracks published beside <slug>.mp4 as <slug>.<lang>.mp4 (same picture, AI-translated voice)
+const LANG_LABEL = { en: 'English', ta: 'தமிழ்', hi: 'हिंदी' };
+function snippetJs({ slug, name, bottom = '18px', guard = '', ts = false, langs = [] }) {
   const keyType = ts ? ': KeyboardEvent' : '';
   const clickType = ts ? ': MouseEvent' : '';
   return `(function () {
@@ -73,10 +75,37 @@ function snippetJs({ slug, name, bottom = '18px', guard = '', ts = false }) {
     wrap.setAttribute('aria-modal', 'true');
     wrap.setAttribute('aria-label', NAME + ' narrated tour');
     var v = document.createElement('video');
-    v.src = BASE + SLUG + '.mp4';
+    var LANGS = ${JSON.stringify(['en', ...langs])}, LABEL${ts ? ': Record<string, string>' : ''} = ${JSON.stringify(Object.fromEntries(['en', ...langs].map((l) => [l, LANG_LABEL[l]])))};
+    var lang = 'en';
+    try { var saved = localStorage.getItem('syed-tour-lang'); if (saved && LANGS.indexOf(saved) >= 0) lang = saved; } catch (e) {}
+    var srcOf = function (l${ts ? ': string' : ''}) { return BASE + SLUG + (l === 'en' ? '' : '.' + l) + '.mp4'; };
+    v.src = srcOf(lang);
     v.poster = BASE + 'posters/' + SLUG + '.jpg';
     v.controls = true; v.autoplay = true; v.playsInline = true;
     v.style.cssText = 'width:100%;border-radius:16px;border:1px solid rgba(203,184,232,.3);background:#000';
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:' + (LANGS.length > 1 ? 'flex' : 'none') + ';flex-wrap:wrap;align-items:center;gap:6px;font:500 12px/1.3 "Plus Jakarta Sans",system-ui,sans-serif;color:#cbb8e8';
+    var note = document.createElement('span');
+    note.style.cssText = 'margin-left:6px;opacity:.75';
+    var paint = function () {
+      [].forEach.call(bar.querySelectorAll('button'), function (b${ts ? ': any' : ''}) { var on = b.dataset.l === lang; b.setAttribute('aria-pressed', String(on)); b.style.background = on ? 'rgba(203,184,232,.22)' : 'transparent'; b.style.color = on ? '#fff' : '#cbb8e8'; });
+      note.textContent = lang === 'en' ? '' : 'AI-translated narration · on-screen text stays in English';
+    };
+    LANGS.forEach(function (l${ts ? ': string' : ''}) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.dataset.l = l; b.textContent = LABEL[l];
+      b.style.cssText = 'padding:6px 14px;border-radius:999px;border:1px solid rgba(203,184,232,.4);font:600 13px/1 "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer';
+      b.addEventListener('click', function () {
+        if (l === lang) return;
+        // the languages run to different lengths, so keep the same place proportionally
+        var frac = v.duration ? v.currentTime / v.duration : 0, playing = !v.paused;
+        lang = l; try { localStorage.setItem('syed-tour-lang', l); } catch (e) {}
+        v.src = srcOf(l); paint();
+        v.addEventListener('loadedmetadata', function once() { v.removeEventListener('loadedmetadata', once); if (frac && v.duration) v.currentTime = frac * v.duration; if (playing) v.play(); });
+      });
+      bar.appendChild(b);
+    });
+    bar.appendChild(note); paint();
     var x = document.createElement('button');
     x.type = 'button';
     x.textContent = 'Close \\u2715';
@@ -86,7 +115,7 @@ function snippetJs({ slug, name, bottom = '18px', guard = '', ts = false }) {
     bd.addEventListener('click', function (e${clickType}) { if (e.target === bd) close(); });
     x.addEventListener('click', close);
     document.addEventListener('keydown', onKey);
-    wrap.appendChild(v); wrap.appendChild(x); bd.appendChild(wrap);
+    wrap.appendChild(bar); wrap.appendChild(v); wrap.appendChild(x); bd.appendChild(wrap);
     document.body.appendChild(bd);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
